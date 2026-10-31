@@ -2,6 +2,7 @@ import copy
 import json
 import re
 from html.parser import HTMLParser
+from importlib.resources import files
 
 import pytest
 
@@ -264,3 +265,33 @@ def test_empty_artifact_renders(tmp_path):
         "cues": [],
         "review": {"corrections": [], "flags": [], "method": "", "source_sha256": ""},
     }
+
+
+def test_renderer_embeds_generated_typescript_bundle(tmp_path, artifact):
+    bundle = (
+        files("debate").joinpath("web_assets", "page.js").read_text(encoding="utf-8")
+    )
+    assert bundle.startswith("/* Generated from page.ts.")
+    page = PageParser(render_page(artifact, tmp_path).read_text(encoding="utf-8"))
+    assert page.scripts[1]["text"].strip() == bundle.strip()
+
+
+def test_renderer_needs_no_typescript_source_or_frontend_tools(
+    tmp_path, monkeypatch, artifact
+):
+    assets = files("debate").joinpath("web_assets")
+    runtime_assets = tmp_path / "runtime-assets"
+    runtime_assets.mkdir()
+    for name in ("page.html", "page.css", "page.js"):
+        (runtime_assets / name).write_text(
+            assets.joinpath(name).read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+    monkeypatch.setattr("debate.web._ASSETS", runtime_assets)
+    monkeypatch.setenv("PATH", "")
+    destination = render_page(artifact, tmp_path / "output")
+    assert not (runtime_assets / "page.ts").exists()
+    assert (
+        PageParser(destination.read_text(encoding="utf-8")).payload()["cues"][0]["id"]
+        == 1
+    )

@@ -84,6 +84,32 @@ PyTorch/TorchAudio 2.8.0 CUDA 12.8 packages. Python 3.14 and TorchAudio 2.9 or l
 are not compatible with this pyannote version. `imageio-ffmpeg` supplies FFmpeg.
 The tested GPU is an RTX 4090. Use `--device cpu` if CUDA is unavailable.
 
+### Frontend development
+
+The browser source is `src/debate/web_assets/page.ts`. It uses strict TypeScript
+with typed transcript data and checked DOM access. Biome formats and checks the
+TypeScript source, CSS, and frontend configuration. The stylesheet uses separate
+component sections; its CSS-only `noDescendingSpecificity` rule is disabled
+because it compares selectors from unrelated components. Other recommended
+checks and the explicit `noExplicitAny` rule remain enabled.
+
+```bash
+bun install --frozen-lockfile
+bun run format
+bun run check
+bun run build
+```
+
+`bun run check` runs Biome and the TypeScript compiler. `bun run build` checks the
+source and bundles it as a browser IIFE in `src/debate/web_assets/page.js`.
+Do not edit that generated JavaScript file directly. Keep it with the source so
+Python exports and installed wheels do not require Bun, Node.js, or TypeScript
+at runtime. Generated JavaScript and data exports are not Biome source inputs.
+
+After changing the frontend, rebuild it and run the export command below to
+update `data/index.html`. The page remains a self-contained HTML file that works
+without a frontend development server.
+
 ### Model access
 
 Use the saved Hugging Face login or set `HF_TOKEN`. The same account must accept
@@ -144,5 +170,7 @@ uv run pytest tests
 uv run ruff check src tests
 uv run ruff format --check src tests
 uv run ty check src
+bun run check
+bun run build
 node --check src/debate/web_assets/page.js
 ```

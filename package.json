@@ -1,0 +1,14 @@
+{
+  "name": "taipei-mayoral-debate-2026",
+  "private": true,
+  "scripts": {
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "check": "biome check --error-on-warnings . && bun run typecheck",
+    "build": "bun run check && bun build src/debate/web_assets/page.ts --target browser --format iife --banner '/* Generated from page.ts. Run bun run build to update. */ \"use strict\";' --outfile src/debate/web_assets/page.js"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.4",
+    "typescript": "7.0.2"
+  }
+}
