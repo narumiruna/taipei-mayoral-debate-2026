@@ -153,10 +153,28 @@ def test_unknown_speaker_labels(speaker, label):
         ("提問記者2", "三立", "提問記者2／三立"),
     ],
 )
-def test_speaker_labels_use_names_only_for_named_debaters(role, name, label):
+def test_speaker_labels_without_organization(role, name, label):
     roles = {"SPEAKER_00": {"role": role, "name": name}}
 
     assert subtitles.speaker_label("SPEAKER_00", roles) == label
+
+
+@pytest.mark.parametrize(
+    ("role", "name", "organization", "label"),
+    [
+        ("主持人1", "黃欣樺", "TVBS", "黃欣樺／TVBS"),
+        ("主持人2", "李文儀", "三立", "李文儀／三立"),
+        ("提問記者1", "樊啟明", "TVBS", "樊啟明／TVBS"),
+        ("提問記者2", "黃燕怡", "三立", "黃燕怡／三立"),
+        ("主持人1", "", "TVBS", "主持人1／TVBS"),
+    ],
+)
+def test_speaker_labels_with_organization(role, name, organization, label):
+    roles = {"SPEAKER_00": {"role": role, "name": name, "organization": organization}}
+
+    (cue,) = subtitles.make_cues(aligned_result([word("你好", 0, 1)]), roles)
+
+    assert cue["label"] == label
 
 
 def test_export_formats_and_evidence(tmp_path, transcript, roles):
@@ -214,6 +232,14 @@ def test_export_without_roles_keeps_speaker_unconfirmed(tmp_path, transcript):
     assert summary["unconfirmed_role_cues"] == 1
 
 
+def test_roles_accept_organization(roles):
+    roles["SPEAKER_00"]["organization"] = "TVBS"
+
+    subtitles.validate_roles(roles, {"SPEAKER_00"})
+
+    assert subtitles.speaker_label("SPEAKER_00", roles) == "王小明／TVBS"
+
+
 def test_roles_accept_evidence_and_optional_name(roles):
     subtitles.validate_roles(roles, {"SPEAKER_00"})
     roles["SPEAKER_00"].pop("name")
@@ -234,6 +260,8 @@ def test_roles_reject_non_objects_and_unknown_speakers(role_map):
         ("role", ""),
         ("role", 1),
         ("name", 1),
+        ("organization", 1),
+        ("organization", None),
         ("evidence", None),
         ("evidence", []),
         ("evidence", "an unsupported claim"),

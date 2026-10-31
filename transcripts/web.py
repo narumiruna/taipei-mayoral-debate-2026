@@ -17,7 +17,9 @@ def render_page(artifact: dict, output_dir: Path) -> Path:
         },
         "display_language": artifact.get("display_language", "zh-Hant-TW"),
         "roles": {
-            speaker: {key: role.get(key, "") for key in ("role", "name")}
+            speaker: {
+                key: role.get(key, "") for key in ("role", "name", "organization")
+            }
             for speaker, role in artifact.get("roles", {}).items()
         },
         "cues": [

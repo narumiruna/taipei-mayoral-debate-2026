@@ -99,7 +99,7 @@ Do not expose it as a public server.
 ## Review status
 
 The recording has 1,082 cues and six speaker clusters: two debaters, two hosts,
-and two reporters. The user supplied the debater name labels. Roles were mapped
+and two reporters. The user supplied the speaker names. Roles were mapped
 from introductions and turn-taking, not from voice characteristics.
 
 The full transcript was reviewed with a second Whisper large-v2 pass. Ten

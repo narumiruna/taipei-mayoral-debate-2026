@@ -32,13 +32,13 @@
   "targeted_recheck_clips": 10,
   "role_anchor_checks": {
     "SPEAKER_05": {
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "start": 863.9,
       "end": 866.2,
       "passed": true
     },
     "SPEAKER_00": {
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "start": 866.2,
       "end": 869,
       "passed": true
@@ -56,13 +56,13 @@
       "passed": true
     },
     "SPEAKER_02": {
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "start": 5830.8,
       "end": 5925,
       "passed": true
     },
     "SPEAKER_01": {
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "start": 6308.7,
       "end": 6400,
       "passed": true
