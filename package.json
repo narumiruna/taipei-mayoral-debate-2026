@@ -4,6 +4,7 @@
   "scripts": {
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
+    "test:web": "bun test tests/responsiveness.test.ts",
     "check": "biome check --error-on-warnings . && bun run typecheck",
     "build": "bun run check && mkdir -p transcripts/assets && bun build web/page.ts --target browser --format iife --banner '/* Generated from web/page.ts. Run bun run build to update. */ \"use strict\";' --outfile transcripts/assets/page.js && cp web/page.css web/page.html transcripts/assets/"
   },
