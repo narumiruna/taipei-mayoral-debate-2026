@@ -4,6 +4,8 @@ A Traditional Chinese debate transcript with timecoded speaker labels, an
 interactive HTML reader, and an auditable text-review ledger. WhisperX handles
 transcription and alignment. pyannote.audio separates speakers.
 
+Public site: <https://narumiruna.github.io/taipei-mayoral-debate-2026/>.
+
 ## Project layout
 
 | Path | Responsibility |
