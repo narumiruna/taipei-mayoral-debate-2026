@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2032%2032%27%3E%3Crect%20width=%2732%27%20height=%2732%27%20rx=%276%27%20fill=%27%23202d40%27/%3E%3Cpath%20d=%27M9%209h6a7%207%200%200%201%200%2014H9z%27%20fill=%27none%27%20stroke=%27%23f7f5ef%27%20stroke-width=%272%27/%3E%3C/svg%3E">
-  <meta name="description" content="2026 臺北市長候選人電視辯論校對逐字稿，提供影音時間定位、說話者篩選與校對紀錄。">
+  <meta name="description" content="2026 臺北市長候選人電視辯論校對逐字稿，提供影音定位、校對紀錄、同題問答對照與問答回應品質評估方法。">
   <title>2026 臺北市長候選人｜電視辯論・校對逐字稿</title>
   <style>{{STYLE}}</style>
 </head>
@@ -14,7 +14,7 @@
   <div class="page-shell">
     <header class="masthead">
       <a href="#" class="wordmark" aria-label="辯論紀錄首頁">DEBATE RECORD <span>／ 2026</span></a>
-      <a class="edition" href="#record">閱讀逐字稿 ↓</a>
+      <nav class="masthead-links" aria-label="頁面導覽"><a class="edition" href="#record">閱讀逐字稿 ↓</a><a class="edition" href="#responsiveness">問答評估 ↓</a></nav>
     </header>
     <section class="hero" aria-labelledby="page-title">
       <div class="eyebrow"><span class="small-rule"></span>公開辯論・文字紀錄</div>
@@ -31,24 +31,103 @@
     <div class="notice"><span class="notice-label">閱讀須知</span><p>本稿以自動語音辨識（ASR）產生，再依校對紀錄修訂，<strong>並非逐句人工聽校的定稿</strong>。人名、重疊發言與時間對齊仍可能有誤；兩位辯論者姓名依使用者指定，角色依介紹與發言內容標註。請以原始影音為準。</p></div>
     <div class="workspace">
       <main id="record" tabindex="-1">
-        <div class="section-heading"><div><span class="section-number">01</span><h2>發言紀錄</h2></div><span class="section-note">依影音時間排序</span></div>
-        <div class="filters">
+        <div class="section-heading"><div><span class="section-number">01</span><h2 id="record-heading">發言紀錄</h2></div><span id="record-heading-note" class="section-note">依影音時間排序</span></div>
+        <div id="reader-filters" class="filters">
           <label class="search-label" for="search">搜尋逐字稿與校對內容</label>
           <div class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="輸入關鍵字，尋找發言…" autocomplete="off"><button type="button" id="clear-search" hidden>清除</button></div>
           <div class="filter-row"><label for="speaker-filter">說話者</label><select id="speaker-filter"><option value="__all__">全部說話者</option></select><button type="button" id="reset-filters">重設篩選</button></div>
         </div>
-        <div class="tabs" role="tablist" aria-label="紀錄類別">
+        <div id="responsiveness" class="tabs" role="tablist" aria-label="紀錄類別">
           <button id="tab-transcript" role="tab" aria-selected="true" aria-controls="panel-transcript" tabindex="0" data-view="transcript">逐字稿 <span id="count-transcript">0</span></button>
           <button id="tab-corrections" role="tab" aria-selected="false" aria-controls="panel-corrections" tabindex="-1" data-view="corrections">校對紀錄 <span id="count-corrections">0</span></button>
           <button id="tab-pending" role="tab" aria-selected="false" aria-controls="panel-pending" tabindex="-1" data-view="pending">待確認 <span id="count-pending">0</span></button>
+          <button id="tab-responsiveness" role="tab" aria-selected="false" aria-controls="panel-responsiveness" tabindex="-1" data-view="responsiveness">問答回應品質評估</button>
         </div>
-        <div class="result-bar"><p id="result-status" role="status" aria-live="polite" aria-atomic="true"></p><span>點選時間即可播放</span></div>
+        <div id="reader-results" class="result-bar"><p id="result-status" role="status" aria-live="polite" aria-atomic="true"></p><span>點選時間即可播放</span></div>
         <noscript><p class="empty-state">請啟用 JavaScript 以閱讀、搜尋逐字稿；亦可下載下方的文字檔。</p></noscript>
         <section id="panel-transcript" role="tabpanel" aria-labelledby="tab-transcript" tabindex="0"><div id="transcript-content"></div></section>
         <section id="panel-corrections" role="tabpanel" aria-labelledby="tab-corrections" tabindex="0" hidden><div class="view-note">以下列出已採用的文字修訂及其依據。這些紀錄不代表其餘內容已完成查證。</div><div id="corrections-content"></div></section>
         <section id="panel-pending" role="tabpanel" aria-labelledby="tab-pending" tabindex="0" hidden><div class="view-note">以下項目尚待查證。建議文字不是已採用的修訂，請回聽影音後再判斷。</div><div id="pending-content"></div></section>
+        <section id="panel-responsiveness" class="assessment" role="tabpanel" aria-labelledby="tab-responsiveness" tabindex="0" hidden>
+          <div class="assessment-intro">
+            <span class="assessment-kicker">QUESTION RESPONSIVENESS</span>
+            <h3>有沒有回答，與回答得好不好，分開看。</h3>
+            <p>先對齊問題與回答，再分類、評分並保留原文依據。<strong>回應品質不等於事實真確性、政策優劣或辯論勝負。</strong></p>
+          </div>
+          <div class="assessment-notice"><strong>本場尚未評分</strong><p>目前僅整理共同媒體提問與雙方首次回答。下方百分比與試算皆為假設示例，不是沈伯洋或蔣萬安的評估結果；未分類也不代表「無法判定」。</p></div>
+          <dl class="assessment-stats" aria-label="本場評估進度">
+            <div><dt>已對齊共同提問</dt><dd><span id="assessment-aligned-count">0</span> 題</dd></div>
+            <div><dt>已複核評分</dt><dd>0 筆</dd></div>
+            <div><dt>本場回答率／總分</dt><dd>— <small>尚無評估資料</small></dd></div>
+          </dl>
+
+          <section class="assessment-section" aria-labelledby="alignment-title">
+            <h3 id="alignment-title">01 ／ 同題問答對照</h3>
+            <p id="assessment-alignment-status" class="assessment-caption"></p>
+            <label id="assessment-question-label" class="search-label" for="assessment-question">選擇共同提問</label>
+            <select id="assessment-question" class="question-select"></select>
+            <div id="assessment-evidence"></div>
+          </section>
+
+          <section class="assessment-section" aria-labelledby="classification-title">
+            <h3 id="classification-title">02 ／ 先分類，不用分數猜回答類型</h3>
+            <p class="assessment-caption">以下為本站簡化的五類定義，不等同 CLARITY 的完整細分類。合理反駁錯誤前提，或說明無法確定的原因，不自動視為迴避。</p>
+            <dl id="assessment-classes" class="classification-list"></dl>
+            <div class="hypothetical-question"><span class="example-label">假設題目 · 非本場發言</span><p>「任期內是否支持調漲公車票價？若支持，預計調漲多少？」</p></div>
+            <div class="classification-examples">
+              <article><h4 class="response-label response-direct">直接完整回答</h4><blockquote>「不支持任期內調漲，會先調整補貼與改善營運效率。」</blockquote><p>已表達不支持，條件式的漲幅追問不適用，不因未報漲幅扣分。</p></article>
+              <article><h4 class="response-label response-evasive">迴避回答 · 轉移議題</h4><blockquote>「公共運輸很重要，過去市府沒有做好規劃，應重視交通權益。」</blockquote><p>談及交通，但未回答是否調漲；不能只因出現相同議題就算有回答。</p></article>
+              <article><h4 class="response-label response-partial">部分回答 · 尚未確定立場</h4><blockquote>「目前無法決定，必須等成本分析完成。」</blockquote><p>有回應並交代不確定的原因，不等同完全迴避。無先前發言時，一致性維持未評估。</p></article>
+            </div>
+          </section>
+
+          <section class="assessment-section" aria-labelledby="comparison-title">
+            <h3 id="comparison-title">03 ／ 回答率與分布</h3>
+            <p class="example-label">假設統計 · 不代表本場候選人</p>
+            <p class="assessment-caption">示例 A、B 各有 21 題，其中 20 題可評估、1 題無法判定。拒答列入可評估分母；無法判定不列入。各比率不一定合計 100%，其餘為拒答。</p>
+            <div class="assessment-table-wrap"><table class="assessment-table rate-table"><caption>假設回答率比較（分母各為 20 題）</caption><thead><tr><th scope="col">假設對象</th><th scope="col">直接回答率</th><th scope="col">部分回答率</th><th scope="col">迴避率</th></tr></thead><tbody id="example-rates"></tbody></table></div>
+            <div class="assessment-table-wrap"><table class="assessment-table distribution-table"><caption>假設回答分類題數（含無法判定）</caption><thead><tr><th scope="col">回答分類</th><th scope="col">示例 A</th><th scope="col">示例 B</th></tr></thead><tbody id="example-distribution"></tbody></table></div>
+            <p class="assessment-formula">Reply Rate = 直接且完整回答題數 ÷ 可評估題數 × 100%</p>
+            <p class="assessment-caption">部分回答率、迴避率使用相同分母。沒有可評估問題時顯示「—」，不顯示 0%。實際比較須限制於相同或難度相近的題目，並公布題數與取樣範圍。</p>
+          </section>
+
+          <section class="assessment-section" aria-labelledby="rubric-title">
+            <h3 id="rubric-title">04 ／ 四維品質量表</h3>
+            <p class="assessment-caption">本站實務量表 v1.0，非學界統一標準。每項 0–5 分，1、2、4 分依相鄰錨點的符合程度判斷；每筆分數須另附原文與理由，不能由回答類型直接推算。</p>
+            <dl class="rubric-list">
+              <div><dt>直接性 <span>Directness · 40%</span></dt><dd>0：未回應所問事項。3：有回應但核心立場仍不明確。5：明確正面回答核心事項。</dd></div>
+              <div><dt>完整性 <span>Completeness · 25%</span></dt><dd>0：沒有回答子問題。3：回答過半子問題。5：回答全部適用子問題；不適用的條件式追問不扣分。</dd></div>
+              <div><dt>具體性 <span>Specificity · 20%</span></dt><dd>0：僅有口號。3：有作法但缺重要細節。5：提供題目所需的明確立場、作法、數字或時間。</dd></div>
+              <div><dt>一致性 <span>Consistency · 15%</span></dt><dd>0：與已引用的先前回答直接矛盾。3：有尚待釐清的差異。5：與先前回答相符；沒有可比前文時標記「未評估」，不能預設滿分。</dd></div>
+            </dl>
+            <div id="quality-calculator" class="quality-calculator">
+              <h4>量表試算 <span class="example-label">不儲存、不列入本場資料</span></h4>
+              <div id="quality-controls" class="quality-controls"></div>
+              <div class="quality-result"><output id="quality-total" aria-live="polite" aria-atomic="true">— / 100</output><button id="reset-quality" type="button">重設試算</button></div>
+              <p id="quality-status" class="assessment-caption"></p>
+              <p class="assessment-formula">總分 = 直接性 × 8 + 完整性 × 5 + 具體性 × 4 + 一致性 × 3</p>
+            </div>
+          </section>
+
+          <section class="assessment-section" aria-labelledby="method-title">
+            <h3 id="method-title">05 ／ 評估流程與限制</h3>
+            <ol class="assessment-method">
+              <li><strong>抽取問題與子問題。</strong>記錄前提、提問者與時間，區分共同題與交互詰問。</li>
+              <li><strong>對齊回答原文。</strong>保留回答者、段落 ID、時間、首次回答與追問後的最終回答；不要混合計數。</li>
+              <li><strong>先分類，再評分。</strong>逐子題記錄覆蓋情形，再給四維分數、引用與理由；另記轉移議題、模糊立場等策略，不推測動機。</li>
+              <li><strong>保留可重現紀錄。</strong>每筆記錄資料版本、量表版本、標註者與日期；若用模型，另存模型版本與評估設定。</li>
+              <li><strong>獨立複核。</strong>由兩名評分者獨立抽樣標註，以 Cohen’s κ 檢查分類一致性；目前尚未進行，不能宣稱結果客觀或已驗證。</li>
+            </ol>
+            <p class="assessment-caution">逐字稿仍有待確認片段；校對不等於事實查核。本頁沒有執行自動模型評分、事實查核或辯論勝負排名。</p>
+            <details class="assessment-references"><summary>研究依據與方法邊界</summary><ul>
+              <li><a href="https://pure.york.ac.uk/portal/en/publications/how-not-to-answer-questions-in-political-interviews/" target="_blank" rel="noopener noreferrer">Bull &amp; Mayer（1993）｜How Not to Answer Questions in Political Interviews ↗</a><p>政治訪談中非回答與迴避策略的研究基礎。</p></li>
+              <li><a href="https://doi.org/10.1093/pa/gsz003" target="_blank" rel="noopener noreferrer">Bull &amp; Strawson（2020）｜Can’t Answer? Won’t Answer? ↗</a><p>以直接回答率研究政治問答；不將其他場域的研究比率套用到本場。</p></li>
+              <li><a href="https://aclanthology.org/2026.semeval-1.449/" target="_blank" rel="noopener noreferrer">Thomas et al.（2026）｜SemEval-2026 Task 6: CLARITY ↗</a><p>以美國總統政治訪談進行分層回應與迴避分類。細分類仍具難度；用於臺灣中文辯論前須另行驗證。</p></li>
+            </ul><p>回答分類、部分回答率與 0–100 量表是本頁的實務設計，不是上述論文的原始官方評分標準。</p></details>
+          </section>
+        </section>
         <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">—</span><h3 id="empty-title">找不到符合條件的內容</h3><p id="empty-description">請更換關鍵字，或重設說話者篩選。</p><button id="empty-reset" type="button">重設篩選</button></div>
-        <p class="end-note">— 紀錄依影音時間編排；引述前請回聽確認 —</p>
+        <p id="reader-end-note" class="end-note">— 紀錄依影音時間編排；引述前請回聽確認 —</p>
       </main>
       <aside class="sidebar" aria-label="影音與閱讀工具">
         <div class="sidebar-sticky">
