@@ -174,6 +174,22 @@ update `data/index.html`. Reader assets and data remain inline in one HTML file;
 no frontend development server is required. Video uses YouTube and requires
 internet access through an HTTP(S) preview.
 
+### Git hooks
+
+Run `bun install --frozen-lockfile` to install Husky and enable the Git hooks.
+The `prepare` script sets `core.hooksPath` to `.husky/_`. The Python checks also
+require `uv sync --dev`.
+
+The pre-commit hook calls `bash scripts/pre-commit.sh`. It runs the frontend
+checks, Ruff lint and format checks, Python type checks, and Python tests.
+A failed check stops the commit. The hook does not format files or rebuild exports.
+
+To run the same checks manually:
+
+```bash
+bash scripts/pre-commit.sh
+```
+
 ### Model access
 
 Use the saved Hugging Face login or set `HF_TOKEN`. The same account must accept
