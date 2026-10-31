@@ -4,6 +4,22 @@ A Traditional Chinese debate transcript with timecoded speaker labels, an
 interactive HTML reader, and an auditable text-review ledger. WhisperX handles
 transcription and alignment. pyannote.audio separates speakers.
 
+## Project layout
+
+| Path | Responsibility |
+| --- | --- |
+| `transcripts/` | Python package: transcription, alignment, speaker separation, review, subtitles, and export |
+| `transcripts/assets/` | Generated JavaScript and copied HTML/CSS used by the Python exporter |
+| `web/` | Frontend TypeScript, CSS, and HTML source |
+| `data/` | Curated transcripts, subtitles, review records, and the single-file web page |
+| `raw/` | Original media; ignored |
+| `outputs/` | Local media derivatives, logs, screenshots, and inference checkpoints; ignored |
+| `tests/` | Python regression tests |
+
+The Python package uses a flat layout without `src/`. Root configuration files
+serve this one project. Python imports use `transcripts`; the distribution and
+console command remain `2026-debate`.
+
 ## Results
 
 Open [`data/index.html`](data/index.html).
@@ -86,7 +102,7 @@ The tested GPU is an RTX 4090. Use `--device cpu` if CUDA is unavailable.
 
 ### Frontend development
 
-The browser source is `src/debate/web_assets/page.ts`. It uses strict TypeScript
+The browser source is `web/page.ts`. It uses strict TypeScript
 with typed transcript data and checked DOM access. Biome formats and checks the
 TypeScript source, CSS, and frontend configuration. The stylesheet uses separate
 component sections; its CSS-only `noDescendingSpecificity` rule is disabled
@@ -101,10 +117,14 @@ bun run build
 ```
 
 `bun run check` runs Biome and the TypeScript compiler. `bun run build` checks the
-source and bundles it as a browser IIFE in `src/debate/web_assets/page.js`.
-Do not edit that generated JavaScript file directly. Keep it with the source so
-Python exports and installed wheels do not require Bun, Node.js, or TypeScript
-at runtime. Generated JavaScript and data exports are not Biome source inputs.
+source, bundles `web/page.ts` as a browser IIFE in `transcripts/assets/page.js`,
+and copies `web/page.html` and `web/page.css` into `transcripts/assets/`.
+
+Edit frontend source only under `web/`. Do not edit `transcripts/assets/` directly;
+regenerate its three runtime files with `bun run build`. Keep those files in the
+Python package so exports and installed wheels do not require `web/`, Bun,
+Node.js, or TypeScript at runtime. Generated assets and data exports are not
+Biome source inputs.
 
 After changing the frontend, rebuild it and run the export command below to
 update `data/index.html`. The page remains a self-contained HTML file that works
@@ -167,10 +187,10 @@ run. The first 90 seconds of this recording are silent.
 
 ```bash
 uv run pytest tests
-uv run ruff check src tests
-uv run ruff format --check src tests
-uv run ty check src
+uv run ruff check transcripts tests
+uv run ruff format --check transcripts tests
+uv run ty check transcripts
 bun run check
 bun run build
-node --check src/debate/web_assets/page.js
+node --check transcripts/assets/page.js
 ```

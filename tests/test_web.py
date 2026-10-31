@@ -3,10 +3,11 @@ import json
 import re
 from html.parser import HTMLParser
 from importlib.resources import files
+from pathlib import Path
 
 import pytest
 
-from debate.web import render_page
+from transcripts.web import render_page
 
 
 class PageParser(HTMLParser):
@@ -267,11 +268,30 @@ def test_empty_artifact_renders(tmp_path):
     }
 
 
+def test_runtime_assets_contain_only_built_files():
+    assets = files("transcripts").joinpath("assets")
+
+    assert {path.name for path in assets.iterdir()} == {
+        "page.js",
+        "page.css",
+        "page.html",
+    }
+    assert all(path.is_file() for path in assets.iterdir())
+
+
+@pytest.mark.parametrize("name", ["page.css", "page.html"])
+def test_runtime_assets_match_canonical_source(name):
+    runtime = files("transcripts").joinpath("assets", name)
+    source = Path(__file__).resolve().parents[1] / "web" / name
+
+    assert runtime.read_bytes() == source.read_bytes()
+
+
 def test_renderer_embeds_generated_typescript_bundle(tmp_path, artifact):
     bundle = (
-        files("debate").joinpath("web_assets", "page.js").read_text(encoding="utf-8")
+        files("transcripts").joinpath("assets", "page.js").read_text(encoding="utf-8")
     )
-    assert bundle.startswith("/* Generated from page.ts.")
+    assert bundle.startswith("/* Generated from web/page.ts.")
     page = PageParser(render_page(artifact, tmp_path).read_text(encoding="utf-8"))
     assert page.scripts[1]["text"].strip() == bundle.strip()
 
@@ -279,7 +299,7 @@ def test_renderer_embeds_generated_typescript_bundle(tmp_path, artifact):
 def test_renderer_needs_no_typescript_source_or_frontend_tools(
     tmp_path, monkeypatch, artifact
 ):
-    assets = files("debate").joinpath("web_assets")
+    assets = files("transcripts").joinpath("assets")
     runtime_assets = tmp_path / "runtime-assets"
     runtime_assets.mkdir()
     for name in ("page.html", "page.css", "page.js"):
@@ -287,7 +307,8 @@ def test_renderer_needs_no_typescript_source_or_frontend_tools(
             assets.joinpath(name).read_text(encoding="utf-8"),
             encoding="utf-8",
         )
-    monkeypatch.setattr("debate.web._ASSETS", runtime_assets)
+    monkeypatch.setattr("transcripts.web._ASSETS", runtime_assets)
+    monkeypatch.chdir(tmp_path)
     monkeypatch.setenv("PATH", "")
     destination = render_page(artifact, tmp_path / "output")
     assert not (runtime_assets / "page.ts").exists()

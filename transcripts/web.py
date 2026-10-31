@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
-_ASSETS = Path(__file__).with_name("web_assets")
+_ASSETS = Path(__file__).with_name("assets")
 
 
 def render_page(

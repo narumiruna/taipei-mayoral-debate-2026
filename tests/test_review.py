@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from debate.review import apply_review, source_fingerprint
+from transcripts.review import apply_review, source_fingerprint
 
 
 @pytest.fixture

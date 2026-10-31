@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2032%2032%27%3E%3Crect%20width=%2732%27%20height=%2732%27%20rx=%276%27%20fill=%27%23202d40%27/%3E%3Cpath%20d=%27M9%209h6a7%207%200%200%201%200%2014H9z%27%20fill=%27none%27%20stroke=%27%23f7f5ef%27%20stroke-width=%272%27/%3E%3C/svg%3E">
+  <meta name="description" content="2026 臺北市長候選人電視辯論校對逐字稿，提供影音時間定位、說話者篩選與校對紀錄。">
+  <title>2026 臺北市長候選人｜電視辯論・校對逐字稿</title>
+  <style>{{STYLE}}</style>
+</head>
+<body>
+  <a class="skip-link" href="#record">跳至逐字稿</a>
+  <div class="page-shell">
+    <header class="masthead">
+      <a href="#" class="wordmark" aria-label="辯論紀錄首頁">DEBATE RECORD <span>／ 2026</span></a>
+      <a class="edition" href="#record">閱讀逐字稿 ↓</a>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow"><span class="small-rule"></span>公開辯論・文字紀錄</div>
+      <h1 id="page-title"><span>2026 臺北市長候選人</span><br>電視辯論<span class="title-dot">・</span>校對逐字稿</h1>
+      <p class="intro">依說話者與時間閱讀逐字稿。<br class="mobile-break">搜尋發言、對照影片與文字修訂紀錄。</p>
+      <dl class="stats" aria-label="紀錄摘要">
+        <div><dt>影音長度</dt><dd id="stat-duration">—</dd></div>
+        <div><dt>字幕段落</dt><dd id="stat-cues">—</dd></div>
+        <div><dt>說話者</dt><dd id="stat-speakers">—</dd></div>
+        <div><dt>校對紀錄</dt><dd id="stat-corrections">—</dd></div>
+        <div><dt>待確認</dt><dd id="stat-pending">—</dd></div>
+      </dl>
+    </section>
+    <div class="notice"><span class="notice-label">閱讀須知</span><p>本稿以自動語音辨識（ASR）產生，再依校對紀錄修訂，<strong>並非逐句人工聽校的定稿</strong>。人名、重疊發言與時間對齊仍可能有誤；兩位辯論者姓名依使用者指定，角色依介紹與發言內容標註。請以原始影音為準。</p></div>
+    <div class="workspace">
+      <main id="record" tabindex="-1">
+        <div class="section-heading"><div><span class="section-number">01</span><h2>發言紀錄</h2></div><span class="section-note">依影音時間排序</span></div>
+        <div class="filters">
+          <label class="search-label" for="search">搜尋逐字稿與校對內容</label>
+          <div class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="輸入關鍵字，尋找發言…" autocomplete="off"><button type="button" id="clear-search" hidden>清除</button></div>
+          <div class="filter-row"><label for="speaker-filter">說話者</label><select id="speaker-filter"><option value="__all__">全部說話者</option></select><button type="button" id="reset-filters">重設篩選</button></div>
+        </div>
+        <div class="tabs" role="tablist" aria-label="紀錄類別">
+          <button id="tab-transcript" role="tab" aria-selected="true" aria-controls="panel-transcript" tabindex="0" data-view="transcript">逐字稿 <span id="count-transcript">0</span></button>
+          <button id="tab-corrections" role="tab" aria-selected="false" aria-controls="panel-corrections" tabindex="-1" data-view="corrections">校對紀錄 <span id="count-corrections">0</span></button>
+          <button id="tab-pending" role="tab" aria-selected="false" aria-controls="panel-pending" tabindex="-1" data-view="pending">待確認 <span id="count-pending">0</span></button>
+        </div>
+        <div class="result-bar"><p id="result-status" role="status" aria-live="polite" aria-atomic="true"></p><span>點選時間即可播放</span></div>
+        <noscript><p class="empty-state">請啟用 JavaScript 以閱讀、搜尋逐字稿；亦可下載下方的文字檔。</p></noscript>
+        <section id="panel-transcript" role="tabpanel" aria-labelledby="tab-transcript" tabindex="0"><div id="transcript-content"></div></section>
+        <section id="panel-corrections" role="tabpanel" aria-labelledby="tab-corrections" tabindex="0" hidden><div class="view-note">以下列出已採用的文字修訂及其依據。這些紀錄不代表其餘內容已完成查證。</div><div id="corrections-content"></div></section>
+        <section id="panel-pending" role="tabpanel" aria-labelledby="tab-pending" tabindex="0" hidden><div class="view-note">以下項目尚待查證。建議文字不是已採用的修訂，請回聽影音後再判斷。</div><div id="pending-content"></div></section>
+        <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">—</span><h3 id="empty-title">找不到符合條件的內容</h3><p id="empty-description">請更換關鍵字，或重設說話者篩選。</p><button id="empty-reset" type="button">重設篩選</button></div>
+        <p class="end-note">— 紀錄依影音時間編排；引述前請回聽確認 —</p>
+      </main>
+      <aside class="sidebar" aria-label="影音與閱讀工具">
+        <div class="sidebar-sticky">
+          <section class="media-panel" aria-labelledby="media-title">
+            <div class="aside-heading"><h2 id="media-title">現場影音</h2><span>對照閱讀</span></div>
+            <video id="debate-video" controls preload="metadata" playsinline poster="{{MEDIA_POSTER}}" aria-label="辯論完整影音"><source src="{{MEDIA_VIDEO}}" type="video/mp4"><track kind="captions" src="subtitles.vtt" srclang="zh-Hant-TW" label="正體中文字幕" default>您的瀏覽器不支援影片播放，請使用下方連結開啟影片。</video>
+            <p id="media-error" class="media-error" role="status" hidden>無法載入影音。請確認本機影片檔案可用；大型媒體不隨文字資料提交。逐字稿仍可閱讀與搜尋。</p>
+            <div class="player-status"><span class="live-dot" aria-hidden="true"></span><span id="playback-status">尚未播放</span><a href="{{MEDIA_VIDEO}}">開啟影片 ↗</a></div>
+            <label class="follow-control"><input type="checkbox" id="follow-playback"><span>跟隨播放位置捲動</span><small>預設關閉</small></label>
+            <p class="media-help">點選逐字稿時間可定位並播放。直接開啟本機檔案時，若字幕無法顯示，可改用本機 HTTP 伺服器開啟此頁。</p>
+          </section>
+          <section class="chapter-panel" aria-labelledby="chapters-title"><div class="aside-heading"><h2 id="chapters-title">時間索引</h2><span>每 10 分鐘</span></div><nav id="chapters" aria-label="影音時間索引"></nav><p class="index-note">時間索引非議題章節。</p></section>
+          <section class="downloads" aria-labelledby="downloads-title"><div class="aside-heading"><h2 id="downloads-title">檔案下載</h2><span>離線保存</span></div><div class="download-grid"><a href="transcript.md" download>逐字稿 <span>MD ↓</span></a><a href="transcript.json" download>結構化資料 <span>JSON ↓</span></a><a href="subtitles.srt" download>字幕 <span>SRT ↓</span></a><a href="subtitles.vtt" download>網頁字幕 <span>VTT ↓</span></a><a href="corrections.json" download>校對紀錄 <span>JSON ↓</span></a></div></section>
+          <details class="provenance"><summary>處理資訊與校對方法</summary><dl><dt>辨識模型</dt><dd id="model-info">—</dd><dt>處理階段</dt><dd id="stage-info">—</dd><dt>校對方法</dt><dd id="method-info">未提供</dd><dt>來源 SHA-256</dt><dd id="hash-info">未提供</dd></dl></details>
+        </div>
+      </aside>
+    </div>
+    <footer><span>DEBATE RECORD / 2026</span><p>文字校對不等同事實查核；引述前請對照原始影音。</p><a href="#page-title">回到頁首 ↑</a></footer>
+  </div>
+  <script type="application/json" id="debate-data">{{DATA}}</script>
+  <script>{{SCRIPT}}</script>
+</body>
+</html>

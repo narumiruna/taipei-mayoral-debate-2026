@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from debate import pipeline
+from transcripts import pipeline
 
 
 @pytest.fixture

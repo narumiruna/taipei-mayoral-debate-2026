@@ -3,7 +3,7 @@ import json
 import pytest
 from typer.testing import CliRunner
 
-from debate import cli, pipeline
+from transcripts import cli, pipeline
 
 runner = CliRunner()
 

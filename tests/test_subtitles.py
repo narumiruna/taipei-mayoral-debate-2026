@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from debate import subtitles
+from transcripts import subtitles
 
 
 @pytest.mark.parametrize(

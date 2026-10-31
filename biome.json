@@ -6,13 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "package.json",
-      "tsconfig.json",
-      "biome.json",
-      "src/debate/web_assets/**/*.ts",
-      "src/debate/web_assets/**/*.css"
-    ]
+    "includes": ["package.json", "tsconfig.json", "biome.json", "web/**/*.ts", "web/**/*.css"]
   },
   "formatter": {
     "enabled": true,
@@ -31,7 +25,7 @@
   },
   "overrides": [
     {
-      "includes": ["src/debate/web_assets/page.css"],
+      "includes": ["web/page.css"],
       "linter": {
         "rules": {
           "style": { "noDescendingSpecificity": "off" }

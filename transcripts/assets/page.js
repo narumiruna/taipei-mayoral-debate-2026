@@ -1,7 +1,7 @@
-/* Generated from page.ts. Run bun run build to update. */ "use strict";
+/* Generated from web/page.ts. Run bun run build to update. */ "use strict";
 (() => {
 
-  // src/debate/web_assets/page.ts
+  // web/page.ts
   (() => {
     function requiredElement(id, type) {
       const node = document.getElementById(id);

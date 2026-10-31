@@ -2,9 +2,9 @@ import json
 
 from typer.testing import CliRunner
 
-from debate import cli, pipeline, subtitles
-from debate.review import source_fingerprint
-from debate.web import render_page
+from transcripts import cli, pipeline, subtitles
+from transcripts.review import source_fingerprint
+from transcripts.web import render_page
 
 
 def test_reviewed_exports_use_separate_destination(tmp_path, transcript, roles):
