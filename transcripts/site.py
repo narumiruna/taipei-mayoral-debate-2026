@@ -53,6 +53,10 @@ def build_site(data_dir: Path, destination: Path) -> Path:
     if ledger_path.exists() or ledger_path.is_symlink():
         ledger = _read_object(ledger_path)
         names.append(ledger_path.name)
+    chapters_path = data_dir / "chapters.json"
+    chapters = None
+    if chapters_path.exists() or chapters_path.is_symlink():
+        chapters = _read_object(chapters_path)
 
     output.parent.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(prefix=f".{output.name}-", dir=output.parent) as temporary:
@@ -61,7 +65,7 @@ def build_site(data_dir: Path, destination: Path) -> Path:
         staging.mkdir()
         for name in names:
             shutil.copyfile(data_dir / name, staging / name)
-        render_page(artifact, staging, fact_checks=ledger)
+        render_page(artifact, staging, fact_checks=ledger, chapters=chapters)
 
         backup = temporary_dir / "previous"
         had_previous = output.exists()

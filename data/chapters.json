@@ -1,0 +1,185 @@
+{
+  "source_sha256": "bcc1e56e8d98ed44e2c48d219314380627d9b3e02a76f3f6433645328899aae2",
+  "items": [
+    {
+      "id": "introduction",
+      "title": "開場與規則",
+      "start_cue_id": 1,
+      "end_cue_id": 34
+    },
+    {
+      "id": "opening-statements",
+      "title": "申論",
+      "children": [
+        {
+          "id": "shen-opening",
+          "title": "沈伯洋申論",
+          "start_cue_id": 37,
+          "end_cue_id": 120
+        },
+        {
+          "id": "chiang-opening",
+          "title": "蔣萬安申論",
+          "start_cue_id": 123,
+          "end_cue_id": 208
+        }
+      ]
+    },
+    {
+      "id": "cross-examination",
+      "title": "交叉詰問",
+      "children": [
+        {
+          "id": "cross-round-1",
+          "title": "第一輪",
+          "children": [
+            {
+              "id": "cross-round-1-chiang-asks",
+              "title": "蔣問沈答",
+              "start_cue_id": 220,
+              "end_cue_id": 281
+            },
+            {
+              "id": "cross-round-1-shen-asks",
+              "title": "沈問蔣答",
+              "start_cue_id": 284,
+              "end_cue_id": 346
+            }
+          ]
+        },
+        {
+          "id": "cross-round-2",
+          "title": "第二輪",
+          "children": [
+            {
+              "id": "cross-round-2-chiang-asks",
+              "title": "蔣問沈答",
+              "start_cue_id": 349,
+              "end_cue_id": 411
+            },
+            {
+              "id": "cross-round-2-shen-asks",
+              "title": "沈問蔣答",
+              "start_cue_id": 415,
+              "end_cue_id": 478
+            }
+          ]
+        },
+        {
+          "id": "cross-round-3",
+          "title": "第三輪",
+          "children": [
+            {
+              "id": "cross-round-3-chiang-asks",
+              "title": "蔣問沈答",
+              "start_cue_id": 484,
+              "end_cue_id": 544
+            },
+            {
+              "id": "cross-round-3-shen-asks",
+              "title": "沈問蔣答",
+              "start_cue_id": 547,
+              "end_cue_id": 610
+            }
+          ]
+        },
+        {
+          "id": "cross-round-4",
+          "title": "第四輪",
+          "children": [
+            {
+              "id": "cross-round-4-chiang-asks",
+              "title": "蔣問沈答",
+              "start_cue_id": 613,
+              "end_cue_id": 675
+            },
+            {
+              "id": "cross-round-4-shen-asks",
+              "title": "沈問蔣答",
+              "start_cue_id": 678,
+              "end_cue_id": 738
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media-questions",
+      "title": "媒體提問",
+      "children": [
+        {
+          "id": "fan-qiming",
+          "title": "樊啟明・TVBS／四年後市民生活",
+          "children": [
+            {
+              "id": "fan-question",
+              "title": "記者提問",
+              "start_cue_id": 747,
+              "end_cue_id": 764
+            },
+            {
+              "id": "fan-chiang-answer",
+              "title": "蔣萬安回答",
+              "start_cue_id": 766,
+              "end_cue_id": 799
+            },
+            {
+              "id": "fan-shen-answer",
+              "title": "沈伯洋回答",
+              "start_cue_id": 801,
+              "end_cue_id": 832
+            }
+          ]
+        },
+        {
+          "id": "huang-yanyi",
+          "title": "黃燕怡・三立／都更與居住韌性",
+          "children": [
+            {
+              "id": "huang-question",
+              "title": "記者提問",
+              "start_cue_id": 835,
+              "end_cue_id": 851
+            },
+            {
+              "id": "huang-shen-answer",
+              "title": "沈伯洋回答",
+              "start_cue_id": 853,
+              "end_cue_id": 885
+            },
+            {
+              "id": "huang-chiang-answer",
+              "title": "蔣萬安回答",
+              "start_cue_id": 887,
+              "end_cue_id": 917
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "closing-statements",
+      "title": "結論",
+      "children": [
+        {
+          "id": "chiang-closing",
+          "title": "蔣萬安結論",
+          "start_cue_id": 924,
+          "end_cue_id": 990
+        },
+        {
+          "id": "shen-closing",
+          "title": "沈伯洋結論",
+          "start_cue_id": 993,
+          "end_cue_id": 1066
+        }
+      ]
+    },
+    {
+      "id": "final-host",
+      "title": "閉幕",
+      "start_cue_id": 1068,
+      "end_cue_id": 1082
+    }
+  ]
+}

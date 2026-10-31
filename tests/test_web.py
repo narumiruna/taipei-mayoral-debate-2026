@@ -355,6 +355,129 @@ def test_empty_artifact_renders(tmp_path):
     }
 
 
+@pytest.fixture
+def chapters():
+    return {
+        "source_sha256": "a" * 64,
+        "private": "PRIVATE_CHAPTER_ROOT",
+        "items": [
+            {
+                "id": "phase",
+                "title": "Phase",
+                "private": "PRIVATE_CHAPTER_GROUP",
+                "start": 100,
+                "children": [
+                    {
+                        "id": "opening",
+                        "title": "Opening",
+                        "start_cue_id": 1,
+                        "end_cue_id": 1,
+                        "private": "PRIVATE_CHAPTER_LEAF",
+                        "end": 100,
+                    }
+                ],
+            }
+        ],
+    }
+
+
+def test_renderer_embeds_explicit_normalized_chapters(tmp_path, artifact, chapters):
+    original_artifact = copy.deepcopy(artifact)
+    original_chapters = copy.deepcopy(chapters)
+
+    html = render_page(artifact, tmp_path, chapters=chapters).read_text(
+        encoding="utf-8"
+    )
+
+    normalized_leaf = {
+        "id": "opening",
+        "title": "Opening",
+        "start_cue_id": 1,
+        "end_cue_id": 1,
+        "start": 0.5,
+        "end": 3.5,
+    }
+    assert PageParser(html).payload()["chapters"] == {
+        "source_sha256": "a" * 64,
+        "items": [
+            {
+                **normalized_leaf,
+                "id": "phase",
+                "title": "Phase",
+                "children": [normalized_leaf],
+            }
+        ],
+    }
+    assert artifact == original_artifact
+    assert chapters == original_chapters
+    assert "PRIVATE_" not in html
+    assert {path.name for path in tmp_path.iterdir()} == {"index.html"}
+
+
+def test_renderer_does_not_infer_chapters_from_artifact(tmp_path, artifact, chapters):
+    artifact["chapters"] = chapters
+
+    html = render_page(artifact, tmp_path, chapters=None).read_text(encoding="utf-8")
+
+    assert "chapters" not in PageParser(html).payload()
+    assert "PRIVATE_" not in html
+
+
+def test_malicious_chapter_labels_and_ids_are_json_escaped(
+    tmp_path, artifact, chapters
+):
+    malicious = (
+        '</script><script>alert(1)</script><img src=x onerror="alert(1)">&\u2028\u2029'
+    )
+    group = chapters["items"][0]
+    group["id"] = malicious + "group"
+    group["title"] = malicious
+    group["children"][0]["id"] = malicious + "leaf"
+    group["children"][0]["title"] = malicious
+
+    html = render_page(artifact, tmp_path, chapters=chapters).read_text(
+        encoding="utf-8"
+    )
+
+    page = PageParser(html)
+    embedded_group = page.payload()["chapters"]["items"][0]
+    assert embedded_group["title"] == malicious
+    assert embedded_group["id"] == malicious + "group"
+    assert embedded_group["children"][0]["title"] == malicious
+    assert embedded_group["children"][0]["id"] == malicious + "leaf"
+    assert len(page.scripts) == 2
+    assert not any(tag == "img" for tag, _ in page.elements)
+    for character in "<>&\u2028\u2029":
+        assert character not in page.scripts[0]["text"]
+    assert malicious not in html
+
+
+@pytest.mark.parametrize("existing", [True, False])
+@pytest.mark.parametrize("invalid", ["source", "reference", "group"])
+def test_invalid_chapters_do_not_write_output(
+    tmp_path, artifact, chapters, existing, invalid
+):
+    output = tmp_path / "output"
+    if existing:
+        output.mkdir()
+        (output / "index.html").write_bytes(b"PREVIOUS HTML")
+    if invalid == "source":
+        chapters["source_sha256"] = "b" * 64
+    elif invalid == "reference":
+        chapters["items"][0]["children"][0]["end_cue_id"] = 999
+    else:
+        chapters["items"][0]["children"] = []
+
+    with pytest.raises(ValueError):
+        render_page(artifact, output, chapters=chapters)
+
+    if existing:
+        assert {path.name for path in output.iterdir()} == {"index.html"}
+        assert (output / "index.html").read_bytes() == b"PREVIOUS HTML"
+    else:
+        assert not output.exists()
+
+
 def test_runtime_assets_contain_only_built_files():
     assets = files("transcripts").joinpath("assets")
 
