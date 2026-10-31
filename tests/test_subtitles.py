@@ -216,6 +216,7 @@ def test_export_formats_and_evidence(tmp_path, transcript, roles):
         "unconfirmed_role_cues": 0,
         "segment_timing_cues": 0,
         "corrected_cues": 0,
+        "speaker_corrected_cues": 0,
         "pending_review_cues": 0,
     }
     assert (

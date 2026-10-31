@@ -67,6 +67,9 @@ def test_curated_ledger_replays_without_changing_source_cues(artifact):
     for cue in source_cues:
         cue["text"] = cue.pop("original_text", cue["text"])
         cue.pop("correction_id", None)
+        cue["speaker"] = cue.pop("original_speaker", cue["speaker"])
+        cue["label"] = cue.pop("original_label", cue["label"])
+        cue.pop("speaker_correction_id", None)
     original = copy.deepcopy(source_cues)
 
     replayed, review = apply_review(source_cues, DATA / "corrections.json")
@@ -74,17 +77,74 @@ def test_curated_ledger_replays_without_changing_source_cues(artifact):
     assert source_cues == original
     assert replayed == artifact["cues"]
     assert review == artifact["review"]
+    speaker_edits = {entry["cue_id"]: entry for entry in review["speaker_corrections"]}
     for source, display in zip(source_cues, replayed, strict=True):
-        assert all(
-            source[key] == display[key] for key in ("id", "start", "end", "speaker")
-        )
+        assert all(source[key] == display[key] for key in ("id", "start", "end"))
+        if source["id"] in speaker_edits:
+            entry = speaker_edits[source["id"]]
+            assert source["speaker"] == display["original_speaker"] == entry["before"]
+            assert display["speaker"] == entry["after"]
+        else:
+            assert source["speaker"] == display["speaker"]
     assert "".join(cue["text"] for cue in source_cues[1:3]) == "".join(
         cue["text"] for cue in replayed[1:3]
     ).translate(REMOVE_PUNCTUATION)
     assert not any(flag["cue_id"] == 2 for flag in review["flags"])
     validation = json.loads((DATA / "validation.json").read_text(encoding="utf-8"))
     assert validation["corrected_cues"] == len(review["corrections"])
+    assert validation["speaker_corrected_cues"] == len(review["speaker_corrections"])
     assert validation["pending_review_cues"] == len(review["flags"])
+
+
+@pytest.mark.parametrize(
+    ("cue_id", "speaker"),
+    [
+        (76, "SPEAKER_03"),
+        (153, "SPEAKER_04"),
+        (219, "SPEAKER_00"),
+        (271, "SPEAKER_03"),
+        (362, "SPEAKER_03"),
+        (414, "SPEAKER_05"),
+        (420, "SPEAKER_03"),
+        (569, "SPEAKER_04"),
+        (646, "SPEAKER_03"),
+        (760, "SPEAKER_02"),
+        (934, "SPEAKER_04"),
+        (984, "SPEAKER_04"),
+        (1017, "SPEAKER_03"),
+        (1021, "SPEAKER_03"),
+        (1026, "SPEAKER_03"),
+        (1042, "SPEAKER_03"),
+        (1047, "SPEAKER_03"),
+    ],
+)
+def test_sentence_endings_keep_the_previous_speaker(artifact, cue_id, speaker):
+    cues = {cue["id"]: cue for cue in artifact["cues"]}
+    cue, previous = cues[cue_id], cues[cue_id - 1]
+    edits = {
+        entry["cue_id"]: entry for entry in artifact["review"]["speaker_corrections"]
+    }
+
+    assert cue["speaker"] == previous["speaker"] == speaker
+    assert cue["start"] == previous["end"]
+    assert cue["original_speaker"] == "UNKNOWN"
+    assert cue["original_label"] == "說話者未確認"
+    assert cue["speaker_correction_id"] == edits[cue_id]["id"]
+    assert edits[cue_id]["reason"] and edits[cue_id]["evidence"]
+    assert cue_id not in {flag["cue_id"] for flag in artifact["review"]["flags"]}
+
+
+def test_closing_host_boundary_remains_unconfirmed(artifact):
+    cues = {cue["id"]: cue for cue in artifact["cues"]}
+    unknown = [cue["id"] for cue in artifact["cues"] if cue["speaker"] == "UNKNOWN"]
+
+    assert unknown == [1076]
+    assert cues[1076]["text"] == "句"
+    assert cues[1075]["speaker"] != cues[1077]["speaker"]
+    assert "speaker_correction_id" not in cues[1076]
+    (flag,) = [flag for flag in artifact["review"]["flags"] if flag["cue_id"] == 1076]
+    assert "交接" in flag["reason"]
+    assert "重疊" in flag["reason"]
 
 
 def test_punctuation_preserves_every_existing_character(artifact):
