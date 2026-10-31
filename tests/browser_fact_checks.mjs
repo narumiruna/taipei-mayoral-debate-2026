@@ -18,6 +18,21 @@ const publishedFiles = new Map(
 const basePath = "/taipei-mayoral-debate-2026/";
 const screenshotDir = new URL("../outputs/fact-checks/", import.meta.url);
 
+async function openTool(page, name) {
+  if (!(await page.locator("#reading-tools").evaluate((node) => node.open))) {
+    await page.locator("#tools-summary").click();
+  }
+  const trigger = page.locator(`#${name}-trigger`);
+  if ((await trigger.getAttribute("aria-expanded")) !== "true") await trigger.click();
+}
+
+async function waitForTab(page, view) {
+  await page.waitForFunction(
+    (value) => document.querySelector(`#tab-${value}`)?.getAttribute("aria-selected") === "true",
+    view,
+  );
+}
+
 // Headless checks do not need WSLg launch arguments.
 await test("fact checks work with external network requests blocked", async (t) => {
   const server = createServer((request, response) => {
@@ -47,9 +62,12 @@ await test("fact checks work with external network requests blocked", async (t) 
   try {
     browser = await chromium.launch({ headless: true });
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+    const externalRequests = [];
     await context.route("**/*", (route) => {
       const url = route.request().url();
-      return url.startsWith(origin) || url.startsWith("file:") ? route.continue() : route.abort();
+      if (url.startsWith(origin) || url.startsWith("file:")) return route.continue();
+      externalRequests.push(url);
+      return route.abort();
     });
     const page = await context.newPage();
     const errors = [];
@@ -191,10 +209,13 @@ await test("fact checks work with external network requests blocked", async (t) 
     await t.test("tab keys and overview hash navigation work repeatedly", async () => {
       await page.locator("#tab-transcript").focus();
       await page.keyboard.press("ArrowRight");
+      await waitForTab(page, "fact-checks");
       assert.equal(await page.locator("#tab-fact-checks").getAttribute("aria-selected"), "true");
       await page.keyboard.press("End");
+      await waitForTab(page, "pending");
       assert.equal(await page.locator("#tab-pending").getAttribute("aria-selected"), "true");
       await page.keyboard.press("Home");
+      await waitForTab(page, "transcript");
       assert.equal(await page.locator("#tab-transcript").getAttribute("aria-selected"), "true");
       const overview = page.locator('.intro a[href="#fact-checks"]');
       await overview.click();
@@ -204,7 +225,84 @@ await test("fact checks work with external network requests blocked", async (t) 
       await page.locator("#panel-fact-checks").waitFor({ state: "visible" });
     });
 
-    await t.test("compact editorial layout exposes the reader and all four tabs", async () => {
+    await t.test(
+      "Radix controls keep one reader state and preserve panel and player nodes",
+      async () => {
+        await page.setViewportSize({ width: 1440, height: 1000 });
+        await page.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
+        await page.locator(".turn").first().waitFor();
+        const views = ["transcript", "fact-checks", "corrections", "pending"];
+        assert.equal(await page.locator(".radix-themes").count(), 1);
+        assert.equal(await page.locator("#search.rt-TextFieldInput").count(), 1);
+        await page.evaluate((values) => {
+          window.readerNodeProbe = {
+            panels: values.map((view) => document.getElementById(`panel-${view}`)),
+            player: document.getElementById("debate-video"),
+            search: document.getElementById("search"),
+          };
+        }, views);
+        await page.locator("#search").fill("臺北");
+        await page.locator("#speaker-filter").selectOption("SPEAKER_04");
+        for (const view of views) {
+          await page.locator(`#tab-${view}`).click();
+          await waitForTab(page, view);
+          assert.equal(
+            await page.locator(`#tab-${view}`).getAttribute("aria-controls"),
+            `panel-${view}`,
+          );
+          assert.equal(
+            await page.locator(`#panel-${view}`).getAttribute("aria-labelledby"),
+            `tab-${view}`,
+          );
+          assert.equal(await page.locator(`#count-${view}`).count(), 1);
+          assert.equal(await page.locator("#search").inputValue(), "臺北");
+          assert.equal(await page.locator("#speaker-filter").inputValue(), "SPEAKER_04");
+          assert(
+            await page.evaluate((values) => {
+              const probe = window.readerNodeProbe;
+              return (
+                values.every(
+                  (value, index) =>
+                    probe.panels[index] === document.getElementById(`panel-${value}`),
+                ) &&
+                probe.player === document.getElementById("debate-video") &&
+                probe.search === document.getElementById("search")
+              );
+            }, views),
+          );
+        }
+        const trigger = page.locator("#media-trigger");
+        assert.equal(await trigger.getAttribute("aria-expanded"), "false");
+        await trigger.focus();
+        await page.keyboard.press("Enter");
+        assert.equal(await trigger.getAttribute("aria-expanded"), "true");
+        assert.equal(await page.locator("#debate-video").isVisible(), true);
+        await page.locator("#follow-playback").check();
+        await trigger.focus();
+        await page.keyboard.press("Space");
+        assert.equal(await trigger.getAttribute("aria-expanded"), "false");
+        assert.equal(await page.locator("#debate-video").isVisible(), false);
+        assert(await page.evaluate(() => window.readerNodeProbe.player.isConnected));
+        await trigger.press("Enter");
+        assert.equal(await page.locator("#follow-playback").isChecked(), true);
+        assert(
+          await page.evaluate(
+            () => window.readerNodeProbe.player === document.getElementById("debate-video"),
+          ),
+        );
+        await page.locator("#follow-playback").uncheck();
+        assert(
+          await page.evaluate(() => {
+            const ids = [...document.querySelectorAll("[id]")].map((node) => node.id);
+            return ids.length === new Set(ids).size;
+          }),
+          "all document IDs remain unique",
+        );
+        await reset();
+      },
+    );
+
+    await t.test("workspace A exposes the reader, header tabs, and left chapter rail", async () => {
       for (const width of [1440, 1100, 1024, 821, 820, 561, 560, 390, 375, 360, 320]) {
         const height = width <= 560 ? 844 : 1000;
         await page.setViewportSize({ width, height });
@@ -220,7 +318,7 @@ await test("fact checks work with external network requests blocked", async (t) 
             tabOverflow: tablist.scrollWidth > tablist.clientWidth,
             tabs: [...tablist.children].map((tab) => {
               const box = tab.getBoundingClientRect();
-              const count = tab.querySelector("span").getBoundingClientRect();
+              const count = tab.querySelector('[id^="count-"]').getBoundingClientRect();
               return {
                 left: box.left,
                 right: box.right,
@@ -234,7 +332,10 @@ await test("fact checks work with external network requests blocked", async (t) 
               text.getBoundingClientRect().top +
               Number.parseFloat(getComputedStyle(text).lineHeight),
             toolsOpen: document.getElementById("reading-tools").open,
-            metricsFit: [...document.querySelectorAll(".stats dd")].every(
+            header: rect(".masthead").toJSON(),
+            sidebar: rect(".sidebar").toJSON(),
+            reader: rect("#record").toJSON(),
+            metricsFit: [...document.querySelectorAll(".stats dd, .stats dt")].every(
               (item) => item.scrollWidth <= item.clientWidth,
             ),
           };
@@ -252,13 +353,23 @@ await test("fact checks work with external network requests blocked", async (t) 
         assert.equal(await page.getByRole("tab", { selected: true }).count(), 1);
         assert.equal(await page.locator("a[download]").count(), 5);
         if (width === 1440) {
+          assert(layout.header.height <= 96, "compact title and tabs fit within 96px");
+          assert(layout.sidebar.x < layout.reader.x, "chapters are left of the document");
+          assert(layout.sidebar.width >= 220 && layout.sidebar.width <= 288);
+          assert(layout.reader.y - layout.header.bottom <= 24, "document starts below header");
           assert(layout.searchY <= 440, "desktop search starts by 440px");
           assert(layout.firstTurnY <= 700, "desktop first entry starts by 700px");
           await page.evaluate(() => window.scrollTo({ top: 1500, behavior: "instant" }));
           const railTop = await page
             .locator(".sidebar-sticky")
             .evaluate((node) => node.getBoundingClientRect().top);
-          assert(Math.abs(railTop - 24) < 1, "desktop tools remain sticky after scrolling");
+          const headerBottom = await page
+            .locator(".masthead")
+            .evaluate((node) => node.getBoundingClientRect().bottom);
+          assert(
+            Math.abs(railTop - headerBottom - 16) < 1,
+            "desktop chapters remain below the sticky header",
+          );
         }
         if (width === 390) {
           assert(layout.searchY <= 600, "mobile search starts by 600px");
@@ -312,7 +423,7 @@ await test("fact checks work with external network requests blocked", async (t) 
       assert.equal(await page.locator("#debate-video").isVisible(), true);
       assert.equal(await page.locator("#chapters").isVisible(), true);
       assert.equal(await page.locator(".download-grid a:visible").count(), 5);
-      assert.equal(await page.locator(".provenance summary").isVisible(), true);
+      assert.equal(await page.locator("#processing-trigger").isVisible(), true);
       assert.deepEqual(await chapterStates(), defaults);
       await summary.focus();
       await page.keyboard.press("Space");
@@ -347,74 +458,88 @@ await test("fact checks work with external network requests blocked", async (t) 
       await accessibility.detach();
     });
 
-    await t.test("supporting tools have readable text, contrast, and chapter targets", async () => {
-      await page.setViewportSize({ width: 1440, height: 1000 });
-      await page.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
-      await page.locator(".turn").first().waitFor();
-      const sizes = await page.evaluate(() => {
-        const fonts = (selector) =>
-          [...document.querySelectorAll(selector)].map((node) =>
-            Number.parseFloat(getComputedStyle(node).fontSize),
-          );
-        return {
-          labels: fonts(
-            ".aside-heading h2, .chapter-button, .download-grid a, .follow-control, .provenance summary",
-          ),
-          supporting: fonts(
-            ".aside-heading > span, .chapter-time, .player-status, .follow-control small, .media-help, .index-note, .download-grid a span, .provenance",
-          ),
-          targets: [
-            ...document.querySelectorAll(
-              ".chapter-button, .chapter-group > summary, .provenance > summary",
+    await t.test(
+      "Radix tools meet text contrast, form-boundary contrast, and target sizes",
+      async () => {
+        await page.setViewportSize({ width: 1440, height: 1000 });
+        await page.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
+        await page.locator(".turn").first().waitFor();
+        const sizes = await page.evaluate(() => {
+          const fonts = (selector) =>
+            [...document.querySelectorAll(selector)].map((node) =>
+              Number.parseFloat(getComputedStyle(node).fontSize),
+            );
+          return {
+            labels: fonts(
+              ".aside-heading h2, .chapter-button, .download-grid a, .follow-control, .tool-trigger",
             ),
-          ]
-            .filter((node) => node.checkVisibility())
-            .map((node) => node.getBoundingClientRect().height),
-        };
-      });
-      assert(sizes.labels.every((size) => size >= 13));
-      assert(sizes.supporting.every((size) => size >= 12));
-      assert(sizes.targets.every((height) => height >= 44));
-      const contrasts = await page
-        .locator(".turn-range, .chapter-time, .player-status, #video-link, .media-error")
-        .evaluateAll((nodes) =>
-          nodes.map((node) => {
-            let background = "rgba(0, 0, 0, 0)";
-            for (let parent = node; parent; parent = parent.parentElement) {
-              const color = getComputedStyle(parent).backgroundColor;
-              if (color !== "rgba(0, 0, 0, 0)") {
-                background = color;
-                break;
+            supporting: fonts(
+              ".aside-heading > span, .chapter-time, .player-status, .follow-control small, .media-help, .index-note, .download-grid a span, .provenance",
+            ),
+            targets: [
+              ...document.querySelectorAll(
+                ".chapter-button, .chapter-group > summary, .tool-trigger",
+              ),
+            ]
+              .filter((node) => node.checkVisibility())
+              .map((node) => node.getBoundingClientRect().height),
+          };
+        });
+        assert(sizes.labels.every((size) => size >= 13));
+        assert(sizes.supporting.every((size) => size >= 12));
+        assert(sizes.targets.every((height) => height >= 44));
+        const contrasts = await page
+          .locator(".turn-range, .chapter-time, .player-status, #video-link, .media-error")
+          .evaluateAll((nodes) =>
+            nodes.map((node) => {
+              let background = "rgba(0, 0, 0, 0)";
+              for (let parent = node; parent; parent = parent.parentElement) {
+                const color = getComputedStyle(parent).backgroundColor;
+                if (color !== "rgba(0, 0, 0, 0)") {
+                  background = color;
+                  break;
+                }
               }
-            }
-            return { foreground: getComputedStyle(node).color, background };
-          }),
+              return { foreground: getComputedStyle(node).color, background };
+            }),
+          );
+        const boundaries = await page
+          .locator(".search-box, #speaker-filter, #verdict-filter")
+          .evaluateAll((nodes) =>
+            nodes.map((node) => ({
+              foreground: getComputedStyle(node).borderTopColor,
+              background: getComputedStyle(node).backgroundColor,
+              minimum: 3,
+            })),
+          );
+        contrasts.push(...boundaries);
+        const luminance = (color) => {
+          const [r, g, b] = color
+            .match(/[\d.]+/g)
+            .slice(0, 3)
+            .map((channel) => {
+              const value = Number(channel) / 255;
+              return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+            });
+          return r * 0.2126 + g * 0.7152 + b * 0.0722;
+        };
+        for (const pair of contrasts) {
+          const [light, dark] = [luminance(pair.foreground), luminance(pair.background)].sort(
+            (a, b) => b - a,
+          );
+          assert((light + 0.05) / (dark + 0.05) >= (pair.minimum ?? 4.5), JSON.stringify(pair));
+        }
+        await page.locator("#tab-transcript").focus();
+        await page.keyboard.press("ArrowRight");
+        await waitForTab(page, "fact-checks");
+        assert.equal(
+          await page
+            .locator("#tab-fact-checks")
+            .evaluate((node) => getComputedStyle(node).outlineWidth),
+          "3px",
         );
-      const luminance = (color) => {
-        const [r, g, b] = color
-          .match(/[\d.]+/g)
-          .slice(0, 3)
-          .map((channel) => {
-            const value = Number(channel) / 255;
-            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
-          });
-        return r * 0.2126 + g * 0.7152 + b * 0.0722;
-      };
-      for (const pair of contrasts) {
-        const [light, dark] = [luminance(pair.foreground), luminance(pair.background)].sort(
-          (a, b) => b - a,
-        );
-        assert((light + 0.05) / (dark + 0.05) >= 4.5, JSON.stringify(pair));
-      }
-      await page.locator("#tab-transcript").focus();
-      await page.keyboard.press("ArrowRight");
-      assert.equal(
-        await page
-          .locator("#tab-fact-checks")
-          .evaluate((node) => getComputedStyle(node).outlineWidth),
-        "3px",
-      );
-    });
+      },
+    );
 
     await t.test("native tools and downloads remain available without JavaScript", async () => {
       const noScriptContext = await browser.newContext({
@@ -476,6 +601,10 @@ await test("fact checks work with external network requests blocked", async (t) 
       assert.equal(await page.locator("#panel-fact-checks").isVisible(), true);
     });
     assert.deepEqual(errors, []);
+    assert(
+      externalRequests.every((url) => new URL(url).hostname === "www.youtube.com"),
+      "No React, Radix, CSS, icon, or font requests leave the inline reader",
+    );
     await context.close();
   } finally {
     await browser?.close();
@@ -957,6 +1086,7 @@ await test("chapter navigation uses a deterministic YouTube API with external re
           (await page.evaluate(() => window.chapterProbe.calls)).some(([kind]) => kind === "play"),
           false,
         );
+        await openTool(page, "media");
         await page.locator("#follow-playback").check();
         await page.locator("#search").focus();
         // Check the behavior with a closed active group as well as a distant cue.
@@ -1018,6 +1148,7 @@ await test("chapter navigation uses a deterministic YouTube API with external re
       async () => {
         const blocked = await newChapterPage({ mock: false });
         await blocked.goto(url, { waitUntil: "domcontentloaded" });
+        await openTool(blocked, "media");
         await blocked.locator("#media-error").waitFor({ state: "visible" });
         const leaf = leaves.find((entry) => entry.id === "cross-round-4-shen-asks");
         await blocked.locator("#tab-pending").click();
@@ -1028,6 +1159,7 @@ await test("chapter navigation uses a deterministic YouTube API with external re
         assert.match(await blocked.locator("#media-error").textContent(), /YouTube/);
         await blocked.context().close();
         await load();
+        await openTool(page, "media");
         await page.evaluate(() => window.chapterProbe.fail(150));
         assert.match(await page.locator("#media-error").textContent(), /嵌入播放/);
         await openChapterPath(page, leaf);
@@ -1147,7 +1279,7 @@ await test("chapter navigation uses a deterministic YouTube API with external re
     );
 
     await t.test(
-      "Tab reaches the final entry in the existing desktop sidebar scroll container at 1440x700",
+      "Tab reaches the final entry in the Radix chapter scroll container at 1440x700",
       async () => {
         await load();
         await page.setViewportSize({ width: 1440, height: 700 });
@@ -1159,7 +1291,11 @@ await test("chapter navigation uses a deterministic YouTube API with external re
           client: node.clientHeight,
           scroll: node.scrollHeight,
         }));
-        assert.equal(sidebar.overflow, "auto");
+        assert(["auto", "scroll"].includes(sidebar.overflow));
+        assert.equal(
+          await page.locator(".sidebar-sticky[data-radix-scroll-area-viewport]").count(),
+          1,
+        );
         assert(sidebar.scroll > sidebar.client);
         await chapterButton(page, "introduction").focus();
         const visited = [];
@@ -1210,6 +1346,7 @@ await test("chapter navigation uses a deterministic YouTube API with external re
       "external YouTube requests were blocked",
     );
     assert.deepEqual(errors, []);
+    assert(externalRequests.every((request) => new URL(request).hostname === "www.youtube.com"));
   } finally {
     await Promise.all(contexts.map((context) => context.close()));
     await browser?.close();

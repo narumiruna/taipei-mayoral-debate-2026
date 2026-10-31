@@ -5,6 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "moduleDetection": "force",
+    "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
     "noUncheckedIndexedAccess": true,
@@ -13,7 +14,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "types": []
+    "types": ["node"]
   },
-  "include": ["web/**/*.ts"]
+  "include": ["web/**/*.ts", "web/**/*.tsx"]
 }
