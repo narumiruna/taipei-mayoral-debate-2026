@@ -106,7 +106,13 @@ The full transcript was reviewed with a second Whisper large-v2 pass. Ten
 uncertain passages were also decoded with unbatched large-v3. This is not a
 complete manual listening review or a political fact check.
 
-- 227 cues have accepted text corrections with before/after records and evidence.
+- 227 cues have accepted word or text-boundary corrections with before/after
+  records and evidence.
+- All 1,082 cues were reviewed for punctuation; 1,056 cues received punctuation
+  without word changes. Cue boundaries are not sentence boundaries. The ledger
+  stores each changed cue's prior reviewed text in `punctuation_before`.
+  There are 1,058 corrected cues in total, including punctuation changes.
+  Punctuation review does not replace audio verification or clear unresolved flags.
 - 46 cues changed when regional phrase substitution was removed. Use `s2tw`
   for Traditional Chinese characters, not `s2twp`, which can change spoken words
   such as `支持`, `分區`, `程序`, and `預算法` into unrelated terms.
