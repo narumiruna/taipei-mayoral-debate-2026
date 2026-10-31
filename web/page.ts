@@ -50,12 +50,42 @@
     source_sha256: string;
   }
 
+  type Verdict = "supported" | "needs-context" | "contradicted" | "insufficient-evidence";
+
+  interface FactCheckSource {
+    title: string;
+    publisher: string;
+    published_at: string | null;
+    url: string;
+    evidence: string;
+  }
+
+  interface FactCheck {
+    id: string;
+    speaker: string;
+    title: string;
+    verdict: Verdict;
+    summary: string;
+    analysis: string[];
+    limitations: string;
+    quotes: { cue_id: number; text: string }[];
+    sources: FactCheckSource[];
+  }
+
+  interface FactCheckLedger {
+    reviewed_at: string;
+    scope: string;
+    method: string;
+    items: FactCheck[];
+  }
+
   interface TranscriptData {
     metadata: TranscriptMetadata;
     display_language: string;
     roles: Record<string, SpeakerRole>;
     cues: Cue[];
     review: Review;
+    fact_checks?: FactCheckLedger;
   }
 
   interface YouTubePlayer {
@@ -80,7 +110,7 @@
     ) => YouTubePlayer;
   }
 
-  type View = "transcript" | "corrections" | "pending";
+  type View = "transcript" | "fact-checks" | "corrections" | "pending";
   type ReviewItem = Correction | Flag;
 
   function requiredElement<T extends HTMLElement>(id: string, type: new () => T): T {
@@ -97,6 +127,19 @@
   const cues = data.cues;
   const corrections = data.review.corrections;
   const flags = data.review.flags;
+  const factChecks = data.fact_checks?.items ?? [];
+  const verdictLabels: Record<Verdict, string> = {
+    supported: "有資料支持",
+    "needs-context": "需補充脈絡",
+    contradicted: "與資料不符",
+    "insufficient-evidence": "證據不足",
+  };
+  const verdictOrder: Verdict[] = [
+    "supported",
+    "needs-context",
+    "contradicted",
+    "insufficient-evidence",
+  ];
   const cueById = new Map(cues.map((cue) => [String(cue.id), cue]));
   const chronological = [...cues].sort((a, b) => a.start - b.start);
   const speakerKey = (cue: Cue | undefined): string => cue?.speaker || "UNKNOWN";
@@ -110,6 +153,7 @@
   const videoId = new URL(video.src).pathname.split("/").pop() || "";
   const search = requiredElement("search", HTMLInputElement);
   const speakerFilter = requiredElement("speaker-filter", HTMLSelectElement);
+  const verdictFilter = requiredElement("verdict-filter", HTMLSelectElement);
   const followPlayback = requiredElement("follow-playback", HTMLInputElement);
   const tabs = [...document.querySelectorAll('[role="tab"]')].map(
     (button): { button: HTMLButtonElement; view: View } => {
@@ -117,7 +161,12 @@
         throw new Error("Each tab must be a button");
       }
       const view = button.dataset.view;
-      if (view !== "transcript" && view !== "corrections" && view !== "pending") {
+      if (
+        view !== "transcript" &&
+        view !== "fact-checks" &&
+        view !== "corrections" &&
+        view !== "pending"
+      ) {
         throw new Error(`Invalid tab view: ${view}`);
       }
       return { button, view };
@@ -395,6 +444,141 @@
     $(pending ? "pending-content" : "corrections-content").replaceChildren(fragment);
   }
 
+  function showTranscript(cue: Cue): void {
+    resetFilters();
+    switchView("transcript");
+    seek(cue);
+    requestAnimationFrame(() => {
+      const target = cueElements.get(String(cue.id));
+      target?.scrollIntoView({ block: "center", behavior: "instant" });
+      const button = target?.querySelector("button");
+      if (button instanceof HTMLButtonElement) button.focus({ preventScroll: true });
+    });
+  }
+
+  function renderFactCheckOverview(): void {
+    const ledger = data.fact_checks;
+    $("fact-check-date").textContent = ledger ? `查核日期 ${ledger.reviewed_at}` : "";
+    $("fact-check-scope").textContent = ledger?.scope ?? "尚未收錄事實查核。";
+    $("fact-check-method").textContent = ledger?.method ?? "查核內容將附原話、依據及限制。";
+    const fragment = document.createDocumentFragment();
+    [...new Set(factChecks.map((item) => item.speaker))].forEach((speaker) => {
+      const items = factChecks.filter((item) => item.speaker === speaker);
+      const card = element("section", "candidate-coverage");
+      card.append(
+        element("h4", "", data.roles[speaker]?.name || speaker),
+        element("p", "coverage-total", `收錄 ${items.length} 項可核對說法`),
+      );
+      const counts = element("dl", "coverage-counts");
+      verdictOrder.forEach((verdict) => {
+        const row = element("div");
+        row.append(
+          element("dt", "", verdictLabels[verdict]),
+          element("dd", "", items.filter((item) => item.verdict === verdict).length),
+        );
+        counts.append(row);
+      });
+      const button = element(
+        "button",
+        "text-button",
+        `查看${data.roles[speaker]?.name || speaker}的查核 →`,
+      );
+      button.type = "button";
+      button.addEventListener("click", () => {
+        search.value = "";
+        speakerFilter.value = speaker;
+        verdictFilter.value = "__all__";
+        render();
+        $("result-status").scrollIntoView({ block: "center", behavior: "instant" });
+      });
+      card.append(counts, button);
+      fragment.append(card);
+    });
+    $("fact-check-overview").replaceChildren(fragment);
+  }
+
+  function renderFactChecks(items: FactCheck[]): void {
+    const fragment = document.createDocumentFragment();
+    items.forEach((item) => {
+      const firstCue = cueById.get(String(item.quotes[0]?.cue_id));
+      const card = element("article", "fact-check-card");
+      card.id = `check-${item.id}`;
+      const header = element("header", "review-header");
+      header.append(
+        speakerBadge(firstCue),
+        element("span", `verdict verdict-${item.verdict}`, verdictLabels[item.verdict]),
+        element("span", "record-id", item.id),
+      );
+      if (firstCue) header.append(timestampButton(firstCue));
+      const title = element("h4", "fact-check-title");
+      title.append(highlighted(item.title));
+      const summary = element("p", "fact-check-summary");
+      summary.append(highlighted(item.summary));
+      card.append(
+        header,
+        title,
+        summary,
+        element("h5", "fact-check-label", "辯論原話（逐字稿節錄）"),
+      );
+      const quote = element("blockquote", "fact-check-quote");
+      item.quotes.forEach((part, index) => {
+        const previous = item.quotes[index - 1];
+        if (previous && part.cue_id !== previous.cue_id + 1) quote.append(" […] ");
+        quote.append(highlighted(part.text));
+      });
+      card.append(quote);
+      const uncertain = item.quotes.some((part) => pendingIds.has(String(part.cue_id)));
+      if (uncertain) {
+        card.append(
+          element(
+            "p",
+            "pending-label",
+            "此引文含待確認字幕，請先回聽；不可僅據辨識文字判定候選人說錯。",
+          ),
+        );
+      }
+      if (firstCue) {
+        const transcript = element("button", "text-button", "回到逐字稿，閱讀前後文 →");
+        transcript.type = "button";
+        transcript.addEventListener("click", () => showTranscript(firstCue));
+        card.append(transcript);
+      }
+      const details = element("details", "fact-check-evidence");
+      details.open = Boolean(query);
+      details.append(element("summary", "", `查核分析與來源（${item.sources.length}）`));
+      item.analysis.forEach((text) => {
+        const paragraph = element("p");
+        paragraph.append(highlighted(text));
+        details.append(paragraph);
+      });
+      details.append(element("h5", "fact-check-label", "資料來源"));
+      const sources = element("ol", "fact-check-sources");
+      item.sources.forEach((source) => {
+        const row = element("li");
+        const link = element("a");
+        link.href = source.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.append(highlighted(source.title), " ↗");
+        const metadata = element("p", "source-meta");
+        metadata.append(
+          highlighted(`${source.publisher} · 來源日期 ${source.published_at ?? "未標示"}`),
+        );
+        const evidence = element("p");
+        evidence.append(highlighted(source.evidence));
+        row.append(link, metadata, evidence);
+        sources.append(row);
+      });
+      details.append(sources, element("h5", "fact-check-label", "查核限制"));
+      const limitations = element("p", "fact-check-limitations");
+      limitations.append(highlighted(item.limitations));
+      details.append(limitations);
+      card.append(details);
+      fragment.append(card);
+    });
+    $("fact-check-content").replaceChildren(fragment);
+  }
+
   function render(): void {
     query = search.value.trim().toLocaleLowerCase("zh-TW");
     selectedSpeaker = speakerFilter.value;
@@ -411,8 +595,26 @@
       });
     const visibleCorrections = filterReview(corrections);
     const visibleFlags = filterReview(flags);
+    const visibleFactChecks = factChecks.filter((item) => {
+      const cue = cueById.get(String(item.quotes[0]?.cue_id));
+      return (
+        (verdictFilter.value === "__all__" || item.verdict === verdictFilter.value) &&
+        matches(cue, [
+          item.id,
+          data.roles[item.speaker]?.name,
+          item.title,
+          verdictLabels[item.verdict],
+          item.summary,
+          ...item.analysis,
+          item.limitations,
+          ...item.quotes.map((part) => part.text),
+          ...item.sources.flatMap((source) => [source.title, source.publisher, source.evidence]),
+        ])
+      );
+    });
     const counts = {
       transcript: visibleCues.length,
+      "fact-checks": visibleFactChecks.length,
       corrections: visibleCorrections.length,
       pending: visibleFlags.length,
     };
@@ -420,37 +622,47 @@
       $(`count-${view}`).textContent = formatNumber(count);
     });
     if (currentView === "transcript") renderTranscript(visibleCues);
+    else if (currentView === "fact-checks") renderFactChecks(visibleFactChecks);
     else
       renderReview(
         currentView === "corrections" ? visibleCorrections : visibleFlags,
         currentView === "pending",
       );
     const count = counts[currentView];
-    const noun =
-      currentView === "transcript"
-        ? "段發言"
-        : currentView === "corrections"
-          ? "筆校對紀錄"
-          : "筆待確認項目";
+    const nouns: Record<View, string> = {
+      transcript: "段發言",
+      "fact-checks": "項事實查核",
+      corrections: "筆校對紀錄",
+      pending: "筆待確認項目",
+    };
+    const filtering = Boolean(
+      query ||
+        selectedSpeaker !== "__all__" ||
+        (currentView === "fact-checks" && verdictFilter.value !== "__all__"),
+    );
     $("result-status").textContent =
-      `${query || selectedSpeaker !== "__all__" ? "符合條件" : "共"} ${formatNumber(count)} ${noun}`;
+      `${filtering ? "符合條件" : "共"} ${formatNumber(count)} ${nouns[currentView]}`;
     $("empty-state").hidden = count > 0;
-    const filtering = Boolean(query || selectedSpeaker !== "__all__");
     $("empty-title").textContent = filtering
       ? "找不到符合條件的內容"
       : currentView === "pending"
         ? "目前沒有待確認紀錄"
         : currentView === "corrections"
           ? "尚無校對紀錄"
-          : "尚無逐字稿內容";
+          : currentView === "fact-checks"
+            ? "尚未收錄事實查核"
+            : "尚無逐字稿內容";
     $("empty-description").textContent = filtering
-      ? "請更換關鍵字，或重設說話者篩選。"
+      ? "請更換關鍵字，或重設說話者與查核結論篩選。"
       : "未列出紀錄不代表全部內容已完成查證。";
     $("empty-reset").hidden = !filtering;
   }
 
   function switchView(view: View, focus = false): void {
     currentView = view;
+    if (view !== "fact-checks" && window.location.hash === "#fact-checks") {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
     tabs.forEach(({ button, view: tabView }) => {
       const selected = tabView === view;
       button.setAttribute("aria-selected", String(selected));
@@ -464,10 +676,16 @@
   function resetFilters(): void {
     search.value = "";
     speakerFilter.value = "__all__";
+    verdictFilter.value = "__all__";
     render();
   }
 
   function revealHash(): void {
+    if (window.location.hash === "#fact-checks") {
+      switchView("fact-checks");
+      $("record").scrollIntoView({ block: "start", behavior: "instant" });
+      return;
+    }
     const match = /^#cue-(\d+)$/.exec(window.location.hash);
     const clock = /^#time-(\d+(?:\.\d+)?)$/.exec(window.location.hash);
     const seconds = clock ? Number(clock[1]) : null;
@@ -651,6 +869,7 @@
 
   search.addEventListener("input", render);
   speakerFilter.addEventListener("change", render);
+  verdictFilter.addEventListener("change", render);
   requiredElement("clear-search", HTMLButtonElement).addEventListener("click", () => {
     search.value = "";
     render();
@@ -678,6 +897,7 @@
     updatePlayback();
   });
   window.addEventListener("hashchange", revealHash);
+  renderFactCheckOverview();
   render();
   revealHash();
   loadYouTubePlayer();

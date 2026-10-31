@@ -9,8 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
-# Frontend dependencies
+# Frontend dependencies and generated deployment output
 node_modules/
+/site/
 
 # Local media and generated transcripts
 *.mp4

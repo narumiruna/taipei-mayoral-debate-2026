@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2032%2032%27%3E%3Crect%20width=%2732%27%20height=%2732%27%20rx=%276%27%20fill=%27%23202d40%27/%3E%3Cpath%20d=%27M9%209h6a7%207%200%200%201%200%2014H9z%27%20fill=%27none%27%20stroke=%27%23f7f5ef%27%20stroke-width=%272%27/%3E%3C/svg%3E">
-  <meta name="description" content="2026 臺北市長候選人電視辯論校對逐字稿，提供影音時間定位、說話者篩選與校對紀錄。">
+  <meta name="description" content="2026 臺北市長候選人電視辯論校對逐字稿，提供影音時間定位、說話者篩選、校對紀錄與附來源的事實查核。">
   <title>2026 臺北市長候選人｜電視辯論・校對逐字稿</title>
   <style>{{STYLE}}</style>
 </head>
@@ -19,7 +19,7 @@
     <section class="hero" aria-labelledby="page-title">
       <div class="eyebrow"><span class="small-rule"></span>公開辯論・文字紀錄</div>
       <h1 id="page-title"><span>2026 臺北市長候選人</span><br>電視辯論<span class="title-dot">・</span>校對逐字稿</h1>
-      <p class="intro">依說話者與時間閱讀逐字稿。<br class="mobile-break">搜尋發言、對照影片與文字修訂紀錄。</p>
+      <p class="intro">依說話者與時間閱讀逐字稿。<br class="mobile-break">搜尋發言、對照影片與文字修訂紀錄，或<a href="#fact-checks">閱讀事實查核 ↗</a>。</p>
       <dl class="stats" aria-label="紀錄摘要">
         <div><dt>影音長度</dt><dd id="stat-duration">—</dd></div>
         <div><dt>字幕段落</dt><dd id="stat-cues">—</dd></div>
@@ -33,18 +33,31 @@
       <main id="record" tabindex="-1">
         <div class="section-heading"><div><span class="section-number">01</span><h2>發言紀錄</h2></div><span class="section-note">依影音時間排序</span></div>
         <div class="filters">
-          <label class="search-label" for="search">搜尋逐字稿與校對內容</label>
-          <div class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="輸入關鍵字，尋找發言…" autocomplete="off"><button type="button" id="clear-search" hidden>清除</button></div>
+          <label class="search-label" for="search">搜尋逐字稿、校對與事實查核</label>
+          <div class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="輸入關鍵字，尋找發言或查核…" autocomplete="off"><button type="button" id="clear-search" hidden>清除</button></div>
           <div class="filter-row"><label for="speaker-filter">說話者</label><select id="speaker-filter"><option value="__all__">全部說話者</option></select><button type="button" id="reset-filters">重設篩選</button></div>
         </div>
         <div class="tabs" role="tablist" aria-label="紀錄類別">
           <button id="tab-transcript" role="tab" aria-selected="true" aria-controls="panel-transcript" tabindex="0" data-view="transcript">逐字稿 <span id="count-transcript">0</span></button>
+          <button id="tab-fact-checks" role="tab" aria-selected="false" aria-controls="panel-fact-checks" tabindex="-1" data-view="fact-checks">事實查核 <span id="count-fact-checks">0</span></button>
           <button id="tab-corrections" role="tab" aria-selected="false" aria-controls="panel-corrections" tabindex="-1" data-view="corrections">校對紀錄 <span id="count-corrections">0</span></button>
           <button id="tab-pending" role="tab" aria-selected="false" aria-controls="panel-pending" tabindex="-1" data-view="pending">待確認 <span id="count-pending">0</span></button>
         </div>
         <div class="result-bar"><p id="result-status" role="status" aria-live="polite" aria-atomic="true"></p><span>點選時間即可播放</span></div>
         <noscript><p class="empty-state">請啟用 JavaScript 以閱讀、搜尋逐字稿；亦可下載下方的文字檔。</p></noscript>
         <section id="panel-transcript" role="tabpanel" aria-labelledby="tab-transcript" tabindex="0"><div id="transcript-content"></div></section>
+        <section id="panel-fact-checks" role="tabpanel" aria-labelledby="tab-fact-checks" tabindex="0" hidden>
+          <div class="fact-check-intro">
+            <div class="fact-check-heading"><h3>查核說法，不評斷動機</h3><span id="fact-check-date" class="record-id"></span></div>
+            <p id="fact-check-scope">尚未收錄事實查核。</p>
+            <p>只查核可驗證的事實主張，不把政見、價值判斷或對手指控直接當成事實。<strong>證據不足不等於錯誤；未列出不等於正確。</strong>不以選查項目推算候選人的整體正確率。</p>
+            <details class="fact-check-method"><summary>查核方法與結論定義</summary><p id="fact-check-method"></p><dl class="verdict-legend"><dt>有資料支持</dt><dd>所列來源支持這項具體主張，不延伸背書其他說法。</dd><dt>需補充脈絡</dt><dd>部分內容有依據，但省略適用條件、統計口徑或重要限制。</dd><dt>與資料不符</dt><dd>可核對的具體主張與可靠資料相反；不推斷是否故意。</dd><dt>證據不足</dt><dd>目前資料無法核實，或原話、統計定義仍待確認。</dd></dl></details>
+          </div>
+          <div id="fact-check-overview" class="fact-check-overview" aria-label="候選人查核收錄範圍"></div>
+          <p class="coverage-note">上方顯示全部收錄項目，不隨篩選變動；項目數不是候選人的錯誤率或排名。候選人姓名沿用本站角色標籤。</p>
+          <div class="verdict-filter"><label for="verdict-filter">查核結論</label><select id="verdict-filter"><option value="__all__">全部結論</option><option value="supported">有資料支持</option><option value="needs-context">需補充脈絡</option><option value="contradicted">與資料不符</option><option value="insufficient-evidence">證據不足</option></select><span>可搭配上方說話者與關鍵字篩選</span></div>
+          <div id="fact-check-content"></div>
+        </section>
         <section id="panel-corrections" role="tabpanel" aria-labelledby="tab-corrections" tabindex="0" hidden><div class="view-note">以下列出已採用的文字與說話者修訂及其依據。這些紀錄不代表其餘內容已完成查證。</div><div id="corrections-content"></div></section>
         <section id="panel-pending" role="tabpanel" aria-labelledby="tab-pending" tabindex="0" hidden><div class="view-note">以下項目尚待查證。建議文字不是已採用的修訂，請回聽影音後再判斷。</div><div id="pending-content"></div></section>
         <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">—</span><h3 id="empty-title">找不到符合條件的內容</h3><p id="empty-description">請更換關鍵字，或重設說話者篩選。</p><button id="empty-reset" type="button">重設篩選</button></div>
@@ -66,7 +79,7 @@
         </div>
       </aside>
     </div>
-    <footer><span>DEBATE RECORD / 2026</span><p>文字校對不等同事實查核；引述前請對照原始影音。</p><a href="#page-title">回到頁首 ↑</a></footer>
+    <footer><span>DEBATE RECORD / 2026</span><p>文字校對與事實查核分開呈現；查核結論限於所列說法與來源，引述前請對照原始影音。</p><a href="#page-title">回到頁首 ↑</a></footer>
   </div>
   <script type="application/json" id="debate-data">{{DATA}}</script>
   <script>{{SCRIPT}}</script>

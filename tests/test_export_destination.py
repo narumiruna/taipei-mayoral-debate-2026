@@ -57,14 +57,7 @@ def test_reviewed_exports_use_separate_destination(tmp_path, transcript, roles):
     assert not (destination / "work").exists()
     for name in ["subtitles.srt", "subtitles.vtt", "transcript.md"]:
         assert "這是校對文字。" in (destination / name).read_text(encoding="utf-8")
-    page = (destination / "index.html").read_text(encoding="utf-8")
-    assert (
-        "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&amp;playsinline=1"
-        in page
-    )
-    assert 'href="https://youtu.be/plpXPrOoV2w"' in page
-    assert "../outputs/" not in page
-    assert "media/debate.mp4" not in page
+    assert not (destination / "index.html").exists()
     assert artifact["segments_text_status"] == "original_asr_before_display_review"
 
 

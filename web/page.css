@@ -297,9 +297,12 @@ h2 {
 .tabs {
   display: flex;
   gap: 22px;
+  overflow-x: auto;
+  scrollbar-width: thin;
   border-bottom: 1px solid var(--line);
 }
 .tabs button {
+  flex-shrink: 0;
   padding: 10px 0 12px;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
@@ -714,6 +717,209 @@ mark {
   color: var(--clay);
   font-size: 11px;
 }
+/* Fact checks: findings and source evidence are separate from ASR review. */
+.fact-check-intro {
+  padding: 24px 0 20px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.fact-check-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.fact-check-heading h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  margin: 0;
+}
+.fact-check-intro p {
+  margin: 12px 0 0;
+  line-height: 1.95;
+}
+.fact-check-method {
+  margin-top: 16px;
+  color: var(--muted);
+}
+.fact-check-method summary,
+.fact-check-evidence summary {
+  cursor: pointer;
+  color: var(--blue);
+  padding: 5px 0;
+}
+.verdict-legend {
+  display: grid;
+  grid-template-columns: 7em minmax(0, 1fr);
+  gap: 8px 12px;
+}
+.verdict-legend dt {
+  font-weight: 600;
+  color: var(--ink);
+}
+.verdict-legend dd {
+  margin: 0;
+}
+.fact-check-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.candidate-coverage {
+  padding: 17px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 4px;
+}
+.candidate-coverage h4 {
+  font-family: var(--serif);
+  font-size: 19px;
+  margin: 0;
+}
+.coverage-total {
+  margin: 3px 0 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.coverage-counts {
+  margin: 0 0 12px;
+  font-size: 11px;
+}
+.coverage-counts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+}
+.coverage-counts dt {
+  color: var(--muted);
+}
+.coverage-counts dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.coverage-note {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.9;
+  margin: 12px 0 20px;
+}
+.verdict-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.verdict-filter select {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 6px 10px;
+}
+.verdict-filter > span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.fact-check-card {
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.fact-check-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.65;
+  margin: 0 0 12px;
+}
+.fact-check-summary {
+  font-size: 14px;
+  line-height: 1.95;
+  margin: 0 0 18px;
+}
+.verdict {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+.verdict-supported {
+  color: #285c4b;
+  background: #edf3ee;
+}
+.verdict-needs-context {
+  color: #76551e;
+  background: #f5efdf;
+}
+.verdict-contradicted {
+  color: #913b28;
+  background: #f8ece5;
+}
+.verdict-insufficient-evidence {
+  color: #536173;
+  background: #edf0f3;
+}
+.fact-check-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 18px 0 8px;
+}
+.fact-check-quote {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 2;
+  margin: 0 0 12px;
+  padding: 10px 15px;
+  border-left: 2px solid var(--line);
+  background: var(--surface);
+}
+.text-button {
+  font-size: 11px;
+  line-height: 1.8;
+  padding: 5px 0;
+  color: var(--blue);
+  background: transparent;
+  text-align: left;
+}
+.text-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.fact-check-evidence {
+  font-size: 12px;
+  line-height: 1.95;
+  margin-top: 14px;
+}
+.fact-check-evidence > p {
+  margin: 12px 0;
+}
+.fact-check-sources {
+  padding-left: 22px;
+}
+.fact-check-sources li {
+  padding: 9px 0;
+}
+.fact-check-sources p {
+  margin: 5px 0 0;
+}
+.fact-check-sources .source-meta {
+  color: var(--muted);
+  font-size: 10px;
+}
+.fact-check-limitations {
+  color: var(--muted);
+  border-left: 2px solid var(--line);
+  padding-left: 12px;
+}
 .empty-state {
   text-align: center;
   padding: 55px 16px;
@@ -937,7 +1143,7 @@ footer a {
     line-height: 2.25;
   }
   .tabs {
-    gap: 0;
+    gap: 14px;
     justify-content: space-between;
   }
   .tabs button {
@@ -960,6 +1166,18 @@ footer a {
   }
   .comparison {
     grid-template-columns: 1fr;
+  }
+  .fact-check-heading h3 {
+    font-size: 21px;
+  }
+  .candidate-coverage {
+    padding: 13px;
+  }
+  .fact-check-card .review-header {
+    gap: 8px;
+  }
+  .fact-check-title {
+    font-size: 20px;
   }
   footer {
     flex-wrap: wrap;

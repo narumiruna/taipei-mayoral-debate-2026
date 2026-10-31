@@ -214,8 +214,8 @@ def test_all_text_exports_match_reviewed_cues(artifact, name):
     assert actual == expected
 
 
-def test_published_page_cues_match_reviewed_transcript(artifact):
-    page = (DATA / "index.html").read_text(encoding="utf-8")
+def test_built_page_cues_match_reviewed_transcript(artifact, curated_site):
+    page = curated_site.read_text(encoding="utf-8")
     match = re.search(
         r'<script type="application/json" id="debate-data">(.*?)</script>',
         page,
