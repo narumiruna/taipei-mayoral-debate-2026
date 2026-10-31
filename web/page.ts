@@ -21,9 +21,13 @@
     timing: string;
     original_text?: string;
     correction_id?: string;
+    original_speaker?: string;
+    original_label?: string;
+    speaker_correction_id?: string;
   }
 
   interface Correction {
+    kind?: "speaker";
     id: string;
     cue_id: number;
     before: string;
@@ -290,7 +294,8 @@
           seek(cue, true);
         });
         span.append(timestampButton(cue), highlighted(cue.text));
-        const corrected = correctedIds.has(id) || Boolean(cue.correction_id);
+        const corrected =
+          correctedIds.has(id) || Boolean(cue.correction_id || cue.speaker_correction_id);
         const pending = pendingIds.has(id);
         if (corrected || pending) {
           const marker = element(
@@ -364,8 +369,8 @@
       } else if ("before" in item) {
         const comparison = element("dl", "comparison");
         const columns: [string, string, string][] = [
-          ["before", "辨識原文", item.before],
-          ["after", "修訂文字", item.after],
+          ["before", item.kind === "speaker" ? "原說話者" : "辨識原文", item.before],
+          ["after", item.kind === "speaker" ? "修訂說話者" : "修訂文字", item.after],
         ];
         columns.forEach(([className, title, text]) => {
           const column = element("div", className);

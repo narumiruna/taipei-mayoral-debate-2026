@@ -165,6 +165,45 @@ def test_page_preserves_speaker_organization(tmp_path, artifact):
     assert page.payload()["cues"][0]["label"] == "王小明／TVBS"
 
 
+def test_page_includes_speaker_corrections_in_review_cards(tmp_path, artifact):
+    cue = artifact["cues"][0]
+    cue.update(
+        original_speaker="UNKNOWN",
+        original_label="說話者未確認",
+        speaker_correction_id="S001",
+    )
+    artifact["review"]["speaker_corrections"] = [
+        {
+            "id": "S001",
+            "cue_id": 1,
+            "before": "UNKNOWN",
+            "after": "SPEAKER_00",
+            "reason": "延續前一句。",
+            "evidence": "前後文與時間資料。",
+            "private": "PRIVATE_SPEAKER_EVIDENCE",
+        }
+    ]
+    original = copy.deepcopy(artifact)
+
+    html = render_page(artifact, tmp_path).read_text(encoding="utf-8")
+    payload = PageParser(html).payload()
+
+    assert artifact == original
+    assert payload["cues"][0]["original_speaker"] == "UNKNOWN"
+    assert payload["cues"][0]["original_label"] == "說話者未確認"
+    assert payload["cues"][0]["speaker_correction_id"] == "S001"
+    assert payload["review"]["corrections"][-1] == {
+        "id": "S001",
+        "cue_id": 1,
+        "before": "說話者未確認",
+        "after": cue["label"],
+        "reason": "延續前一句。",
+        "evidence": "前後文與時間資料。",
+        "kind": "speaker",
+    }
+    assert "PRIVATE_" not in html
+
+
 def test_malicious_text_round_trips_without_executable_markup(tmp_path, artifact):
     malicious = (
         '</script><script>alert("injected")</script>'

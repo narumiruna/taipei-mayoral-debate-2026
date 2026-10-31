@@ -191,6 +191,7 @@ def export(
                 "source_sha256": review["source_sha256"],
                 "method": review["method"],
                 "corrections": [],
+                "speaker_corrections": [],
                 "flags": [],
             },
         )
@@ -207,7 +208,11 @@ def export(
             f"- Text review: {len(review['corrections'])} corrected cues; "
             f"{len(review['flags'])} cues require review. See `corrections.json`."
         ),
-        "- Source segments and character times are unchanged; reviewed cue text may differ.\n",
+        f"- Speaker review: {len(review['speaker_corrections'])} corrected cues.",
+        (
+            "- Source segments and character times are unchanged; "
+            "reviewed cue text and speakers may differ.\n"
+        ),
     ]
     for cue in cues:
         text = f"【{cue['label']}】{cue['text']}"
@@ -278,6 +283,7 @@ def export(
         "unconfirmed_role_cues": sum(cue["speaker"] not in roles for cue in cues),
         "segment_timing_cues": sum(cue["timing"] != "aligned" for cue in cues),
         "corrected_cues": len(review["corrections"]),
+        "speaker_corrected_cues": len(review["speaker_corrections"]),
         "pending_review_cues": len(review["flags"]),
     }
     save_json(output / "validation.json", summary)

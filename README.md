@@ -111,13 +111,18 @@ complete manual listening review or a political fact check.
 - All 1,082 cues were reviewed for punctuation; 1,056 cues received punctuation
   without word changes. Cue boundaries are not sentence boundaries. The ledger
   stores each changed cue's prior reviewed text in `punctuation_before`.
-  There are 1,058 corrected cues in total, including punctuation changes.
+  There are 1,058 text-corrected cues in total, including punctuation changes.
   Punctuation review does not replace audio verification or clear unresolved flags.
 - 46 cues changed when regional phrase substitution was removed. Use `s2tw`
   for Traditional Chinese characters, not `s2twp`, which can change spoken words
   such as `支持`, `分區`, `程序`, and `預算法` into unrelated terms.
-- 103 unique cues remain flagged after temporal and semantic checks are merged.
-  These include 18 unassigned-speaker cues, three long alignments, uncertain
+- All 18 unassigned-speaker cues were checked against adjacent sentences,
+  diarization intervals, and the saved independent ASR. Seventeen short cues
+  complete the previous speaker's sentence and have audited speaker corrections.
+  Their text and timing are unchanged. This is a contextual review, not a listening
+  review. Cue 1076 remains unassigned at the closing-host handoff.
+- 86 unique cues remain flagged after temporal and semantic checks are merged.
+  These include one unassigned-speaker cue, three long alignments, uncertain
   names, possible omissions, and disputed ASR alternatives.
 - Preserve numbers, political statements, and possible spoken mistakes. For
   example, `三規一章` is retained because the other debater explicitly refers
@@ -218,6 +223,13 @@ uv run 2026-debate export \
 The exporter automatically reads `corrections.json` from the destination.
 Use `--corrections PATH` to import another ledger. Each accepted edit needs a
 unique ID, cue ID, exact `before` text, `after` text, reason, and evidence.
+Speaker assignments use a separate `speaker_corrections` array with the same
+fields; `before` and `after` contain speaker IDs, not transcript text. The target
+must be a known speaker in the source cues. IDs must be unique across text
+corrections, speaker corrections, and review flags. Each changed cue retains
+`original_speaker`, `original_label`, and `speaker_correction_id`. The page shows
+these assignments in its correction view. Do not change model checkpoints or
+use a nearest-speaker rule to resolve uncertain speech.
 Uncertain alternatives belong in `flags`, not accepted corrections.
 A source fingerprint rejects stale edits if the underlying cues change.
 

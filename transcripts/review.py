@@ -1,4 +1,4 @@
-"""Apply auditable display-text corrections without changing source timings."""
+"""Apply auditable text and speaker corrections without changing source timings."""
 
 import hashlib
 import json
@@ -30,7 +30,7 @@ def _text(entry: dict, key: str) -> str:
 
 
 def apply_review(cues: list[dict], path: Path | None = None) -> tuple[list[dict], dict]:
-    """Validate every edit before applying any edit. Keep uncertain text intact."""
+    """Validate every edit before applying any edit. Keep uncertain cues intact."""
     fingerprint = source_fingerprint(cues)
     ledger = load_json(path) if path else {}
     if not isinstance(ledger, dict):
@@ -40,11 +40,19 @@ def apply_review(cues: list[dict], path: Path | None = None) -> tuple[list[dict]
             "Correction source changed. Review the new cues before exporting."
         )
     corrections = ledger.get("corrections", [])
+    speaker_corrections = ledger.get("speaker_corrections", [])
     supplied_flags = ledger.get("flags", [])
-    if not isinstance(corrections, list) or not isinstance(supplied_flags, list):
-        raise TypeError("Review corrections and flags must be lists.")
+    if not all(
+        isinstance(entries, list)
+        for entries in (corrections, speaker_corrections, supplied_flags)
+    ):
+        raise TypeError(
+            "Review corrections, speaker corrections, and flags must be lists."
+        )
     by_id = {cue["id"]: cue for cue in cues}
+    by_speaker = {cue["speaker"]: cue for cue in cues if cue["speaker"] != "UNKNOWN"}
     edits = {}
+    speaker_edits = {}
     entry_ids = set()
     for entry in corrections:
         if not isinstance(entry, dict):
@@ -65,8 +73,70 @@ def apply_review(cues: list[dict], path: Path | None = None) -> tuple[list[dict]
         _text(entry, "evidence")
         edits[cue_id] = entry
 
-    flags: dict[int, dict] = {}
+    for entry in speaker_corrections:
+        if not isinstance(entry, dict):
+            raise TypeError("Each speaker correction must be a JSON object.")
+        identity = _text(entry, "id")
+        cue_id = entry.get("cue_id")
+        if type(cue_id) is not int or cue_id not in by_id:
+            raise ValueError(f"Unknown speaker correction cue: {cue_id}")
+        if identity in entry_ids or cue_id in speaker_edits:
+            raise ValueError(
+                "Speaker correction IDs and corrected cue IDs must be unique."
+            )
+        entry_ids.add(identity)
+        if _text(entry, "before") != by_id[cue_id]["speaker"]:
+            raise ValueError(
+                f"Speaker correction {identity} does not match the original speaker."
+            )
+        after = _text(entry, "after")
+        if after == entry["before"]:
+            raise ValueError(f"Speaker correction {identity} must change the speaker.")
+        if after not in by_speaker:
+            raise ValueError(
+                f"Speaker correction {identity} requires a known non-UNKNOWN target speaker."
+            )
+        _text(entry, "reason")
+        _text(entry, "evidence")
+        speaker_edits[cue_id] = entry
+
+    for entry in supplied_flags:
+        if not isinstance(entry, dict):
+            raise TypeError("Each review flag must be a JSON object.")
+        identity = _text(entry, "id")
+        cue_id = entry.get("cue_id")
+        if type(cue_id) is not int or cue_id not in by_id:
+            raise ValueError(f"Unknown review flag cue: {cue_id}")
+        if identity in entry_ids:
+            raise ValueError("Review entry IDs must be unique.")
+        entry_ids.add(identity)
+        _text(entry, "reason")
+        if not isinstance(entry.get("suggestion", ""), str):
+            raise TypeError("A review suggestion must be a string.")
+
+    result = []
     for cue in cues:
+        display = dict(cue)
+        if cue["id"] in edits:
+            entry = edits[cue["id"]]
+            display.update(
+                text=entry["after"],
+                original_text=cue["text"],
+                correction_id=entry["id"],
+            )
+        if cue["id"] in speaker_edits:
+            entry = speaker_edits[cue["id"]]
+            display.update(
+                speaker=entry["after"],
+                label=by_speaker[entry["after"]]["label"],
+                original_speaker=cue["speaker"],
+                original_label=cue["label"],
+                speaker_correction_id=entry["id"],
+            )
+        result.append(display)
+
+    flags: dict[int, dict] = {}
+    for cue in result:
         reasons = []
         if cue["speaker"] == "UNKNOWN":
             reasons.append("說話者時間未與語音重疊，身分未確認。")
@@ -79,19 +149,9 @@ def apply_review(cues: list[dict], path: Path | None = None) -> tuple[list[dict]
                 "reason": "\n".join(reasons),
             }
     for entry in supplied_flags:
-        if not isinstance(entry, dict):
-            raise TypeError("Each review flag must be a JSON object.")
-        identity = _text(entry, "id")
-        cue_id = entry.get("cue_id")
-        if type(cue_id) is not int or cue_id not in by_id:
-            raise ValueError(f"Unknown review flag cue: {cue_id}")
-        if identity in entry_ids:
-            raise ValueError("Correction and review flag IDs must be unique.")
-        entry_ids.add(identity)
-        reason = _text(entry, "reason")
+        cue_id = entry["cue_id"]
+        reason = entry["reason"]
         suggestion = entry.get("suggestion", "")
-        if not isinstance(suggestion, str):
-            raise TypeError("A review suggestion must be a string.")
         if cue_id in flags:
             flags[cue_id]["reason"] += "\n" + reason
             if suggestion:
@@ -99,21 +159,11 @@ def apply_review(cues: list[dict], path: Path | None = None) -> tuple[list[dict]
         else:
             flags[cue_id] = dict(entry)
 
-    result = []
-    for cue in cues:
-        display = dict(cue)
-        if cue["id"] in edits:
-            entry = edits[cue["id"]]
-            display.update(
-                text=entry["after"],
-                original_text=cue["text"],
-                correction_id=entry["id"],
-            )
-        result.append(display)
     review = {
         "source_sha256": fingerprint,
         "method": ledger.get("method", "尚未進行文字校對；時間與身分標記由程式檢查。"),
         "corrections": corrections,
+        "speaker_corrections": speaker_corrections,
         "flags": sorted(flags.values(), key=lambda flag: flag["cue_id"]),
     }
     return result, review

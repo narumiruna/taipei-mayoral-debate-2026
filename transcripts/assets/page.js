@@ -195,7 +195,7 @@
             seek(cue, true);
           });
           span.append(timestampButton(cue), highlighted(cue.text));
-          const corrected = correctedIds.has(id) || Boolean(cue.correction_id);
+          const corrected = correctedIds.has(id) || Boolean(cue.correction_id || cue.speaker_correction_id);
           const pending = pendingIds.has(id);
           if (corrected || pending) {
             const marker = element("span", "review-indicator", [corrected ? "校" : "", pending ? "待" : ""].filter(Boolean).join("・"));
@@ -253,8 +253,8 @@
         } else if ("before" in item) {
           const comparison = element("dl", "comparison");
           const columns = [
-            ["before", "辨識原文", item.before],
-            ["after", "修訂文字", item.after]
+            ["before", item.kind === "speaker" ? "原說話者" : "辨識原文", item.before],
+            ["after", item.kind === "speaker" ? "修訂說話者" : "修訂文字", item.after]
           ];
           columns.forEach(([className, title, text]) => {
             const column = element("div", className);

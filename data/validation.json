@@ -12,9 +12,10 @@
     "SPEAKER_04",
     "SPEAKER_05"
   ],
-  "unassigned_cues": 18,
-  "unconfirmed_role_cues": 18,
+  "unassigned_cues": 1,
+  "unconfirmed_role_cues": 1,
   "segment_timing_cues": 0,
   "corrected_cues": 1058,
-  "pending_review_cues": 103
+  "speaker_corrected_cues": 17,
+  "pending_review_cues": 86
 }

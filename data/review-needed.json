@@ -48,23 +48,6 @@
     "suggestion": ""
   },
   {
-    "start": 1275.123,
-    "end": 1275.143,
-    "text": "音。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 76,
-    "original_text": "音",
-    "correction_id": "P0076",
-    "review_id": "T0076",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。",
-      "僅音一字延續0075聲音，且標為說話者未確認；應核對字幕切分，不依此推定另一位說話者。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 1293.419,
     "end": 1299.106,
     "text": "任何的意義。所以我們做了什麼事呢？我們舉辦DebugSong，我們30",
@@ -209,23 +192,6 @@
     "suggestion": ""
   },
   {
-    "start": 1709.367,
-    "end": 1709.387,
-    "text": "了。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 153,
-    "original_text": "了",
-    "correction_id": "P0153",
-    "review_id": "T0153",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。",
-      "僅了一字延續0152我做到，說話者標籤及極短切分待核，不據此推定新說話者。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 1738.569,
     "end": 1743.895,
     "text": "頂大道北上引道的開通，到捷運東環段的通車的動",
@@ -238,20 +204,6 @@
     "review_id": "R016",
     "reasons": [
       "通車的動工語意有衝突，可能為原話自我修正，不擅刪通車。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 2390.071,
-    "end": 2390.091,
-    "text": "。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 219,
-    "review_id": "T0219",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
     ],
     "suggestion": ""
   },
@@ -300,22 +252,6 @@
     "review_id": "R019",
     "reasons": [
       "句末這十與0259一件案例連讀為這十一件案例，與前文兩個案例數量不同；可能誤辨或說話者用語，不改數值。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 2675.832,
-    "end": 2675.852,
-    "text": "嗎？",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 271,
-    "original_text": "嗎",
-    "correction_id": "P0271",
-    "review_id": "T0271",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
     ],
     "suggestion": ""
   },
@@ -431,22 +367,6 @@
     "suggestion": ""
   },
   {
-    "start": 3166.473,
-    "end": 3166.493,
-    "text": "嗎？",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 362,
-    "original_text": "嗎",
-    "correction_id": "P0362",
-    "review_id": "T0362",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 3236.826,
     "end": 3242.734,
     "text": "的吸引讓AI的人才從國小一直到大學，一直到研究院，變成是一個跟國",
@@ -541,38 +461,6 @@
       "與前文同一公園名稱疑似誤辨，兩輪未提供一致字形。"
     ],
     "suggestion": "可能為線形／線性公園，須回聽確認。"
-  },
-  {
-    "start": 3446.632,
-    "end": 3446.652,
-    "text": "始。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 414,
-    "original_text": "始",
-    "correction_id": "P0414",
-    "review_id": "T0414",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 3472.093,
-    "end": 3472.133,
-    "text": "多萬。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 420,
-    "original_text": "多萬",
-    "correction_id": "P0420",
-    "review_id": "T0420",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
   },
   {
     "start": 3478.3,
@@ -717,22 +605,6 @@
     "suggestion": "成淵國中"
   },
   {
-    "start": 4601.725,
-    "end": 4601.745,
-    "text": "懲。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 569,
-    "original_text": "懲",
-    "correction_id": "P0569",
-    "review_id": "T0569",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 4613.659,
     "end": 4619.606,
     "text": "子，我們第一時間即刻的虛心來救制度面馬上的改進。不管",
@@ -857,22 +729,6 @@
     "review_id": "R044",
     "reasons": [
       "毒駕殺人本來就是死刑等刑罰斷言可能是說話者原話；不得為符合現行法而改寫。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 5020.242,
-    "end": 5020.262,
-    "text": "謝。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 646,
-    "original_text": "謝",
-    "correction_id": "P0646",
-    "review_id": "T0646",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
     ],
     "suggestion": ""
   },
@@ -1032,22 +888,6 @@
     "review_id": "R054",
     "reasons": [
       "提問者姓名黃映穎與0833–0834黃燕怡、0853黃燕儀不一致，未確認正確字形。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 5902.599,
-    "end": 5902.639,
-    "text": "一下？",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 760,
-    "original_text": "一下",
-    "correction_id": "P0760",
-    "review_id": "T0760",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
     ],
     "suggestion": ""
   },
@@ -1340,22 +1180,6 @@
     "suggestion": ""
   },
   {
-    "start": 7117.13,
-    "end": 7117.15,
-    "text": "麼。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 934,
-    "original_text": "麼",
-    "correction_id": "P0934",
-    "review_id": "T0934",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 7134.018,
     "end": 7139.967,
     "text": "為身邊有府院黨包裝宣傳，一夕之間，他好像成了一",
@@ -1404,22 +1228,6 @@
     "suggestion": ""
   },
   {
-    "start": 7392.8,
-    "end": 7392.82,
-    "text": "了。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 984,
-    "original_text": "了",
-    "correction_id": "P0984",
-    "review_id": "T0984",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 7508.994,
     "end": 7513.88,
     "text": "我塞到車車裡面的時候，想說我們交通要改革，結果現在只幫我們省了2到3",
@@ -1452,38 +1260,6 @@
     "suggestion": ""
   },
   {
-    "start": 7556.231,
-    "end": 7556.271,
-    "text": "什麼？",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 1017,
-    "original_text": "什麼",
-    "correction_id": "P1017",
-    "review_id": "T1017",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 7568.266,
-    "end": 7568.286,
-    "text": "來。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 1021,
-    "original_text": "來",
-    "correction_id": "P1021",
-    "review_id": "T1021",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 7573.597,
     "end": 7579.506,
     "text": "寫著：「我們是復興的小火炬，是世上的光。」所以我們作為市長，",
@@ -1496,22 +1272,6 @@
     "review_id": "R078",
     "reasons": [
       "此處為校徽或校歌引述，雖小火炬可明確修字，仍不可按記憶重建整段校訓。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 7586.558,
-    "end": 7586.578,
-    "text": "嗎？",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 1026,
-    "original_text": "嗎",
-    "correction_id": "P1026",
-    "review_id": "T1026",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
     ],
     "suggestion": ""
   },
@@ -1532,22 +1292,6 @@
     "suggestion": ""
   },
   {
-    "start": 7670.09,
-    "end": 7670.11,
-    "text": "值。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 1042,
-    "original_text": "值",
-    "correction_id": "P1042",
-    "review_id": "T1042",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
-    ],
-    "suggestion": ""
-  },
-  {
     "start": 7683.197,
     "end": 7688.947,
     "text": "贏，你要管你有沒有，你當你把票投給你想要的生活",
@@ -1560,22 +1304,6 @@
     "review_id": "R080",
     "reasons": [
       "引述不用管哪個候選人贏你要管你有沒有你當你把票投給等字句不順，可能漏贏字或口誤，不用外部引文重寫。"
-    ],
-    "suggestion": ""
-  },
-  {
-    "start": 7691.552,
-    "end": 7691.592,
-    "text": "贏了。",
-    "speaker": "UNKNOWN",
-    "timing": "aligned",
-    "label": "說話者未確認",
-    "id": 1047,
-    "original_text": "贏了",
-    "correction_id": "P1047",
-    "review_id": "T1047",
-    "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
     ],
     "suggestion": ""
   },
@@ -1603,9 +1331,10 @@
     "id": 1076,
     "review_id": "T1076",
     "reasons": [
-      "說話者時間未與語音重疊，身分未確認。"
+      "說話者時間未與語音重疊，身分未確認。",
+      "「句」位於李文儀與黃欣樺的主持人交接處；第1077段「點。」與第1078段「謝」時間重疊，原始「句」「點」的對齊分數均為0。第二輪文字支持「句點」的連續性，但不能確認說話者，不逕自歸入任一位主持人。"
     ],
-    "suggestion": ""
+    "suggestion": "回聽02:13:24–02:13:27並共同核對1075–1079的說話者與切分；未確認前保留原始標記。"
   },
   {
     "start": 8011.969,
