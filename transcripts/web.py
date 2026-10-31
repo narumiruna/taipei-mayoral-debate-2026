@@ -4,18 +4,25 @@ import json
 import re
 from pathlib import Path
 
+from .chapters import validate_chapters
 from .fact_checks import validate_fact_checks
 
 _ASSETS = Path(__file__).with_name("assets")
 
 
 def render_page(
-    artifact: dict, output_dir: Path, *, fact_checks: object | None = None
+    artifact: dict,
+    output_dir: Path,
+    *,
+    fact_checks: object | None = None,
+    chapters: object | None = None,
 ) -> Path:
-    """Write inline HTML from an artifact and an explicit optional fact-check ledger."""
+    """Write inline HTML from an artifact and explicit optional curated metadata."""
     output_dir = Path(output_dir)
     if fact_checks is not None:
         fact_checks = validate_fact_checks(fact_checks, artifact)
+    if chapters is not None:
+        chapters = validate_chapters(chapters, artifact)
     review = artifact.get("review") or {}
     corrections = list(review.get("corrections", []))
     by_id = {cue["id"]: cue for cue in artifact.get("cues", [])}
@@ -98,6 +105,8 @@ def render_page(
     }
     if fact_checks is not None:
         payload["fact_checks"] = fact_checks
+    if chapters is not None:
+        payload["chapters"] = chapters
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
     for character, escaped in (
         ("&", "\\u0026"),

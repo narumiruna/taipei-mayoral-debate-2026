@@ -130,7 +130,7 @@ def public_data(tmp_path):
             (data / name).write_bytes(f"Fixture {name}\r\n".encode())
     _write_json(data / "transcript.json", artifact)
     _write_json(data / "fact-checks.json", ledger)
-    # Only the two rendered JSON inputs require UTF-8; downloads are opaque bytes.
+    # Rendered JSON inputs require UTF-8; downloads are opaque bytes.
     (data / "transcript.md").write_bytes(b"# Fixture\r\n\xff\x00\r\n")
     return data
 
@@ -153,7 +153,8 @@ def test_build_stages_explicit_ledger_and_copies_exact_bytes(
     render_page = site.render_page
     calls = []
 
-    def render_staged(artifact, staging, *, fact_checks):
+    def render_staged(artifact, staging, *, fact_checks, chapters):
+        assert chapters is None
         assert staging.parent.parent == destination.parent
         assert staging != destination
         assert not destination.exists()
@@ -233,8 +234,26 @@ def test_repeated_builds_are_byte_identical(tmp_path, public_data, with_ledger):
 
     assert _tree(destination) == first
     assert ("fact_checks" in Page(result).payload) == with_ledger
+    assert "chapters" not in Page(result).payload
     assert _tree(public_data) == original
     assert {path.name for path in tmp_path.iterdir()} == {"data", "site"}
+
+
+def test_generic_site_without_curated_metadata_remains_valid(tmp_path, public_data):
+    (public_data / "fact-checks.json").unlink()
+    _write_json(public_data / "transcript.json", {})
+    original = _tree(public_data)
+
+    result = site.build_site(public_data, tmp_path / "site")
+
+    page = Page(result)
+    assert "chapters" not in page.payload
+    assert "fact_checks" not in page.payload
+    assert page.payload["cues"] == []
+    assert page.payload["metadata"]["duration"] is None
+    assert set(page.downloads) == DOWNLOADS
+    assert set(_tree(result.parent)) == {*PUBLIC_FILES, "index.html"}
+    assert _tree(public_data) == original
 
 
 def test_rebuild_removes_stale_files_and_removed_optional_ledger(tmp_path, public_data):
@@ -271,11 +290,11 @@ def test_missing_required_input_preserves_previous_output(
     assert _tree(tmp_path) == before
 
 
-@pytest.mark.parametrize("name", ["transcript.md", "fact-checks.json"])
+@pytest.mark.parametrize("name", ["transcript.md", "fact-checks.json", "chapters.json"])
 def test_named_input_directory_is_not_copied(tmp_path, public_data, name):
     destination = _old_site(tmp_path)
     path = public_data / name
-    path.unlink()
+    path.unlink(missing_ok=True)
     path.mkdir()
     (path / "secret.txt").write_bytes(b"SECRET")
     before = _tree(tmp_path)
@@ -286,7 +305,9 @@ def test_named_input_directory_is_not_copied(tmp_path, public_data, name):
     assert _tree(tmp_path) == before
 
 
-@pytest.mark.parametrize("name", ["transcript.json", "fact-checks.json"])
+@pytest.mark.parametrize(
+    "name", ["transcript.json", "fact-checks.json", "chapters.json"]
+)
 @pytest.mark.parametrize(
     "contents",
     [b"null", b"[]", b'"text"', b"1", b"true", b"{broken", b'{"text":"\xff"}'],
@@ -328,7 +349,7 @@ def test_staging_failure_preserves_previous_output_and_source(
             raise OSError("Copy failed.")
         return copyfile(source, target)
 
-    def fail_render(artifact, staging, *, fact_checks):
+    def fail_render(artifact, staging, *, fact_checks, chapters):
         (staging / "index.html").write_bytes(b"PARTIAL HTML")
         raise OSError("Render failed.")
 
@@ -447,11 +468,16 @@ def test_file_destination_is_rejected(tmp_path, public_data):
     assert _tree(tmp_path) == before
 
 
-def test_module_command_uses_only_stdlib_in_copied_runtime(tmp_path, public_data):
+@pytest.mark.parametrize("with_chapters", [True, False])
+def test_module_command_uses_only_stdlib_in_copied_runtime(
+    tmp_path, public_data, chapter_data, with_chapters
+):
+    if not with_chapters:
+        (public_data / "chapters.json").unlink()
     runtime = tmp_path / "runtime"
     package = runtime / "transcripts"
     package.mkdir(parents=True)
-    for name in ("__init__.py", "site.py", "web.py", "fact_checks.py"):
+    for name in ("__init__.py", "site.py", "web.py", "fact_checks.py", "chapters.py"):
         shutil.copyfile(ROOT / "transcripts" / name, package / name)
     shutil.copytree(ROOT / "transcripts" / "assets", package / "assets")
     data = runtime / "data"
@@ -481,12 +507,157 @@ def test_module_command_uses_only_stdlib_in_copied_runtime(tmp_path, public_data
     assert set(_tree(destination)) == {*PUBLIC_FILES, "fact-checks.json", "index.html"}
     page = Page(destination / "index.html")
     assert page.payload["fact_checks"] == _read_json(data / "fact-checks.json")
+    assert ("chapters" in page.payload) == with_chapters
+    if with_chapters:
+        assert page.payload["chapters"]["items"][0]["start"] == 1.0
+        assert b"PRIVATE_CHAPTER" not in (destination / "index.html").read_bytes()
     assert set(page.downloads) == DOWNLOADS
     for name, contents in original.items():
-        assert (destination / name).read_bytes() == contents
+        if name != "chapters.json":
+            assert (destination / name).read_bytes() == contents
     assert _tree(data) == original
     assert _tree(public_data) == original
     assert not (data / "index.html").exists()
+
+
+@pytest.fixture
+def chapter_data(public_data):
+    chapters = {
+        "source_sha256": "a" * 64,
+        "private": "PRIVATE_CHAPTER_ROOT",
+        "items": [
+            {
+                "id": "phase",
+                "title": "Phase",
+                "private": "PRIVATE_CHAPTER_GROUP",
+                "children": [
+                    {
+                        "id": "opening",
+                        "title": "Opening",
+                        "start_cue_id": 1,
+                        "end_cue_id": 1,
+                        "private": "PRIVATE_CHAPTER_LEAF",
+                    }
+                ],
+            }
+        ],
+    }
+    _write_json(public_data / "chapters.json", chapters)
+    return chapters
+
+
+def test_build_embeds_chapters_explicitly_without_publishing_file(
+    tmp_path, monkeypatch, public_data, chapter_data
+):
+    destination = tmp_path / "site"
+    original = _tree(public_data)
+    render_page = site.render_page
+    calls = []
+
+    def render_staged(artifact, staging, *, fact_checks, chapters):
+        assert staging != destination
+        assert not destination.exists()
+        assert not (staging / "chapters.json").exists()
+        calls.append(chapters)
+        return render_page(
+            artifact, staging, fact_checks=fact_checks, chapters=chapters
+        )
+
+    monkeypatch.setattr(site, "render_page", render_staged)
+
+    result = site.build_site(public_data, destination)
+
+    assert calls == [chapter_data]
+    assert set(_tree(destination)) == {*PUBLIC_FILES, "fact-checks.json", "index.html"}
+    leaf = {
+        "id": "opening",
+        "title": "Opening",
+        "start_cue_id": 1,
+        "end_cue_id": 1,
+        "start": 1.0,
+        "end": 3.0,
+    }
+    page = Page(result)
+    assert page.payload["chapters"] == {
+        "source_sha256": "a" * 64,
+        "items": [{**leaf, "id": "phase", "title": "Phase", "children": [leaf]}],
+    }
+    assert b"PRIVATE_CHAPTER" not in result.read_bytes()
+    assert set(page.downloads) == DOWNLOADS
+    for name in (*PUBLIC_FILES, "fact-checks.json"):
+        assert (destination / name).read_bytes() == original[name]
+    assert _tree(public_data) == original
+
+
+def test_repeated_chapter_builds_are_identical_and_removal_clears_metadata(
+    tmp_path, public_data, chapter_data
+):
+    destination = tmp_path / "site"
+    site.build_site(public_data, destination)
+    first = _tree(destination)
+    site.build_site(public_data, destination)
+    assert _tree(destination) == first
+
+    # A stale chapter download must also disappear on replacement.
+    (destination / "chapters.json").write_bytes(b"STALE")
+    (public_data / "chapters.json").unlink()
+    original = _tree(public_data)
+
+    result = site.build_site(public_data, destination)
+
+    assert "chapters" not in Page(result).payload
+    assert set(_tree(destination)) == {*PUBLIC_FILES, "fact-checks.json", "index.html"}
+    assert _tree(public_data) == original
+
+
+@pytest.mark.parametrize(
+    "invalid",
+    ["source", "reference", "empty-group", "ambiguous", "order", "overlap", "duration"],
+)
+def test_invalid_chapters_preserve_previous_site_and_inputs(
+    tmp_path, public_data, chapter_data, invalid
+):
+    destination = _old_site(tmp_path)
+    group = chapter_data["items"][0]
+    leaf = group["children"][0]
+    if invalid == "source":
+        chapter_data["source_sha256"] = "b" * 64
+    elif invalid == "reference":
+        leaf["end_cue_id"] = 999
+    elif invalid == "empty-group":
+        group["children"] = []
+    elif invalid == "ambiguous":
+        group["start_cue_id"] = 1
+    elif invalid == "order":
+        group["children"].append({**leaf, "id": "duplicate-range"})
+    else:
+        artifact = _read_json(public_data / "transcript.json")
+        if invalid == "overlap":
+            artifact["cues"].append({**artifact["cues"][0], "id": 2, "start": 2})
+            group["children"].append(
+                {**leaf, "id": "overlap", "start_cue_id": 2, "end_cue_id": 2}
+            )
+        else:
+            artifact["metadata"]["duration"] = 2
+        _write_json(public_data / "transcript.json", artifact)
+    _write_json(public_data / "chapters.json", chapter_data)
+    before = _tree(tmp_path)
+
+    with pytest.raises(ValueError):
+        site.build_site(public_data, destination)
+
+    assert _tree(tmp_path) == before
+
+
+def test_dangling_chapter_input_is_not_silently_ignored(tmp_path, public_data):
+    destination = _old_site(tmp_path)
+    (public_data / "chapters.json").symlink_to(public_data / "missing.json")
+    before = _tree(tmp_path)
+
+    with pytest.raises(FileNotFoundError):
+        site.build_site(public_data, destination)
+
+    assert _tree(tmp_path) == before
 
 
 def test_committed_inputs_build_all_ten_curated_fact_checks(tmp_path):

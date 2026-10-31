@@ -79,6 +79,22 @@
     items: FactCheck[];
   }
 
+  interface Chapter {
+    id: string;
+    title: string;
+    start_cue_id: number;
+    end_cue_id: number;
+    start: number;
+    end: number;
+    children?: Chapter[];
+  }
+
+  interface ChapterEntry {
+    chapter: Chapter;
+    button: HTMLButtonElement;
+    ancestors: HTMLDetailsElement[];
+  }
+
   interface TranscriptData {
     metadata: TranscriptMetadata;
     display_language: string;
@@ -86,6 +102,7 @@
     cues: Cue[];
     review: Review;
     fact_checks?: FactCheckLedger;
+    chapters?: { source_sha256: string; items: Chapter[] };
   }
 
   interface YouTubePlayer {
@@ -186,7 +203,8 @@
   let autoplayBlocked = false;
   let lastFollowedId: string | null = null;
   let cueElements = new Map<string, HTMLSpanElement>();
-  const chapterButtons: HTMLButtonElement[] = [];
+  const chapterLeaves: ChapterEntry[] = [];
+  const chapterGroups: HTMLDetailsElement[] = [];
 
   function element<K extends keyof HTMLElementTagNameMap>(
     tag: K,
@@ -284,6 +302,9 @@
     link.searchParams.set("t", String(Math.floor(seconds)));
     videoLink.href = link.href;
     setTarget(String(cue.id));
+    chapterAt(seconds)?.ancestors.forEach((group) => {
+      group.open = true;
+    });
     try {
       const original = cueById.get(String(cue.id));
       const hash =
@@ -444,10 +465,10 @@
     $(pending ? "pending-content" : "corrections-content").replaceChildren(fragment);
   }
 
-  function showTranscript(cue: Cue): void {
+  function showTranscript(cue: Cue, play = false): void {
     resetFilters();
     switchView("transcript");
-    seek(cue);
+    seek(cue, play);
     requestAnimationFrame(() => {
       const target = cueElements.get(String(cue.id));
       target?.scrollIntoView({ block: "center", behavior: "instant" });
@@ -680,6 +701,53 @@
     render();
   }
 
+  function chapterAt(seconds: number): ChapterEntry | undefined {
+    return chapterLeaves.find(({ chapter }) => chapter.start <= seconds && seconds < chapter.end);
+  }
+
+  function renderChapters(
+    chapters: Chapter[],
+    ancestors: HTMLDetailsElement[] = [],
+    path: string[] = [],
+  ): HTMLOListElement {
+    const list = element("ol", "chapter-list");
+    chapters.forEach((chapter) => {
+      const item = element("li");
+      const names = [...path, chapter.title];
+      const button = element("button", "chapter-button");
+      button.type = "button";
+      button.dataset.chapterId = chapter.id;
+      button.setAttribute("aria-label", `從 ${time(chapter.start)} 播放：${names.join("／")}`);
+      button.append(
+        element("span", "chapter-label", chapter.children ? "從此處開始" : chapter.title),
+        element("span", "chapter-time", time(chapter.start)),
+      );
+      button.addEventListener("click", () => {
+        const cue = cueById.get(String(chapter.start_cue_id));
+        if (cue) showTranscript(cue, true);
+      });
+      if (chapter.children) {
+        const group = element("details", "chapter-group");
+        group.open = ancestors.length === 0;
+        group.dataset.chapterGroup = chapter.id;
+        const summary = element("summary", "", chapter.title);
+        button.classList.add("chapter-start");
+        group.append(
+          summary,
+          button,
+          renderChapters(chapter.children, [...ancestors, group], names),
+        );
+        chapterGroups.push(group);
+        item.append(group);
+      } else {
+        chapterLeaves.push({ chapter, button, ancestors });
+        item.append(button);
+      }
+      list.append(item);
+    });
+    return list;
+  }
+
   function revealHash(): void {
     if (window.location.hash === "#fact-checks") {
       switchView("fact-checks");
@@ -700,6 +768,7 @@
     if (!cue) return;
     search.value = "";
     speakerFilter.value = "__all__";
+    verdictFilter.value = "__all__";
     switchView("transcript");
     seek(validTime ? { ...cue, start: seconds } : cue, false);
     requestAnimationFrame(() => {
@@ -738,10 +807,16 @@
         ? "請按 YouTube 播放按鈕開始播放"
         : `${label} ${time(now)} / ${time(duration)}`;
     }
-    const chapter = Math.floor(now / 600);
-    chapterButtons.forEach((button, index) => {
-      if (index === chapter) button.setAttribute("aria-current", "true");
-      else button.removeAttribute("aria-current");
+    const currentChapter = chapterAt(now);
+    chapterLeaves.forEach((entry) => {
+      if (entry === currentChapter) entry.button.setAttribute("aria-current", "true");
+      else entry.button.removeAttribute("aria-current");
+    });
+    chapterGroups.forEach((group) => {
+      group.classList.toggle(
+        "is-active-section",
+        currentChapter?.ancestors.includes(group) ?? false,
+      );
     });
     if (
       followPlayback.checked &&
@@ -852,20 +927,9 @@
     speakerFilter.append(option);
   });
 
-  for (let start = 0; start < duration; start += 600) {
-    const cue =
-      chronological.find((item) => item.end > start) || chronological[chronological.length - 1];
-    if (!cue) break;
-    const button = element("button", "chapter-button", time(start));
-    button.type = "button";
-    button.setAttribute("aria-label", `播放 ${time(start)} 起的影音`);
-    button.addEventListener("click", () => {
-      seek({ ...cue, start }, true);
-    });
-    $("chapters").append(button);
-    chapterButtons.push(button);
-  }
-  if (!chapterButtons.length) $("chapters").append(element("p", "index-note", "尚無時間索引"));
+  const chapters = data.chapters?.items ?? [];
+  if (chapters.length) $("chapters").append(renderChapters(chapters));
+  else $("chapters").append(element("p", "index-note", "尚無章節資料"));
 
   search.addEventListener("input", render);
   speakerFilter.addEventListener("change", render);

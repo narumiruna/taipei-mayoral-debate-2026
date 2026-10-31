@@ -26,8 +26,9 @@ console command remain `2026-debate`.
 ## Results
 
 Run `bun run build`, then open `site/index.html`.
-The page has transcript search, speaker filters, video seeking, correction
-comparisons, unresolved review items, sourced fact checks, and download links.
+The page has transcript search, speaker filters, debate chapter navigation,
+video seeking, correction comparisons, unresolved review items, sourced fact
+checks, and download links.
 Reader CSS, JavaScript, and transcript data are inline. Transcript search and
 review work offline, including when YouTube is blocked. Video playback uses
 [YouTube](https://youtu.be/plpXPrOoV2w) and its iframe API. It requires internet
@@ -42,6 +43,7 @@ access and an HTTP(S) preview; YouTube may reject `file://` pages.
 | `corrections.json` | Exact before/after text, evidence, source fingerprint, and unresolved flags |
 | `review-needed.json` | Unresolved intervals with timestamps |
 | `fact-checks.json` | Selected factual claims, exact cue quotes, dated sources, findings, and limits |
+| `chapters.json` | Curated debate phases and cue-based navigation boundaries; embedded in HTML only |
 | `speaker-review.md` | Role mapping and review limits |
 | `validation.json`, `verification.json` | Output checks and counts |
 
@@ -69,7 +71,8 @@ builder uses only the standard library through `uv run --no-project python`;
 it does not install transcription dependencies or run inference.
 
 The build copies the documented public records from `data/`, validates the
-optional fact-check ledger, and generates one inline HTML page in `site/`.
+optional fact-check ledger and chapter metadata, and generates one inline HTML
+page in `site/`.
 It does not change source data. Only `site/` is uploaded. Unknown files, local
 credentials, `raw/`, and `outputs/` are not copied. Do not commit `site/` or write
 HTML into `data/`.
@@ -92,6 +95,16 @@ browser with YouTube access before reporting in-page playback as verified.
 If the restriction remains, the video owner must allow embedding. The direct
 YouTube link remains available when embedded playback is restricted.
 
+Chapter browser tests use a test-only YouTube API stub to check seek requests,
+play actions, and current-chapter boundaries. Blocked-network tests also check
+text navigation and timestamped external links without YouTube. Neither check
+verifies live embedded playback. After chapter changes, a site maintainer must
+select representative chapters from all four phases in a browser with YouTube
+access and confirm the video and transcript match. This requires the video owner
+to permit embedding. Do not report live playback as verified before that check.
+The unresolved live-playback check does not prevent local implementation tests
+from passing and does not authorize a deployment.
+
 ## Preview
 
 From the repository root, build and serve only the deployment output:
@@ -106,6 +119,53 @@ Then open <http://127.0.0.1:8765/#fact-checks> for the fact-check tab or
 may reject `file://` playback. You can open `site/index.html` directly for offline
 reading. The server listens only on the local interface and does not serve the
 repository. Do not expose it as a public server.
+
+## Chapter navigation
+
+The sidebar's **辯論流程** panel replaces the fixed ten-minute index. It has four
+formal phases: **申論**, **交叉詰問**, **媒體提問**, and **結論**. The introduction
+and final host segment are separate entries. There are 20 leaf entries in total.
+Each of the four cross-examination rounds has two complete question sequences;
+a sequence includes the question, answer, follow-up question, and final answer.
+Each media question has separate entries for the reporter and both answers.
+Media-question titles are summaries, not quotations or official phase names.
+
+Phase groups start expanded. Round and media-question groups start collapsed.
+Disclosure controls only expand or collapse; separate buttons navigate to a
+group's start or an individual entry. A selection clears all filters, selects
+the transcript tab, focuses the target cue, and requests playback. Labels show
+the phase or speaker first and the original video time second. The current
+chapter follows the selected video time, not page scrolling. Playback updates
+do not change disclosure state or keyboard focus. Follow-playback scrolling
+remains off by default. Silent opening time, advertisement breaks, and time
+after the last segment have no current chapter.
+
+Edit `data/chapters.json`, then run `bun run build`. The file contains
+`source_sha256` and ordered `items`. The hash must match
+`data/transcript.json`'s `review.source_sha256`. Each item has a unique `id` and a
+nonempty `title`. A group has ordered, nonempty `children`. A leaf instead has
+`start_cue_id` and `end_cue_id`; both reference existing transcript cues. The
+builder derives the half-open interval `[first_cue.start, last_cue.end)` and each
+group's bounds from its descendants. Do not duplicate times in chapter metadata
+or TypeScript. Keep source cues, subtitle boundaries, and the original video
+timeline unchanged, including the silent opening and advertisements.
+
+Chapter ends follow existing cue boundaries, not word-accurate audio cuts.
+Some host-transition cues contain a candidate's final syllable. Candidate
+entries stop at the last candidate-labeled cue; they do not split or reassign
+mixed-speaker cues. The introduction includes the mixed rule/phase transition
+cue, and the final host entry includes the unresolved closing-speaker handoff.
+These navigation choices do not resolve the transcript's review flags.
+
+The standard-library validator rejects invalid references, source hashes,
+non-finite or reversed times, overlapping leaf ranges, and unordered items.
+The renderer embeds only validated public fields with the transcript; it does
+not fetch chapter data at runtime or publish a separate chapter download.
+Existing generic exports without chapter metadata remain valid and show
+**尚無章節資料**, with no ten-minute fallback. Invalid metadata stops the build
+before it replaces a previous site. To undo chapter implementation changes,
+revert only their source paths and run `bun run build`; do not edit generated
+HTML or transcript exports by hand. Deployment requires separate authorization.
 
 ## Review status
 
@@ -216,7 +276,12 @@ packages. Full Python tests and transcription also require `uv sync --dev`.
 testing filters, source links, keyboard tabs, transcript navigation, offline
 reading, and widths of 1440, 390, and 320 pixels. It also serves the generated
 files under the GitHub Pages project path and verifies download bytes.
-Screenshots stay under ignored `outputs/fact-checks/`.
+Fact-check screenshots stay under ignored `outputs/fact-checks/`. Chapter tests
+also check native disclosure controls, all navigation targets, current-chapter
+boundaries, and API-stub seeking. Expanded and collapsed chapter captures stay
+under ignored `outputs/chapters/`; checks include keyboard access in a
+1440 × 700 desktop viewport. These captures and tests do not establish live
+YouTube playback; see **Playback limits**.
 
 `bun run check` runs Biome and the TypeScript compiler. The build has two stages:
 

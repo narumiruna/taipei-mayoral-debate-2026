@@ -67,7 +67,8 @@
     let autoplayBlocked = false;
     let lastFollowedId = null;
     let cueElements = new Map;
-    const chapterButtons = [];
+    const chapterLeaves = [];
+    const chapterGroups = [];
     function element(tag, className, text) {
       const node = document.createElement(tag);
       if (className)
@@ -156,6 +157,9 @@
       link.searchParams.set("t", String(Math.floor(seconds)));
       videoLink.href = link.href;
       setTarget(String(cue.id));
+      chapterAt(seconds)?.ancestors.forEach((group) => {
+        group.open = true;
+      });
       try {
         const original = cueById.get(String(cue.id));
         const hash = original && Number(original.start) === seconds ? `#cue-${cue.id}` : `#time-${seconds}`;
@@ -289,10 +293,10 @@
       });
       $(pending ? "pending-content" : "corrections-content").replaceChildren(fragment);
     }
-    function showTranscript(cue) {
+    function showTranscript(cue, play = false) {
       resetFilters();
       switchView("transcript");
-      seek(cue);
+      seek(cue, play);
       requestAnimationFrame(() => {
         const target = cueElements.get(String(cue.id));
         target?.scrollIntoView({ block: "center", behavior: "instant" });
@@ -473,6 +477,41 @@
       verdictFilter.value = "__all__";
       render();
     }
+    function chapterAt(seconds) {
+      return chapterLeaves.find(({ chapter }) => chapter.start <= seconds && seconds < chapter.end);
+    }
+    function renderChapters(chapters, ancestors = [], path = []) {
+      const list = element("ol", "chapter-list");
+      chapters.forEach((chapter) => {
+        const item = element("li");
+        const names = [...path, chapter.title];
+        const button = element("button", "chapter-button");
+        button.type = "button";
+        button.dataset.chapterId = chapter.id;
+        button.setAttribute("aria-label", `從 ${time(chapter.start)} 播放：${names.join("／")}`);
+        button.append(element("span", "chapter-label", chapter.children ? "從此處開始" : chapter.title), element("span", "chapter-time", time(chapter.start)));
+        button.addEventListener("click", () => {
+          const cue = cueById.get(String(chapter.start_cue_id));
+          if (cue)
+            showTranscript(cue, true);
+        });
+        if (chapter.children) {
+          const group = element("details", "chapter-group");
+          group.open = ancestors.length === 0;
+          group.dataset.chapterGroup = chapter.id;
+          const summary = element("summary", "", chapter.title);
+          button.classList.add("chapter-start");
+          group.append(summary, button, renderChapters(chapter.children, [...ancestors, group], names));
+          chapterGroups.push(group);
+          item.append(group);
+        } else {
+          chapterLeaves.push({ chapter, button, ancestors });
+          item.append(button);
+        }
+        list.append(item);
+      });
+      return list;
+    }
     function revealHash() {
       if (window.location.hash === "#fact-checks") {
         switchView("fact-checks");
@@ -488,6 +527,7 @@
         return;
       search.value = "";
       speakerFilter.value = "__all__";
+      verdictFilter.value = "__all__";
       switchView("transcript");
       seek(validTime ? { ...cue, start: seconds } : cue, false);
       requestAnimationFrame(() => {
@@ -520,12 +560,15 @@
         const label = playing ? "播放中" : state === 3 ? "載入中" : state === -1 || state === 5 ? "尚未播放" : "已暫停";
         $("playback-status").textContent = autoplayBlocked ? "請按 YouTube 播放按鈕開始播放" : `${label} ${time(now)} / ${time(duration)}`;
       }
-      const chapter = Math.floor(now / 600);
-      chapterButtons.forEach((button, index) => {
-        if (index === chapter)
-          button.setAttribute("aria-current", "true");
+      const currentChapter = chapterAt(now);
+      chapterLeaves.forEach((entry) => {
+        if (entry === currentChapter)
+          entry.button.setAttribute("aria-current", "true");
         else
-          button.removeAttribute("aria-current");
+          entry.button.removeAttribute("aria-current");
+      });
+      chapterGroups.forEach((group) => {
+        group.classList.toggle("is-active-section", currentChapter?.ancestors.includes(group) ?? false);
       });
       if (followPlayback.checked && playing && currentView === "transcript" && activeId !== lastFollowedId) {
         const current = activeId === null ? undefined : cueElements.get(activeId);
@@ -621,21 +664,11 @@
       option.value = speaker;
       speakerFilter.append(option);
     });
-    for (let start = 0;start < duration; start += 600) {
-      const cue = chronological.find((item) => item.end > start) || chronological[chronological.length - 1];
-      if (!cue)
-        break;
-      const button = element("button", "chapter-button", time(start));
-      button.type = "button";
-      button.setAttribute("aria-label", `播放 ${time(start)} 起的影音`);
-      button.addEventListener("click", () => {
-        seek({ ...cue, start }, true);
-      });
-      $("chapters").append(button);
-      chapterButtons.push(button);
-    }
-    if (!chapterButtons.length)
-      $("chapters").append(element("p", "index-note", "尚無時間索引"));
+    const chapters = data.chapters?.items ?? [];
+    if (chapters.length)
+      $("chapters").append(renderChapters(chapters));
+    else
+      $("chapters").append(element("p", "index-note", "尚無章節資料"));
     search.addEventListener("input", render);
     speakerFilter.addEventListener("change", render);
     verdictFilter.addEventListener("change", render);
