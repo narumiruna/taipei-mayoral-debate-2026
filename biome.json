@@ -11,8 +11,10 @@
       "tsconfig.json",
       "biome.json",
       "web/**/*.ts",
+      "web/**/*.tsx",
       "web/**/*.css",
-      "tests/browser_fact_checks.mjs"
+      "tests/browser_fact_checks.mjs",
+      "scripts/build-web.mjs"
     ]
   },
   "formatter": {

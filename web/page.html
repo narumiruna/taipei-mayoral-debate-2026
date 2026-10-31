@@ -13,38 +13,37 @@
   <a class="skip-link" href="#record">跳至逐字稿</a>
   <div class="page-shell">
     <header class="masthead">
-      <a href="#" class="wordmark" aria-label="辯論紀錄首頁">DEBATE RECORD <span>／ 2026</span></a>
-      <a class="edition" href="#record">閱讀逐字稿 ↓</a>
+      <div class="identity">
+        <div class="brand-row"><a href="#" class="wordmark" aria-label="辯論紀錄首頁">DEBATE RECORD <span>／ 2026</span></a><a class="edition" href="#record">閱讀逐字稿 ↓</a></div>
+        <h1 id="page-title">2026 臺北市長候選人｜電視辯論<span class="title-dot">・</span>校對逐字稿</h1>
+      </div>
+      <div id="record-tabs">
+        <div class="tabs" role="tablist" aria-label="紀錄類別">
+          <button id="tab-transcript" role="tab" aria-selected="true" aria-controls="panel-transcript" tabindex="0" data-view="transcript">逐字稿 <span id="count-transcript">0</span></button>
+          <button id="tab-fact-checks" role="tab" aria-selected="false" aria-controls="panel-fact-checks" tabindex="-1" data-view="fact-checks">事實查核 <span id="count-fact-checks">0</span></button>
+          <button id="tab-corrections" role="tab" aria-selected="false" aria-controls="panel-corrections" tabindex="-1" data-view="corrections">校對紀錄 <span id="count-corrections">0</span></button>
+          <button id="tab-pending" role="tab" aria-selected="false" aria-controls="panel-pending" tabindex="-1" data-view="pending">待確認 <span id="count-pending">0</span></button>
+        </div>
+      </div>
     </header>
-    <section class="hero" aria-labelledby="page-title">
-      <div class="eyebrow"><span class="small-rule"></span>公開辯論・文字紀錄</div>
-      <h1 id="page-title"><span>2026 臺北市長候選人</span><br>電視辯論<span class="title-dot">・</span>校對逐字稿</h1>
-      <p class="intro">依說話者與時間閱讀逐字稿。<br class="mobile-break">搜尋發言、對照影片與文字修訂紀錄，或<a href="#fact-checks">閱讀事實查核 ↗</a>。</p>
-      <dl class="stats" aria-label="紀錄摘要">
-        <div><dt>影音長度</dt><dd id="stat-duration">—</dd></div>
-        <div><dt>字幕段落</dt><dd id="stat-cues">—</dd></div>
-        <div><dt>說話者</dt><dd id="stat-speakers">—</dd></div>
-        <div><dt>校對紀錄</dt><dd id="stat-corrections">—</dd></div>
-        <div><dt>待確認</dt><dd id="stat-pending">—</dd></div>
-      </dl>
-    </section>
-    <div class="notice"><span class="notice-label">閱讀須知</span><p>本稿以自動語音辨識（ASR）產生，再依校對紀錄修訂，<strong>並非逐句人工聽校的定稿</strong>。人名、重疊發言與時間對齊仍可能有誤；說話者姓名依使用者指定，角色依介紹與發言內容標註。請以原始影音為準。</p></div>
     <div class="workspace">
       <aside class="sidebar" aria-label="影音與閱讀工具">
         <details id="reading-tools" class="reading-tools" open>
           <summary id="tools-summary" class="tools-summary">影音、章節與下載</summary>
-          <div class="sidebar-sticky">
-            <section class="media-panel" aria-labelledby="media-title">
+          <div class="rail-layout">
+            <div id="chapter-scroll"><section class="chapter-panel" aria-labelledby="chapters-title"><div class="aside-heading"><h2 id="chapters-title">辯論流程</h2><span>依階段定位</span></div><nav id="chapters" aria-label="辯論流程章節"></nav><p class="index-note">展開階段查看細項；點選章節可定位逐字稿與影音。</p></section></div>
+            <div id="tool-controls" class="tool-groups">
+              <details class="tool-fallback" open><summary>現場影音</summary><section class="media-panel" aria-labelledby="media-title">
               <div class="aside-heading"><h2 id="media-title">現場影音</h2><span>對照閱讀</span></div>
               <iframe id="debate-video" src="https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&amp;playsinline=1" title="辯論完整影音" allow="autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               <p id="media-error" class="media-error" role="status" hidden>無法載入 YouTube 影音。請確認網路連線，或使用下方連結在 YouTube 開啟。逐字稿仍可閱讀與搜尋。</p>
               <div class="player-status"><span class="live-dot" aria-hidden="true"></span><span id="playback-status">YouTube 載入中</span><a id="video-link" href="https://youtu.be/plpXPrOoV2w" target="_blank" rel="noopener noreferrer">在 YouTube 開啟 ↗</a></div>
               <label class="follow-control"><input type="checkbox" id="follow-playback"><span>跟隨播放位置捲動</span><small>預設關閉</small></label>
               <p class="media-help">影片由 YouTube 提供，需連線播放。點選逐字稿時間可定位；若未自動播放，請按播放器的播放按鈕。校對字幕可由下方下載。</p>
-            </section>
-            <section class="chapter-panel" aria-labelledby="chapters-title"><div class="aside-heading"><h2 id="chapters-title">辯論流程</h2><span>依階段定位</span></div><nav id="chapters" aria-label="辯論流程章節"></nav><p class="index-note">展開階段查看細項；點選章節可定位逐字稿與影音。</p></section>
-            <section class="downloads" aria-labelledby="downloads-title"><div class="aside-heading"><h2 id="downloads-title">檔案下載</h2><span>離線保存</span></div><div class="download-grid"><a href="transcript.md" download>逐字稿 <span>MD ↓</span></a><a href="transcript.json" download>結構化資料 <span>JSON ↓</span></a><a href="subtitles.srt" download>字幕 <span>SRT ↓</span></a><a href="subtitles.vtt" download>網頁字幕 <span>VTT ↓</span></a><a href="corrections.json" download>校對紀錄 <span>JSON ↓</span></a></div></section>
-            <details class="provenance"><summary>處理資訊與校對方法</summary><dl><dt>辨識模型</dt><dd id="model-info">—</dd><dt>處理階段</dt><dd id="stage-info">—</dd><dt>校對方法</dt><dd id="method-info">未提供</dd><dt>來源 SHA-256</dt><dd id="hash-info">未提供</dd></dl></details>
+            </section></details>
+              <details class="tool-fallback" open><summary>檔案下載</summary><section class="downloads" aria-labelledby="downloads-title"><div class="aside-heading"><h2 id="downloads-title">檔案下載</h2><span>離線保存</span></div><div class="download-grid"><a href="transcript.md" download>逐字稿 <span>MD ↓</span></a><a href="transcript.json" download>結構化資料 <span>JSON ↓</span></a><a href="subtitles.srt" download>字幕 <span>SRT ↓</span></a><a href="subtitles.vtt" download>網頁字幕 <span>VTT ↓</span></a><a href="corrections.json" download>校對紀錄 <span>JSON ↓</span></a></div></section></details>
+              <details class="provenance"><summary>處理資訊與校對方法</summary><dl><dt>辨識模型</dt><dd id="model-info">—</dd><dt>處理階段</dt><dd id="stage-info">—</dd><dt>校對方法</dt><dd id="method-info">未提供</dd><dt>來源 SHA-256</dt><dd id="hash-info">未提供</dd></dl></details>
+            </div>
           </div>
         </details>
       </aside>
@@ -52,15 +51,18 @@
         <div class="section-heading"><div><span class="section-number">01</span><h2>發言紀錄</h2></div><span class="section-note">依影音時間排序</span></div>
         <div class="filters">
           <label class="search-label" for="search">搜尋逐字稿、校對與事實查核</label>
-          <div class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="輸入關鍵字，尋找發言或查核…" autocomplete="off"><button type="button" id="clear-search" hidden>清除</button></div>
-          <div class="filter-row"><label for="speaker-filter">說話者</label><select id="speaker-filter"><option value="__all__">全部說話者</option></select><button type="button" id="reset-filters">重設篩選</button></div>
+          <div id="search-control"><div class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="輸入關鍵字，尋找發言或查核…" autocomplete="off"><button type="button" id="clear-search" hidden>清除</button></div></div>
+          <div class="filter-row"><label for="speaker-filter">說話者</label><select id="speaker-filter"><option value="__all__">全部說話者</option></select><span id="reset-control"><button type="button" id="reset-filters">重設篩選</button></span></div>
         </div>
-        <div class="tabs" role="tablist" aria-label="紀錄類別">
-          <button id="tab-transcript" role="tab" aria-selected="true" aria-controls="panel-transcript" tabindex="0" data-view="transcript">逐字稿 <span id="count-transcript">0</span></button>
-          <button id="tab-fact-checks" role="tab" aria-selected="false" aria-controls="panel-fact-checks" tabindex="-1" data-view="fact-checks">事實查核 <span id="count-fact-checks">0</span></button>
-          <button id="tab-corrections" role="tab" aria-selected="false" aria-controls="panel-corrections" tabindex="-1" data-view="corrections">校對紀錄 <span id="count-corrections">0</span></button>
-          <button id="tab-pending" role="tab" aria-selected="false" aria-controls="panel-pending" tabindex="-1" data-view="pending">待確認 <span id="count-pending">0</span></button>
-        </div>
+        <p class="intro"><span class="record-kind">公開辯論・文字紀錄</span> 依說話者與時間閱讀逐字稿。<br class="mobile-break">搜尋發言、對照影片與文字修訂紀錄，或<a href="#fact-checks">閱讀事實查核 ↗</a>。</p>
+        <dl class="stats" aria-label="紀錄摘要">
+        <div><dt>影音長度</dt><dd id="stat-duration">—</dd></div>
+        <div><dt>字幕段落</dt><dd id="stat-cues">—</dd></div>
+        <div><dt>說話者</dt><dd id="stat-speakers">—</dd></div>
+        <div><dt>校對紀錄</dt><dd id="stat-corrections">—</dd></div>
+        <div><dt>待確認</dt><dd id="stat-pending">—</dd></div>
+      </dl>
+        <div class="notice"><span class="notice-label">閱讀須知</span><p>本稿以自動語音辨識（ASR）產生，再依校對紀錄修訂，<strong>並非逐句人工聽校的定稿</strong>。人名、重疊發言與時間對齊仍可能有誤；說話者姓名依使用者指定，角色依介紹與發言內容標註。請以原始影音為準。</p></div>
         <div class="result-bar"><p id="result-status" role="status" aria-live="polite" aria-atomic="true"></p><span>點選時間即可播放</span></div>
         <noscript><p class="empty-state">請啟用 JavaScript 以閱讀、搜尋逐字稿；亦可從「檔案下載」保存文字檔。</p></noscript>
         <section id="panel-transcript" role="tabpanel" aria-labelledby="tab-transcript" tabindex="0"><div id="transcript-content"></div></section>

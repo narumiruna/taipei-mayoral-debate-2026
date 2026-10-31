@@ -12,7 +12,7 @@ Public site: <https://narumiruna.github.io/taipei-mayoral-debate-2026/>.
 | --- | --- |
 | `transcripts/` | Python package: transcription, alignment, speaker separation, review, subtitles, and export |
 | `transcripts/assets/` | Generated JavaScript and copied HTML/CSS used by the Python exporter |
-| `web/` | Frontend TypeScript, CSS, and HTML source |
+| `web/` | Reader TypeScript, React/Radix controls, CSS, and HTML source |
 | `data/` | Curated transcripts, subtitles, review records, and fact-check sources |
 | `site/` | Generated website and public downloads; ignored deployment output |
 | `raw/` | Original media; ignored |
@@ -253,9 +253,21 @@ The tested GPU is an RTX 4090. Use `--device cpu` if CUDA is unavailable.
 
 ### Frontend development
 
-The browser source is `web/page.ts`. It uses strict TypeScript
-with typed transcript data and checked DOM access. Biome formats and checks the
-TypeScript source, CSS, and frontend configuration. The stylesheet uses separate
+The reader engine is `web/page.ts`. It uses strict TypeScript with typed
+transcript data and checked DOM access. `web/reader-controls.tsx` adds React and
+Radix controls without replacing the engine's content rendering.
+
+The compact header uses Radix Tabs; the left chapter rail uses Radix Scroll
+Area. Media, downloads, and processing tools use Radix Collapsible. Themes
+provides the Theme, TextField, Button, and Badge components; Colors and Icons
+provide the palette and inline SVGs. Native chapter disclosures and speaker/
+verdict selects retain their existing keyboard and data contracts. Tool groups
+stay mounted when closed, so tab changes and tool toggles do not replace the
+player or discard filters. On mobile, media and download groups are expanded
+inside the outer tools disclosure for one-activation access.
+
+Biome checks the TypeScript, TSX, CSS, build script, and frontend configuration.
+The stylesheet uses separate
 component sections; its CSS-only `noDescendingSpecificity` rule is disabled
 because it compares selectors from unrelated components. Other recommended
 checks and the explicit `noExplicitAny` rule remain enabled.
@@ -270,11 +282,15 @@ bun run test:browser
 ```
 
 Website builds need Bun, uv, and a Python interpreter, not the transcription
-packages. Full Python tests and transcription also require `uv sync --dev`.
+packages. Full Python tests also require `uv sync --dev` and the frontend
+dependencies: the runtime CSS parity check invokes Bun. The installed Python
+renderer does not need frontend packages. Transcription requires `uv sync --dev`.
 
 `bun run test:browser` builds a fresh site, then blocks external requests while
 testing filters, source links, keyboard tabs, transcript navigation, offline
-reading, and widths of 1440, 390, and 320 pixels. It also serves the generated
+reading, and 11 widths from 320 to 1440 pixels. It checks the top bar, left rail,
+form-boundary contrast, Radix control state, permanent player/panel nodes,
+resize focus, and native no-JavaScript download access. It also serves the generated
 files under the GitHub Pages project path and verifies download bytes.
 Fact-check screenshots stay under ignored `outputs/fact-checks/`. Chapter tests
 also check native disclosure controls, all navigation targets, current-chapter
@@ -285,8 +301,13 @@ YouTube playback; see **Playback limits**.
 
 `bun run check` runs Biome and the TypeScript compiler. The build has two stages:
 
-1. `bun run build:assets` checks the frontend, bundles `web/page.ts` into
-   `transcripts/assets/page.js`, and copies the HTML and CSS runtime assets.
+1. `bun run build:assets` checks the frontend and runs `scripts/build-web.mjs`.
+   It bundles the engine and React/Radix controls into `transcripts/assets/page.js`,
+   bundles `web/page.css` and Radix CSS into `transcripts/assets/page.css`, and
+   copies the HTML template. JavaScript is built in production mode; script-closing
+   strings are escaped for safe HTML inlining. CSS imports are resolved at build
+   time. Themes tokens/component styles are included; unused layout utilities
+   are not imported.
 2. `bun run build:site` uses the curated data and packaged assets to generate
    `site/`. It does not need model checkpoints or third-party Python packages.
 
@@ -298,8 +319,9 @@ Generated assets, data exports, and `site/` are not Biome source inputs.
 The site builder prepares the full output before replacing a previous site.
 Invalid source data leaves the previous output unchanged. Rebuilding removes
 stale output files, including a fact-check ledger removed from the inputs.
-Reader assets and data stay inline in one HTML file; no frontend server is
-required.
+Reader assets and data stay inline in one HTML file, including React, Radix
+components, colors, and icons. No CDN or runtime stylesheet fetch is required.
+The Python renderer still needs no React packages or frontend server at runtime.
 
 ### Git hooks
 

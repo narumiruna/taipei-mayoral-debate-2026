@@ -1,3 +1,5 @@
+import { mountReaderControls, type View } from "./reader-controls";
+
 (() => {
   interface TranscriptMetadata {
     duration: number | null;
@@ -127,7 +129,6 @@
     ) => YouTubePlayer;
   }
 
-  type View = "transcript" | "fact-checks" | "corrections" | "pending";
   type ReviewItem = Correction | Flag;
 
   function requiredElement<T extends HTMLElement>(id: string, type: new () => T): T {
@@ -165,6 +166,7 @@
   const speakerIndex = new Map(knownSpeakers.map((speaker, index) => [speaker, index]));
   const correctedIds = new Set(corrections.map((item) => String(item.cue_id)));
   const pendingIds = new Set(flags.map((item) => String(item.cue_id)));
+  const controls = mountReaderControls(switchView);
   const video = requiredElement("debate-video", HTMLIFrameElement);
   const videoLink = requiredElement("video-link", HTMLAnchorElement);
   const videoId = new URL(video.src).pathname.split("/").pop() || "";
@@ -175,23 +177,6 @@
   const readingTools = requiredElement("reading-tools", HTMLDetailsElement);
   const toolsSummary = $("tools-summary");
   const compactTools = window.matchMedia("(max-width: 820px)");
-  const tabs = [...document.querySelectorAll('[role="tab"]')].map(
-    (button): { button: HTMLButtonElement; view: View } => {
-      if (!(button instanceof HTMLButtonElement)) {
-        throw new Error("Each tab must be a button");
-      }
-      const view = button.dataset.view;
-      if (
-        view !== "transcript" &&
-        view !== "fact-checks" &&
-        view !== "corrections" &&
-        view !== "pending"
-      ) {
-        throw new Error(`Invalid tab view: ${view}`);
-      }
-      return { button, view };
-    },
-  );
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const duration = Math.max(Number(data.metadata.duration) || 0, ...cues.map((cue) => cue.end), 0);
   const formatNumber = (value: number): string => new Intl.NumberFormat("zh-TW").format(value);
@@ -642,9 +627,7 @@
       corrections: visibleCorrections.length,
       pending: visibleFlags.length,
     };
-    Object.entries(counts).forEach(([view, count]) => {
-      $(`count-${view}`).textContent = formatNumber(count);
-    });
+    controls.setCounts(counts);
     if (currentView === "transcript") renderTranscript(visibleCues);
     else if (currentView === "fact-checks") renderFactChecks(visibleFactChecks);
     else
@@ -687,13 +670,11 @@
     if (view !== "fact-checks" && window.location.hash === "#fact-checks") {
       history.replaceState(null, "", window.location.pathname + window.location.search);
     }
-    tabs.forEach(({ button, view: tabView }) => {
-      const selected = tabView === view;
-      button.setAttribute("aria-selected", String(selected));
-      button.tabIndex = selected ? 0 : -1;
-      $(`panel-${tabView}`).hidden = !selected;
-      if (selected && focus) button.focus();
+    controls.setView(view);
+    (["transcript", "fact-checks", "corrections", "pending"] as const).forEach((tabView) => {
+      $(`panel-${tabView}`).hidden = tabView !== view;
     });
+    if (focus) $(`tab-${view}`).focus();
     render();
   }
 
@@ -955,21 +936,6 @@
   });
   requiredElement("reset-filters", HTMLButtonElement).addEventListener("click", resetFilters);
   requiredElement("empty-reset", HTMLButtonElement).addEventListener("click", resetFilters);
-  tabs.forEach(({ button, view }, index) => {
-    button.addEventListener("click", () => switchView(view));
-    button.addEventListener("keydown", (event) => {
-      let next: number | undefined;
-      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
-      if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === "Home") next = 0;
-      if (event.key === "End") next = tabs.length - 1;
-      if (next !== undefined) {
-        event.preventDefault();
-        const nextTab = tabs[next];
-        if (nextTab) switchView(nextTab.view, true);
-      }
-    });
-  });
   followPlayback.addEventListener("change", () => {
     lastFollowedId = null;
     updatePlayback();
