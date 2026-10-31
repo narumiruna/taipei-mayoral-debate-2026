@@ -5,7 +5,12 @@
   "speaker_count": 6,
   "display_language": "zh-Hant-TW",
   "script_conversion": "s2tw",
-  "accepted_corrected_cues": 227,
+  "accepted_corrected_cues": 1058,
+  "word_or_boundary_corrected_cues": 227,
+  "punctuation_reviewed_cues": 1082,
+  "punctuation_changed_cues": 1056,
+  "punctuation_preserves_prior_reviewed_text": true,
+  "punctuation_preserves_pending_flags": true,
   "normalization_changed_cues": 46,
   "pending_review_cues": 103,
   "unassigned_speaker_cues": 18,
@@ -82,6 +87,6 @@
     "console_errors_or_warnings": 0,
     "media_range_http_status": 206
   },
-  "unit_tests_passed": 181,
+  "unit_tests_passed": 191,
   "all_speech_manually_verified": false
 }
