@@ -204,6 +204,247 @@ await test("fact checks work with external network requests blocked", async (t) 
       await page.locator("#panel-fact-checks").waitFor({ state: "visible" });
     });
 
+    await t.test("compact editorial layout exposes the reader and all four tabs", async () => {
+      for (const width of [1440, 1100, 1024, 821, 820, 561, 560, 390, 375, 360, 320]) {
+        const height = width <= 560 ? 844 : 1000;
+        await page.setViewportSize({ width, height });
+        await page.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
+        await page.locator(".turn").first().waitFor();
+        await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+        const layout = await page.evaluate(() => {
+          const rect = (selector) => document.querySelector(selector).getBoundingClientRect();
+          const tablist = document.querySelector(".tabs");
+          const text = document.querySelector(".turn-text");
+          return {
+            overflow: document.documentElement.scrollWidth > innerWidth,
+            tabOverflow: tablist.scrollWidth > tablist.clientWidth,
+            tabs: [...tablist.children].map((tab) => {
+              const box = tab.getBoundingClientRect();
+              const count = tab.querySelector("span").getBoundingClientRect();
+              return {
+                left: box.left,
+                right: box.right,
+                height: box.height,
+                countFits: count.left >= box.left && count.right <= box.right,
+              };
+            }),
+            searchY: rect(".search-box").top,
+            firstTurnY: rect(".turn").top,
+            firstLineEnd:
+              text.getBoundingClientRect().top +
+              Number.parseFloat(getComputedStyle(text).lineHeight),
+            toolsOpen: document.getElementById("reading-tools").open,
+            metricsFit: [...document.querySelectorAll(".stats dd")].every(
+              (item) => item.scrollWidth <= item.clientWidth,
+            ),
+          };
+        });
+        assert.equal(layout.overflow, false, `page overflow at ${width}px`);
+        assert.equal(layout.tabOverflow, false, `tab overflow at ${width}px`);
+        assert.equal(layout.toolsOpen, width > 820, `initial tools state at ${width}px`);
+        assert.equal(layout.metricsFit, true, `summary metrics fit at ${width}px`);
+        for (const tab of layout.tabs) {
+          assert(tab.left >= 0 && tab.right <= width, `tab bounds at ${width}px`);
+          assert(tab.height >= 44, `tab target height at ${width}px`);
+          assert(tab.countFits, `tab count fits at ${width}px`);
+        }
+        assert.equal(await page.getByRole("main").count(), 1);
+        assert.equal(await page.getByRole("tab", { selected: true }).count(), 1);
+        assert.equal(await page.locator("a[download]").count(), 5);
+        if (width === 1440) {
+          assert(layout.searchY <= 440, "desktop search starts by 440px");
+          assert(layout.firstTurnY <= 700, "desktop first entry starts by 700px");
+          await page.evaluate(() => window.scrollTo({ top: 1500, behavior: "instant" }));
+          const railTop = await page
+            .locator(".sidebar-sticky")
+            .evaluate((node) => node.getBoundingClientRect().top);
+          assert(Math.abs(railTop - 24) < 1, "desktop tools remain sticky after scrolling");
+        }
+        if (width === 390) {
+          assert(layout.searchY <= 600, "mobile search starts by 600px");
+          assert(
+            layout.firstLineEnd <= height,
+            "first transcript line fits in the mobile viewport",
+          );
+        }
+        if (width === 320) assert(layout.searchY <= 650, "narrow search starts by 650px");
+      }
+    });
+
+    await t.test("mobile tools retain keyboard access and focus across resize", async () => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
+      await page.locator(".turn").first().waitFor();
+      const tools = page.locator("#reading-tools");
+      const summary = page.locator("#tools-summary");
+      const accessibility = await context.newCDPSession(page);
+      const expandedState = async () => {
+        const { nodes } = await accessibility.send("Accessibility.getFullAXTree");
+        const disclosure = nodes.find(
+          (node) =>
+            node.role?.value === "DisclosureTriangle" && node.name?.value === "影音、章節與下載",
+        );
+        assert(
+          disclosure && !disclosure.ignored,
+          "native disclosure is exposed to accessibility tools",
+        );
+        assert.equal(
+          disclosure.properties.find((property) => property.name === "focusable").value.value,
+          true,
+        );
+        return disclosure.properties.find((property) => property.name === "expanded").value.value;
+      };
+      const chapterStates = () =>
+        page.locator(".chapter-group").evaluateAll((nodes) => nodes.map((node) => node.open));
+      const defaults = await chapterStates();
+      assert.equal(await tools.evaluate((node) => node.open), false);
+      assert.equal(await expandedState(), false);
+      await summary.focus();
+      await page.keyboard.press("Tab");
+      assert.equal(
+        await page.locator("#search").evaluate((node) => node === document.activeElement),
+        true,
+      );
+      await summary.focus();
+      await page.keyboard.press("Enter");
+      assert.equal(await tools.evaluate((node) => node.open), true);
+      assert.equal(await expandedState(), true);
+      assert.equal(await page.locator("#debate-video").isVisible(), true);
+      assert.equal(await page.locator("#chapters").isVisible(), true);
+      assert.equal(await page.locator(".download-grid a:visible").count(), 5);
+      assert.equal(await page.locator(".provenance summary").isVisible(), true);
+      assert.deepEqual(await chapterStates(), defaults);
+      await summary.focus();
+      await page.keyboard.press("Space");
+      assert.equal(await tools.evaluate((node) => node.open), false);
+      await page.keyboard.press("Enter");
+      await page.locator('#chapters button[data-chapter-id="introduction"]').click();
+      await page.waitForFunction(
+        () => document.activeElement.id === "" && document.activeElement.closest(".cue"),
+      );
+      assert.equal(await page.locator(".cue.is-target").count(), 1);
+      assert.match(await page.locator("#video-link").getAttribute("href"), /t=854/);
+      await page.locator("#follow-playback").focus();
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page.waitForFunction(() => document.getElementById("reading-tools").open);
+      await page.setViewportSize({ width: 390, height: 844 });
+      assert.equal(
+        await page.locator("#follow-playback").evaluate((node) => node === document.activeElement),
+        true,
+      );
+      assert.equal(await tools.evaluate((node) => node.open), true, "focused tools stay open");
+      await summary.focus();
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page.waitForFunction(() => document.activeElement.id === "search");
+      assert.equal(await tools.evaluate((node) => node.open), true);
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.waitForFunction(() => !document.getElementById("reading-tools").open);
+      assert.equal(
+        await page.locator("#search").evaluate((node) => node === document.activeElement),
+        true,
+      );
+      assert.deepEqual(await chapterStates(), defaults);
+      await accessibility.detach();
+    });
+
+    await t.test("supporting tools have readable text, contrast, and chapter targets", async () => {
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
+      await page.locator(".turn").first().waitFor();
+      const sizes = await page.evaluate(() => {
+        const fonts = (selector) =>
+          [...document.querySelectorAll(selector)].map((node) =>
+            Number.parseFloat(getComputedStyle(node).fontSize),
+          );
+        return {
+          labels: fonts(
+            ".aside-heading h2, .chapter-button, .download-grid a, .follow-control, .provenance summary",
+          ),
+          supporting: fonts(
+            ".aside-heading > span, .chapter-time, .player-status, .follow-control small, .media-help, .index-note, .download-grid a span, .provenance",
+          ),
+          targets: [
+            ...document.querySelectorAll(
+              ".chapter-button, .chapter-group > summary, .provenance > summary",
+            ),
+          ]
+            .filter((node) => node.checkVisibility())
+            .map((node) => node.getBoundingClientRect().height),
+        };
+      });
+      assert(sizes.labels.every((size) => size >= 13));
+      assert(sizes.supporting.every((size) => size >= 12));
+      assert(sizes.targets.every((height) => height >= 44));
+      const contrasts = await page
+        .locator(".turn-range, .chapter-time, .player-status, #video-link, .media-error")
+        .evaluateAll((nodes) =>
+          nodes.map((node) => {
+            let background = "rgba(0, 0, 0, 0)";
+            for (let parent = node; parent; parent = parent.parentElement) {
+              const color = getComputedStyle(parent).backgroundColor;
+              if (color !== "rgba(0, 0, 0, 0)") {
+                background = color;
+                break;
+              }
+            }
+            return { foreground: getComputedStyle(node).color, background };
+          }),
+        );
+      const luminance = (color) => {
+        const [r, g, b] = color
+          .match(/[\d.]+/g)
+          .slice(0, 3)
+          .map((channel) => {
+            const value = Number(channel) / 255;
+            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+          });
+        return r * 0.2126 + g * 0.7152 + b * 0.0722;
+      };
+      for (const pair of contrasts) {
+        const [light, dark] = [luminance(pair.foreground), luminance(pair.background)].sort(
+          (a, b) => b - a,
+        );
+        assert((light + 0.05) / (dark + 0.05) >= 4.5, JSON.stringify(pair));
+      }
+      await page.locator("#tab-transcript").focus();
+      await page.keyboard.press("ArrowRight");
+      assert.equal(
+        await page
+          .locator("#tab-fact-checks")
+          .evaluate((node) => getComputedStyle(node).outlineWidth),
+        "3px",
+      );
+    });
+
+    await t.test("native tools and downloads remain available without JavaScript", async () => {
+      const noScriptContext = await browser.newContext({
+        viewport: { width: 390, height: 844 },
+        javaScriptEnabled: false,
+      });
+      try {
+        await noScriptContext.route("**/*", (route) =>
+          route.request().url().startsWith(origin) ? route.continue() : route.abort(),
+        );
+        const noScriptPage = await noScriptContext.newPage();
+        await noScriptPage.goto(`${origin}${basePath}`, { waitUntil: "domcontentloaded" });
+        const tools = noScriptPage.locator("#reading-tools");
+        assert.equal(await tools.getAttribute("open"), "");
+        assert.equal(await noScriptPage.locator(".download-grid a:visible").count(), 5);
+        assert.equal(await noScriptPage.locator("noscript .empty-state").isVisible(), true);
+        await noScriptPage.locator("#tools-summary").focus();
+        await noScriptPage.keyboard.press("Enter");
+        assert.equal(await tools.getAttribute("open"), null);
+        await noScriptPage.keyboard.press("Space");
+        assert.equal(await noScriptPage.locator(".download-grid a:visible").count(), 5);
+        const name = await noScriptPage.locator(".download-grid a").first().getAttribute("href");
+        const response = await noScriptPage.request.get(`${origin}${basePath}${name}`);
+        assert.equal(response.status(), 200);
+        assert.deepEqual(await response.body(), publishedFiles.get(name));
+      } finally {
+        await noScriptContext.close();
+      }
+    });
+
     await t.test("desktop and narrow mobile layouts have no page overflow", async () => {
       await mkdir(screenshotDir, { recursive: true });
       await page.locator(".fact-check-evidence").evaluateAll((details) => {
@@ -471,7 +712,7 @@ await test("chapter navigation uses a deterministic YouTube API with external re
       // A hash-only goto can reuse the previous document and its ready player.
       await page.goto("about:blank");
       await page.goto(`${url}${hash}`, { waitUntil: "domcontentloaded" });
-      await page.locator("#chapters > ol.chapter-list").waitFor();
+      await page.locator("#chapters > ol.chapter-list").waitFor({ state: "attached" });
       await page.waitForFunction(() => typeof window.chapterProbe?.ready === "function");
       if (ready) await page.evaluate(() => window.chapterProbe.ready());
     };
@@ -868,6 +1109,10 @@ await test("chapter navigation uses a deterministic YouTube API with external re
         await mkdir(screenshotDir, { recursive: true });
         for (const width of [1440, 390, 320]) {
           await page.setViewportSize({ width, height: 1000 });
+          const tools = page.locator("#reading-tools");
+          if (!(await tools.evaluate((node) => node.open))) {
+            await page.locator("#tools-summary").click();
+          }
           for (const expanded of [true, false]) {
             await page.locator(".chapter-group").evaluateAll((groups, expanded) => {
               for (const group of groups) group.open = expanded;

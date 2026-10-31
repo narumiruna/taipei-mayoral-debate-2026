@@ -43,6 +43,9 @@
     const speakerFilter = requiredElement("speaker-filter", HTMLSelectElement);
     const verdictFilter = requiredElement("verdict-filter", HTMLSelectElement);
     const followPlayback = requiredElement("follow-playback", HTMLInputElement);
+    const readingTools = requiredElement("reading-tools", HTMLDetailsElement);
+    const toolsSummary = $("tools-summary");
+    const compactTools = window.matchMedia("(max-width: 820px)");
     const tabs = [...document.querySelectorAll('[role="tab"]')].map((button) => {
       if (!(button instanceof HTMLButtonElement)) {
         throw new Error("Each tab must be a button");
@@ -669,6 +672,14 @@
       $("chapters").append(renderChapters(chapters));
     else
       $("chapters").append(element("p", "index-note", "尚無章節資料"));
+    function syncReadingTools() {
+      if (!compactTools.matches && document.activeElement === toolsSummary) {
+        search.focus({ preventScroll: true });
+      }
+      readingTools.open = !compactTools.matches || readingTools.contains(document.activeElement);
+    }
+    syncReadingTools();
+    compactTools.addEventListener("change", syncReadingTools);
     search.addEventListener("input", render);
     speakerFilter.addEventListener("change", render);
     verdictFilter.addEventListener("change", render);
