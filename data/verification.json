@@ -44,13 +44,13 @@
       "passed": true
     },
     "SPEAKER_03": {
-      "label": "辯論者1／沈伯洋",
+      "label": "沈伯洋",
       "start": 1050,
       "end": 1500,
       "passed": true
     },
     "SPEAKER_04": {
-      "label": "辯論者2／蔣萬安",
+      "label": "蔣萬安",
       "start": 1583,
       "end": 2010,
       "passed": true
@@ -87,6 +87,6 @@
     "console_errors_or_warnings": 0,
     "media_range_http_status": 206
   },
-  "unit_tests_passed": 191,
+  "unit_tests_passed": 199,
   "all_speech_manually_verified": false
 }

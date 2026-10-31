@@ -142,6 +142,23 @@ def test_unknown_speaker_labels(speaker, label):
     assert cue["label"] == label
 
 
+@pytest.mark.parametrize(
+    ("role", "name", "label"),
+    [
+        ("辯論者1", "沈伯洋", "沈伯洋"),
+        ("辯論者2", "蔣萬安", "蔣萬安"),
+        ("辯論者1", "", "辯論者1"),
+        ("辯論者2", "", "辯論者2"),
+        ("主持人1", "TVBS", "主持人1／TVBS"),
+        ("提問記者2", "三立", "提問記者2／三立"),
+    ],
+)
+def test_speaker_labels_use_names_only_for_named_debaters(role, name, label):
+    roles = {"SPEAKER_00": {"role": role, "name": name}}
+
+    assert subtitles.speaker_label("SPEAKER_00", roles) == label
+
+
 def test_export_formats_and_evidence(tmp_path, transcript, roles):
     output = tmp_path / "exports"
 
