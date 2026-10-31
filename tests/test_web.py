@@ -10,15 +10,6 @@ import pytest
 
 from transcripts.web import render_page
 
-RESEARCH_URLS = {
-    (
-        "https://pure.york.ac.uk/portal/en/publications/"
-        "how-not-to-answer-questions-in-political-interviews/"
-    ),
-    "https://doi.org/10.1093/pa/gsz003",
-    "https://aclanthology.org/2026.semeval-1.449/",
-}
-
 
 class PageParser(HTMLParser):
     def __init__(self, html):
@@ -216,9 +207,7 @@ def test_page_embeds_reader_with_youtube_and_relative_downloads(tmp_path, artifa
         if tag == "link"
     )
     assert not re.search(r"\bfetch\s*\(|@import\b", html)
-    assert set(
-        re.findall(r"https?://[^\s\"'<>`]+", unescape(html))
-    ) == RESEARCH_URLS | {
+    assert set(re.findall(r"https?://[^\s\"'<>`]+", unescape(html))) == {
         "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&playsinline=1",
         "https://youtu.be/plpXPrOoV2w",
         "https://www.youtube.com/iframe_api",
@@ -259,7 +248,7 @@ def test_page_embeds_reader_with_youtube_and_relative_downloads(tmp_path, artifa
         if key in {"src", "poster"}
         or (key == "href" and not value.startswith(("#", "data:")))
     }
-    assert resources == {("a", "href", url) for url in RESEARCH_URLS} | {
+    assert resources == {
         (
             "iframe",
             "src",
@@ -283,36 +272,6 @@ def test_page_embeds_reader_with_youtube_and_relative_downloads(tmp_path, artifa
         "subtitles.vtt",
         "corrections.json",
     }
-
-
-def test_assessment_tab_has_accessible_controls_and_explicit_limits(tmp_path, artifact):
-    html = render_page(artifact, tmp_path).read_text(encoding="utf-8")
-    page = PageParser(html)
-    by_id = {attrs["id"]: (tag, attrs) for tag, attrs in page.elements if "id" in attrs}
-
-    tag, tab = by_id["tab-responsiveness"]
-    assert tag == "button"
-    assert tab["role"] == "tab"
-    assert tab["aria-selected"] == "false"
-    assert tab["tabindex"] == "-1"
-    assert tab["aria-controls"] == "panel-responsiveness"
-    _, panel = by_id[tab["aria-controls"]]
-    assert panel["role"] == "tabpanel"
-    assert panel["aria-labelledby"] == "tab-responsiveness"
-    assert "hidden" in panel
-    assert by_id["assessment-question"][0] == "select"
-    assert by_id["quality-total"][0] == "output"
-    assert by_id["quality-total"][1]["aria-live"] == "polite"
-    assert "本場尚未評分" in html
-    assert "假設統計 · 不代表本場候選人" in html
-    assert "不儲存、不列入本場資料" in html
-    assert "無法判定不列入" in html
-    assert "非學界統一標準" in html
-    for tag, attrs in page.elements:
-        assert not any(key.startswith("on") for key in attrs)
-        if tag == "a" and attrs.get("href") in RESEARCH_URLS:
-            assert attrs["target"] == "_blank"
-            assert {"noopener", "noreferrer"} <= set(attrs["rel"].split())
 
 
 @pytest.mark.parametrize("review", ["missing", {}, None])

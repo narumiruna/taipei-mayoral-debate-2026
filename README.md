@@ -16,7 +16,7 @@ Public site: <https://narumiruna.github.io/taipei-mayoral-debate-2026/>.
 | `data/` | Curated transcripts, subtitles, review records, and the single-file web page |
 | `raw/` | Original media; ignored |
 | `outputs/` | Local media derivatives, logs, screenshots, and inference checkpoints; ignored |
-| `tests/` | Python and frontend regression tests, plus browser checks |
+| `tests/` | Python regression tests |
 
 The Python package uses a flat layout without `src/`. Root configuration files
 serve this one project. Python imports use `transcripts`; the distribution and
@@ -26,15 +26,15 @@ console command remain `2026-debate`.
 
 Open [`data/index.html`](data/index.html).
 The page has transcript search, speaker filters, video seeking, correction
-comparisons, unresolved review items, a question responsiveness tab, and download
-links. Reader CSS, JavaScript, and transcript data are inline. Transcript search and review work offline,
+comparisons, unresolved review items, and download links. Reader CSS, JavaScript,
+and transcript data are inline. Transcript search and review work offline,
 including when YouTube is blocked. Video playback uses
 [YouTube](https://youtu.be/plpXPrOoV2w) and its iframe API. It requires internet
 access and an HTTP(S) preview; YouTube may reject `file://` pages.
 
 | Committable file under `data/` | Contents |
 | --- | --- |
-| `index.html` | Responsive transcript, review, and question responsiveness page |
+| `index.html` | Responsive transcript and review page |
 | `transcript.md` | Reviewed timecoded transcript |
 | `transcript.json` | Reviewed cues, original source segments, roles, and review records |
 | `subtitles.srt`, `subtitles.vtt` | Reviewed subtitles |
@@ -51,32 +51,6 @@ Large media, screenshots, logs, and inference checkpoints stay in ignored
 `outputs/`. Do not add those files to a commit. The web page plays YouTube video,
 not ignored local media. Download links remain local paths relative to
 `index.html`, for the transcript, subtitles, and correction ledger.
-
-### Question responsiveness
-
-Open the **問答回應品質評估** tab or `data/index.html#responsiveness`.
-It aligns two common media questions with both debaters' first answers. Each
-answer has timecoded source text, pending-review warnings, and a link to the
-reader. The first question retains a warning about a mixed-speaker cue at the
-answer boundary. These are source-specific alignment records, not automatic
-question extraction. They appear only when the source fingerprint and cue ranges
-match the records in `web/responsiveness.ts`.
-
-The recorded answers are **not classified or scored**. No verified evaluation
-records exist. The page separates these unscored answers from hypothetical
-classification examples, reply-rate comparisons, and a score calculator.
-The calculator uses Directness 40%, Completeness 25%, Specificity 20%, and
-Consistency 15%. All four dimensions need a 0–5 score before it shows a total.
-An unassessed dimension is not zero. Calculator inputs are not saved or included
-in debate statistics.
-
-The five response classes and 0–100 rubric are site-specific methods, not an
-official academic standard. Unknown classifications are excluded from rate
-denominators; explicit refusals are included. No assessable questions means no
-rate, not 0%. The tab links to Bull and CLARITY research and describes comparison,
-context, and independent-review limits. It does not run model inference,
-fact-check claims, or rank a debate winner. Source evidence, examples, and the
-calculator work offline; research links and YouTube require internet access.
 
 ## Deployment
 
@@ -171,9 +145,7 @@ The tested GPU is an RTX 4090. Use `--device cpu` if CUDA is unavailable.
 
 ### Frontend development
 
-The browser entry point is `web/page.ts`. `web/responsiveness.ts` contains the
-assessment view and its source-bound alignment records. `web/transcript.ts`
-defines the shared transcript types. These files use strict TypeScript
+The browser source is `web/page.ts`. It uses strict TypeScript
 with typed transcript data and checked DOM access. Biome formats and checks the
 TypeScript source, CSS, and frontend configuration. The stylesheet uses separate
 component sections; its CSS-only `noDescendingSpecificity` rule is disabled
@@ -184,12 +156,8 @@ checks and the explicit `noExplicitAny` rule remain enabled.
 bun install --frozen-lockfile
 bun run format
 bun run check
-bun run test:web
 bun run build
 ```
-
-`bun run test:web` checks score weights, missing scores, rate denominators, and
-alignment records against the committed transcript.
 
 `bun run check` runs Biome and the TypeScript compiler. `bun run build` checks the
 source, bundles `web/page.ts` as a browser IIFE in `transcripts/assets/page.js`,
@@ -205,21 +173,6 @@ After changing the frontend, rebuild it and run the export command below to
 update `data/index.html`. Reader assets and data remain inline in one HTML file;
 no frontend development server is required. Video uses YouTube and requires
 internet access through an HTTP(S) preview.
-
-To rebuild only the HTML from the committed reviewed transcript, without
-inference checkpoints:
-
-```bash
-bun run build
-uv run python - <<'PY'
-import json
-from pathlib import Path
-from transcripts.web import render_page
-
-artifact = json.loads(Path("data/transcript.json").read_text(encoding="utf-8"))
-render_page(artifact, Path("data"))
-PY
-```
 
 ### Model access
 
@@ -282,19 +235,6 @@ uv run ruff check transcripts tests
 uv run ruff format --check transcripts tests
 uv run ty check transcripts
 bun run check
-bun run test:web
 bun run build
 node --check transcripts/assets/page.js
 ```
-
-Run the browser checks with an isolated Playwright dependency:
-
-```bash
-uv run --no-project --with playwright python -m playwright install chromium
-uv run --no-project --with playwright python tests/check_web_browser.py
-```
-
-The browser check uses headless Chromium and blocks external requests. It checks
-tab keys, source evidence, calculator states, six viewport widths, empty data,
-and offline `file://` use. Screenshots stay in ignored
-`outputs/responsiveness-check/`. It does not verify live YouTube playback.
