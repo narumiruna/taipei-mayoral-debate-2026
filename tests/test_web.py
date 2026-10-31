@@ -127,7 +127,9 @@ def test_nested_output_embeds_only_whitelisted_data(tmp_path, artifact):
         "stage": "diarize",
     }
     assert payload["display_language"] == "zh-Hant-TW"
-    assert payload["roles"] == {"SPEAKER_00": {"role": "主持人", "name": "王小明"}}
+    assert payload["roles"] == {
+        "SPEAKER_00": {"role": "主持人", "name": "王小明", "organization": ""}
+    }
     assert payload["cues"] == [
         {key: value for key, value in artifact["cues"][0].items() if key != "words"}
     ]
@@ -151,6 +153,16 @@ def test_nested_output_embeds_only_whitelisted_data(tmp_path, artifact):
     }
     assert "PRIVATE_" not in html
     assert "/private/source.wav" not in html
+
+
+def test_page_preserves_speaker_organization(tmp_path, artifact):
+    artifact["roles"]["SPEAKER_00"]["organization"] = "TVBS"
+    artifact["cues"][0]["label"] = "王小明／TVBS"
+
+    page = PageParser(render_page(artifact, tmp_path).read_text(encoding="utf-8"))
+
+    assert page.payload()["roles"]["SPEAKER_00"]["organization"] == "TVBS"
+    assert page.payload()["cues"][0]["label"] == "王小明／TVBS"
 
 
 def test_malicious_text_round_trips_without_executable_markup(tmp_path, artifact):

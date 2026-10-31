@@ -21,7 +21,8 @@
   "roles": {
     "SPEAKER_00": {
       "role": "主持人2",
-      "name": "三立",
+      "name": "李文儀",
+      "organization": "三立",
       "evidence": [
         {
           "start": 866.265,
@@ -31,7 +32,8 @@
     },
     "SPEAKER_01": {
       "role": "提問記者2",
-      "name": "三立",
+      "name": "黃燕怡",
+      "organization": "三立",
       "evidence": [
         {
           "start": 6296.768,
@@ -45,7 +47,8 @@
     },
     "SPEAKER_02": {
       "role": "提問記者1",
-      "name": "TVBS",
+      "name": "樊啟明",
+      "organization": "TVBS",
       "evidence": [
         {
           "start": 5828.757,
@@ -83,7 +86,8 @@
     },
     "SPEAKER_05": {
       "role": "主持人1",
-      "name": "TVBS",
+      "name": "黃欣樺",
+      "organization": "TVBS",
       "evidence": [
         {
           "start": 854.632,
@@ -185647,7 +185651,7 @@
       "text": "歡迎收看由TVBS電視臺及三立電視共同聯合主辦的20",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1
     },
     {
@@ -185656,7 +185660,7 @@
       "text": "26臺北市長候選人電視辯論會。我是TVBS黃欣樺。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 2,
       "original_text": "26臺北市長候選人電視辯論會我是TVBS黃欣",
       "correction_id": "C226"
@@ -185667,7 +185671,7 @@
       "text": "我是三立電視李文儀。我們代表兩家電視臺，特別感謝兩位市長候選人",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 3,
       "original_text": "樺我是三立電視李文儀我們代表兩家電視臺特別感謝兩位市長候選人",
       "correction_id": "C227"
@@ -185678,7 +185682,7 @@
       "text": "接受邀約，讓臺北市的市民以及全國的觀眾得以透過兩位的政策辯",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 4,
       "original_text": "接受邀約讓臺北市的市民以及全國的觀眾得以透過兩位的政策辯",
       "correction_id": "P0004"
@@ -185689,7 +185693,7 @@
       "text": "論，一起來見證這一場理性的君子之爭。而今年的臺北市長",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 5,
       "original_text": "論一起來見證這一場理性的君子之爭而今年的臺北市長",
       "correction_id": "P0005"
@@ -185700,7 +185704,7 @@
       "text": "候選人一共有六位，未來臺北市選委會也將為六位候選人舉辦政見發表會，",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 6,
       "original_text": "候選人一共有六位未來臺北市選委會也將為六位候選人舉辦政見發表會",
       "correction_id": "P0006"
@@ -185711,7 +185715,7 @@
       "text": "讓每一位候選人得以暢所欲言。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 7,
       "original_text": "讓每一位候選人得以暢所欲言",
       "correction_id": "P0007"
@@ -185722,7 +185726,7 @@
       "text": "不過，由於種種條件的限制，今天我們的辯論會邀請到民調最高的兩位候選人",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 8,
       "original_text": "不過由於種種條件的限制今天我們的辯論會邀請到民調最高的兩位候選人",
       "correction_id": "P0008"
@@ -185733,7 +185737,7 @@
       "text": "與會，也請各位觀眾朋友見諒。那麼，一是介紹今天與會的候選",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 9,
       "original_text": "與會也請各位觀眾朋友見諒那麼一是介紹今天與會的候選",
       "correction_id": "P0009"
@@ -185744,7 +185748,7 @@
       "text": "人，分別是民進黨籍的沈伯洋先生，請跟大家打聲招呼。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 10,
       "original_text": "人分別是民進黨籍的沈薄洋先生請跟大家打聲招呼",
       "correction_id": "C001"
@@ -185766,7 +185770,7 @@
       "text": "歡迎國民黨籍的蔣萬安先生，請跟大家打聲招呼。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 12,
       "original_text": "歡迎國民黨籍的蔣萬先生請跟大家打聲招呼",
       "correction_id": "C003"
@@ -185788,7 +185792,7 @@
       "text": "歡迎，也麻煩兩位候選人移步到舞臺中央，進行君子之握",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 14,
       "original_text": "歡迎也麻煩兩位候選人一步到舞臺中央進行君子之臥",
       "correction_id": "C004"
@@ -185799,7 +185803,7 @@
       "text": "以及合影留念。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 15,
       "original_text": "以及合影留念",
       "correction_id": "P0015"
@@ -185810,7 +185814,7 @@
       "text": "好，現場的觀眾也請用掌聲一起見證這歷史性的一刻。而依照公平的原則，今",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 16,
       "original_text": "好現場的觀眾也請用掌聲一起見證這歷史性的一刻而依照公平的原則今",
       "correction_id": "P0016"
@@ -185821,7 +185825,7 @@
       "text": "天兩位候選人所佔的位置跟發言順序，都是由雙方陣營一起抽籤所產生。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 17,
       "original_text": "天兩位候選人所佔的位置跟發言順序都是由雙方陣營一起抽籤所產生",
       "correction_id": "P0017"
@@ -185832,7 +185836,7 @@
       "text": "再次感謝兩位。請兩位候選人先回到您原本的站位，謝謝。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 18,
       "original_text": "再次感謝兩位請兩位候選人先回到您原本的站位謝謝",
       "correction_id": "P0018"
@@ -185843,7 +185847,7 @@
       "text": "剛剛辯論會的現場響起如雷的掌聲，給予兩位候選人十足十的鼓勵了。也因此，",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 19,
       "original_text": "剛剛辯論會的現場響起如雷的掌聲給予兩位候選人十足十的鼓勵了也因此",
       "correction_id": "P0019"
@@ -185854,7 +185858,7 @@
       "text": "今天現場的應援貴賓們，也請大家待會辯論會進行過程當中，不鼓掌、",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 20,
       "original_text": "今天現場的應援貴賓們也請大家待會辯論會進行過程當中不鼓掌",
       "correction_id": "P0020"
@@ -185865,7 +185869,7 @@
       "text": "不發出聲響，並且禁止手機拍照、錄影。也請您將行動電話、通訊",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 21,
       "original_text": "不發出聲響並且禁止手機拍照錄影也請您將行動電話通訊",
       "correction_id": "P0021"
@@ -185876,7 +185880,7 @@
       "text": "設備關機或關靜音。如果辯論過程當中發出聲響，影響到辯論會，那麼",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 22,
       "original_text": "設備關機或關靜音如果辯論過程當中發出聲響影響到辯論會那麼",
       "correction_id": "P0022"
@@ -185887,7 +185891,7 @@
       "text": "您所支持的候選人會扣除節電結論時間30秒鐘。同",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 23,
       "original_text": "您所支持的候選人會扣除節電結論時間30秒鐘同",
       "correction_id": "P0023"
@@ -185898,7 +185902,7 @@
       "text": "時，為了保證辯論會的公平公正，我們的工作人員會嚴格執行",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 24,
       "original_text": "時為了保證辯論會的公平公正我們的工作人員會嚴格執行",
       "correction_id": "P0024"
@@ -185909,7 +185913,7 @@
       "text": "規則。如果有貴賓違規干擾到辯論會的進行，我們會立刻請工作人員",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 25,
       "original_text": "規則如果有貴賓違規干擾到辯論會的進行我們會立刻請工作人員",
       "correction_id": "P0025"
@@ -185920,7 +185924,7 @@
       "text": "請離該名貴賓。那麼，該名貴賓所支持的候選人結論時間，也會扣",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 26,
       "original_text": "請離該名貴賓那麼該名貴賓所支持的候選人結論時間也會扣",
       "correction_id": "P0026"
@@ -185931,7 +185935,7 @@
       "text": "除掉處理這段干擾時間所耗時的。那麼，今天的辯論會進",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 27,
       "original_text": "除掉處理這段干擾時間所耗時的那麼今天的辯論會進",
       "correction_id": "P0027"
@@ -185942,7 +185946,7 @@
       "text": "行兩個小時，總共四個階段，首先是候選人申論、交",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 28,
       "original_text": "行兩個小時總共四個階段首先是候選人聲論交",
       "correction_id": "C005"
@@ -185953,7 +185957,7 @@
       "text": "叉詰問、媒體提問以及各自的結論。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 29,
       "original_text": "叉結問媒體提問以及各自的結論",
       "correction_id": "C006"
@@ -185964,7 +185968,7 @@
       "text": "同時，我們今天的辯論會將全程計時。提醒兩位候選人，當您的發言時間進入了",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 30,
       "original_text": "同時我們今天的辯論會將全程計時提醒兩位候選人當您的發言時間進入了",
       "correction_id": "P0030"
@@ -185975,7 +185979,7 @@
       "text": "倒數一分鐘的時候，我們會響起一聲的鈴聲提醒；如果進入",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 31,
       "original_text": "倒數一分鐘的時候我們會響起一聲的鈴聲提醒如果進入",
       "correction_id": "P0031"
@@ -185986,7 +185990,7 @@
       "text": "倒數30秒，我們會有兩聲的鈴聲提醒。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 32,
       "original_text": "倒數30秒我們會有兩聲的鈴聲提醒",
       "correction_id": "P0032"
@@ -185997,7 +186001,7 @@
       "text": "如果您的發言時間已經終止，我們會讓您前方的麥克風直接消",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 33,
       "original_text": "如果您的發言時間已經終止我們會讓您前方的麥克風直接消",
       "correction_id": "P0033"
@@ -186008,7 +186012,7 @@
       "text": "音，提醒兩位要格外注意。同時，今天的辯論會正式開始。第一階",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 34,
       "original_text": "音提醒兩位要格外注意同時今天的辯論會正式開始第一階",
       "correction_id": "P0034"
@@ -186019,7 +186023,7 @@
       "text": "段的申論時間，依照之前抽籤的順序，我們要請沈伯洋先生先行進",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 35,
       "original_text": "段的深論時間依照之前抽籤的順序我們要請沈伯揚先生先行進",
       "correction_id": "C007"
@@ -186030,7 +186034,7 @@
       "text": "行申論。申論時間8分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 36,
       "original_text": "行深論深論時間8分鐘請開始",
       "correction_id": "C008"
@@ -186965,7 +186969,7 @@
       "text": "謝謝沈伯洋先生。接下來是由蔣萬安先生進行8分鐘的申論。計時",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 121,
       "original_text": "謝謝沈博洋先生接下來是由蔣萬先生進行8分鐘的聲論計時",
       "correction_id": "C019"
@@ -186976,7 +186980,7 @@
       "text": "請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 122,
       "original_text": "請開始",
       "correction_id": "P0122"
@@ -187931,7 +187935,7 @@
       "text": "好，謝謝蔣萬安先生。以上就是兩位候選人對於臺北市的政見理念。不過接下",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 209,
       "original_text": "好謝謝蔣安先生以上就是兩位候選人對於臺北市的政見理念不過接下",
       "correction_id": "C031"
@@ -187942,7 +187946,7 @@
       "text": "來，我們要休息五分鐘，廣告之後回來，要進入下一階段的交叉詰問時間。馬",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 210,
       "original_text": "來我們要休息五分鐘廣告之後回來要進入下一階段的交叉結論時間馬",
       "correction_id": "C032"
@@ -187953,7 +187957,7 @@
       "text": "上回來。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 211,
       "original_text": "上回來",
       "correction_id": "P0211"
@@ -187964,7 +187968,7 @@
       "text": "歡迎回到由三立電視跟TVBS電視臺所共同主辦的2026臺北市長候",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 212
     },
     {
@@ -187973,7 +187977,7 @@
       "text": "選人電視辯論會。在經過剛剛的第一階段申論之後，接下來",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 213,
       "original_text": "選人電視辯論會在經過剛剛的第一階段深論之後接下來",
       "correction_id": "C033"
@@ -187984,7 +187988,7 @@
       "text": "緊接著要進行的是第二階段，也就是四輪的候選人交叉詰問。而進",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 214,
       "original_text": "緊接著要進行的是第二階段也就是四輪的候選人交叉解問而進",
       "correction_id": "C034"
@@ -187995,7 +187999,7 @@
       "text": "行的方式是由提問人先行提問一分鐘，由對手可以回答兩分鐘，",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 215,
       "original_text": "行的方式是由提問人先行提問一分鐘由對手可以回答兩分鐘",
       "correction_id": "P0215"
@@ -188006,7 +188010,7 @@
       "text": "而提問人可以再追問一分鐘，而對手可以回答一分半。按照先前抽籤的",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 216,
       "original_text": "而提問人可以再追問一分鐘而對手可以回答一分半按照先前抽籤的",
       "correction_id": "P0216"
@@ -188017,7 +188021,7 @@
       "text": "順序,我要請蔣萬安先生先行來提問,由沈伯洋先生來回答。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 217,
       "original_text": "順序,我要請蔣安先生先行來提問,由沈伯揚先生來回答。",
       "correction_id": "C035"
@@ -188028,7 +188032,7 @@
       "text": "蔣萬安先生,提問時間一分鐘,請開始",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 218,
       "original_text": "蔣安先生,提問時間一分鐘,請開始",
       "correction_id": "C036"
@@ -188169,7 +188173,7 @@
       "text": "好，謝謝蔣萬安先生的提問。請沈伯洋先生回答，回答時間兩分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 231,
       "original_text": "好謝謝蔣文先生的提問請沈博洋先生回答回答時間兩分鐘請開始",
       "correction_id": "C042"
@@ -188411,7 +188415,7 @@
       "text": "好，蔣萬安先生可再追問一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 253,
       "original_text": "好蔣萬安先生可再追問一分鐘請開始",
       "correction_id": "P0253"
@@ -188532,7 +188536,7 @@
       "text": "度？接下來請沈伯洋先生回答，時間一分半，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 264,
       "original_text": "度接下來請沈伯陽先生回答時間一分半請開始",
       "correction_id": "C049"
@@ -188730,7 +188734,7 @@
       "text": "接下來是由沈伯洋先生提問，蔣萬安先生回答，提問時間一分鐘。沈伯洋先生，請",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 282,
       "original_text": "接下來是由沈伯揚先生提問講完先生回答提問時間一分鐘沈伯揚先生請",
       "correction_id": "C051"
@@ -188741,7 +188745,7 @@
       "text": "開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 283,
       "original_text": "開始",
       "correction_id": "P0283"
@@ -188871,7 +188875,7 @@
       "text": "席。謝謝沈伯洋先生的提問，請蔣萬安先生回",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 295,
       "original_text": "席謝謝沈伯揚先生的提問請蔣萬先生回",
       "correction_id": "C055"
@@ -188882,7 +188886,7 @@
       "text": "答，回答時間兩分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 296,
       "original_text": "答回答時間兩分鐘請開始",
       "correction_id": "P0296"
@@ -189124,7 +189128,7 @@
       "text": "沈伯洋先生，再追問一分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 318,
       "original_text": "沈博洋先生再追問一分鐘請開始",
       "correction_id": "C058"
@@ -189256,7 +189260,7 @@
       "text": "蔣萬安先生，回答時間1分半，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 330,
       "original_text": "講完先生回答時間1分半請開始",
       "correction_id": "C062"
@@ -189443,7 +189447,7 @@
       "text": "好，兩位都提問一輪了，現在要進入第二輪的交叉詰問。而接下來，請蔣萬安先生",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 347,
       "original_text": "好兩位都提問一輪了現在要進入第二輪的交叉節問而接下來請蔣岸先生",
       "correction_id": "C069"
@@ -189454,7 +189458,7 @@
       "text": "向沈伯洋先生提問，時間一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 348,
       "original_text": "向沈博洋先生提問時間一分鐘請開始",
       "correction_id": "C070"
@@ -189584,7 +189588,7 @@
       "text": "蔣萬安先生的提問，請沈伯洋先生回答，時間兩分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 360,
       "original_text": "蔣萬安先生的提問請沈博洋先生回答時間兩分鐘請開始",
       "correction_id": "C075"
@@ -189837,7 +189841,7 @@
       "text": "接。好，蔣萬安先生再追問一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 383,
       "original_text": "接好蔣萬安先生再追問一分鐘請開始",
       "correction_id": "P0383"
@@ -189969,7 +189973,7 @@
       "text": "繼續請沈伯洋先生回答，時間一分半，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 395,
       "original_text": "繼續請沈鵬洋先生回答時間一分半請開始",
       "correction_id": "C085"
@@ -190156,7 +190160,7 @@
       "text": "謝。接下來由沈伯洋先生提問，蔣萬安先生回答，提問時間一分鐘。沈伯洋先",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 412,
       "original_text": "謝接下來由沈伯揚先生提問蔣萬先生回答提問時間一分鐘沈伯揚先",
       "correction_id": "C087"
@@ -190167,7 +190171,7 @@
       "text": "生，請開",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 413,
       "original_text": "生請開",
       "correction_id": "P0413"
@@ -190319,7 +190323,7 @@
       "text": "很",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 427
     },
     {
@@ -190559,7 +190563,7 @@
       "text": "的。沈伯洋湘西嵐，請繼續追問，時間一分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 449,
       "original_text": "的沈博焱湘西嵐請繼續追問時間一分鐘請開始",
       "correction_id": "C098"
@@ -190691,7 +190695,7 @@
       "text": "明？接下來蔣萬安先生進行回答，時間一分半，請開",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 461,
       "original_text": "明接下來蔣官先生進行回答時間一分半請開",
       "correction_id": "C100"
@@ -190702,7 +190706,7 @@
       "text": "始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 462,
       "original_text": "始",
       "correction_id": "P0462"
@@ -190889,7 +190893,7 @@
       "text": "關。謝謝兩位候選人激烈的攻防，我們先休息五分鐘，待會會進行",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 479,
       "original_text": "關謝謝兩位候選人激烈的攻防我們先休息五分鐘待會會進行",
       "correction_id": "P0479"
@@ -190900,7 +190904,7 @@
       "text": "第二階段的交叉詰問。休息一下，馬上回來。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 480,
       "original_text": "第二階段的交叉解問休息一下馬上回來",
       "correction_id": "C107"
@@ -190911,7 +190915,7 @@
       "text": "歡迎回到2026臺北市長候選人電視辯論會，繼續進行第三輪的交叉詰問。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 481,
       "original_text": "歡迎回到2026臺北市長候選人電視辯論會繼續進行第三輪的交叉解問",
       "correction_id": "C108"
@@ -190922,7 +190926,7 @@
       "text": "按照之前抽籤順序，我們要請蔣萬安先生先行提問，由沈伯洋先生來回",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 482,
       "original_text": "按照之前抽籤順序我們要請蔣萬安先生先行提問由沈伯陽先生來回",
       "correction_id": "C109"
@@ -190933,7 +190937,7 @@
       "text": "答。蔣萬安先生提問時間一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 483,
       "original_text": "答蔣萬安先生提問時間一分鐘請開始",
       "correction_id": "P0483"
@@ -191065,7 +191069,7 @@
       "text": "繼續請沈伯洋先生回答，時間兩分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 495,
       "original_text": "繼續請沈博洋先生回答時間兩分鐘請開始",
       "correction_id": "C112"
@@ -191307,7 +191311,7 @@
       "text": "蔣萬安先生，請再追問一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 517,
       "original_text": "蔣萬先生請再追問一分鐘請開始",
       "correction_id": "C116"
@@ -191428,7 +191432,7 @@
       "text": "接下來請沈伯洋先生回答，時間一分半，請開",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 528,
       "original_text": "接下來請沈博洋先生回答時間一分半請開",
       "correction_id": "C123"
@@ -191615,7 +191619,7 @@
       "text": "的。現在由沈伯洋先生提問，蔣萬安先生回答，提問時間一分鐘，沈伯",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 545,
       "original_text": "的現在由沈博洋先生提問講完先生回答提問時間一分鐘沈博",
       "correction_id": "C129"
@@ -191626,7 +191630,7 @@
       "text": "洋先生，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 546,
       "original_text": "洋先生請開始",
       "correction_id": "P0546"
@@ -191758,7 +191762,7 @@
       "text": "麼？蔣萬安先生回答時間兩分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 558,
       "original_text": "麼蔣旺先生回答時間兩分鐘請開始",
       "correction_id": "C132"
@@ -192020,7 +192024,7 @@
       "text": "長。沈伯洋先生追問一分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 582,
       "original_text": "長沈博洋先生追問一分鐘請開始",
       "correction_id": "C138"
@@ -192152,7 +192156,7 @@
       "text": "裡？蔣萬安先生的回答一分半，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 594,
       "original_text": "裡蔣娃先生的回答一分半請開始",
       "correction_id": "C140"
@@ -192339,7 +192343,7 @@
       "text": "繼續第四輪的交叉詰問，將由蔣萬安先生提問，由沈伯洋先生回答。蔣萬安先",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 611,
       "original_text": "繼續第四輪的交叉結論將由蔣萬安先生提問由沈博洋先生回答蔣萬安先",
       "correction_id": "C143"
@@ -192350,7 +192354,7 @@
       "text": "生提問時間一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 612,
       "original_text": "生提問時間一分鐘請開始",
       "correction_id": "P0612"
@@ -192482,7 +192486,7 @@
       "text": "接下來請沈伯洋先生回答，時間兩分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 624,
       "original_text": "接下來請沈北洋先生回答時間兩分鐘請開始",
       "correction_id": "C147"
@@ -192735,7 +192739,7 @@
       "text": "好，蔣萬安先生再追問一分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 647,
       "original_text": "好蔣萬安先生再追問一分鐘請開始",
       "correction_id": "P0647"
@@ -192865,7 +192869,7 @@
       "text": "呢？接下來請沈伯洋先生回答，時間一分半，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 659,
       "original_text": "呢接下來請沈伯揚先生回答時間一分半請開始",
       "correction_id": "C157"
@@ -193052,7 +193056,7 @@
       "text": "謝。接下來由沈伯洋先生提問，蔣萬安先生回答，提問時間一分鐘。沈伯洋先生，請開",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 676,
       "original_text": "謝接下來由沈博洋先生提問蔣安先生回答提問時間一分鐘沈博洋先生請開",
       "correction_id": "C161"
@@ -193063,7 +193067,7 @@
       "text": "始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 677,
       "original_text": "始",
       "correction_id": "P0677"
@@ -193182,7 +193186,7 @@
       "text": "案。請蔣萬安先生回答，回答時間兩分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 688,
       "original_text": "案請蔣蛙先生回答回答時間兩分鐘請開始",
       "correction_id": "C163"
@@ -193424,7 +193428,7 @@
       "text": "題。那麼沈伯洋先生再追問一分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 710,
       "original_text": "題那麼沈博洋先生再追問一分鐘請開始",
       "correction_id": "C168"
@@ -193556,7 +193560,7 @@
       "text": "以。蔣萬安先生回答時間一分半，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 722,
       "original_text": "以蔣安先生回答時間一分半請開始",
       "correction_id": "C170"
@@ -193743,7 +193747,7 @@
       "text": "好，謝謝兩位候選人這一階段激烈的攻防。而稍後有更多臺北市民關心的議",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 739,
       "original_text": "好謝謝兩位候選人這一階段激烈的攻防而稍後有更多臺北市民關心的議",
       "correction_id": "P0739"
@@ -193754,7 +193758,7 @@
       "text": "題，將有兩位媒體代表來提問。我們休息一下，馬上回來。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 740,
       "original_text": "題將有兩位媒體代表來提問我們休息一下馬上回來",
       "correction_id": "P0740"
@@ -193765,7 +193769,7 @@
       "text": "歡迎回到2026臺北市長候選人電視辯論會。我們即將進行的是媒體提",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 741,
       "original_text": "歡迎回到2026臺北市長候選人電視辯論會我們即將進行的是媒體提",
       "correction_id": "P0741"
@@ -193776,7 +193780,7 @@
       "text": "問時間，有兩位媒體人提問，提問時間兩分鐘。那麼提問代表",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 742,
       "original_text": "問時間有兩位媒體人提問提問時間兩分鐘那麼提問代表",
       "correction_id": "P0742"
@@ -193787,7 +193791,7 @@
       "text": "是TVBS新聞部副理樊啟明先生，你好，以及三立新聞",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 743,
       "original_text": "是TVBS新聞部副理樊醒銘先生你好以及三立新聞",
       "correction_id": "C176"
@@ -193798,7 +193802,7 @@
       "text": "網資深總監黃映穎女士，你好。目前兩位候選人針對",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 744,
       "original_text": "網資深總監黃映穎女士你好目前兩位候選人針對",
       "correction_id": "P0744"
@@ -193809,7 +193813,7 @@
       "text": "問題有三分鐘的回答時間，請TVBS新聞部副理樊啟明先生先提",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 745,
       "original_text": "問題有三分鐘的回答時間請TVBS新聞部副理樊醒銘先生先提",
       "correction_id": "C177"
@@ -193820,7 +193824,7 @@
       "text": "問，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 746,
       "original_text": "問請開始",
       "correction_id": "P0746"
@@ -193831,7 +193835,7 @@
       "text": "兩位候選人好，各位觀眾大家好，我是TVBS新聞部副理樊啟明。我想把問題",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 747,
       "original_text": "兩位候選人好各位觀眾大家好我是TVBS新聞部副理樊啟明我想把問題",
       "correction_id": "P0747"
@@ -193842,7 +193846,7 @@
       "text": "拉回到臺北市民日常的生活當中。我是一個電視臺的記者，我們非常重視的就",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 748,
       "original_text": "拉回到臺北市民日常的生活當中我是一個電視臺的記者我們非常重視的就",
       "correction_id": "P0748"
@@ -193853,7 +193857,7 @@
       "text": "是畫面。我想請兩位跟我一起設定一個場景，有一個臺北市民，他每天",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 749,
       "original_text": "是畫面我想請兩位跟我一起設定一個場景有一個臺北市民他每天",
       "correction_id": "P0749"
@@ -193864,7 +193868,7 @@
       "text": "都需要通勤上班，而他工作的地點很可能是在內湖科學園區，或",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 750,
       "original_text": "都需要通勤上班而他工作的地點很可能是在內湖科學園區或",
       "correction_id": "P0750"
@@ -193875,7 +193879,7 @@
       "text": "是北市科未來的輝達總部。他還有小孩要上學，他有托育的需",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 751,
       "original_text": "是北市科未來的輝達總部他還有小孩要上學他有托育的需",
       "correction_id": "P0751"
@@ -193886,7 +193890,7 @@
       "text": "求，另外家裡面可能有一些長輩需要照顧。我的問題是，是不是可以請兩",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 752,
       "original_text": "求另外家裡面可能有一些長輩需要照顧我的問題是是不是可以請兩",
       "correction_id": "P0752"
@@ -193897,7 +193901,7 @@
       "text": "位，可以用很具體的方式來描述這個臺北市民，從他每天早上出門的那一刻",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 753,
       "original_text": "位可以用很具體的方式來描述這個臺北市民從他每天早上出門的那一刻",
       "correction_id": "P0753"
@@ -193908,7 +193912,7 @@
       "text": "開始，四年之後的這一天，他的生活會出現什麼樣子的改變？他通",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 754,
       "original_text": "開始四年之後的這一天他的生活會出現什麼樣子的改變他通",
       "correction_id": "P0754"
@@ -193919,7 +193923,7 @@
       "text": "勤到內湖或是北市科，有沒有新的選擇？會不會更方便？會不會更安全？",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 755,
       "original_text": "勤到內湖或是北市科有沒有新的選擇會不會更方便會不會更安全",
       "correction_id": "P0755"
@@ -193930,7 +193934,7 @@
       "text": "另外，他要送小朋友到學校、到託嬰中心、到幼兒園，會不會更放心？要照顧",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 756,
       "original_text": "另外他要送小朋友到學校到託嬰中心到幼兒園會不會更放心要照顧",
       "correction_id": "P0756"
@@ -193941,7 +193945,7 @@
       "text": "家中的長輩，非常非常的辛苦，他可以獲得臺北市政府，有沒有更多的一些實際",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 757,
       "original_text": "家中的長輩非常非常的辛苦他可以獲得臺北市政府有沒有更多的一些實際",
       "correction_id": "P0757"
@@ -193952,7 +193956,7 @@
       "text": "的支援？另外，到了假日，臺北市有沒有多出一些新的地方，讓他可以出去走一",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 758,
       "original_text": "的支援另外到了假日臺北市有沒有多出一些新的地方讓他可以出去走一",
       "correction_id": "P0758"
@@ -193963,7 +193967,7 @@
       "text": "走，可以放鬆心情，可以好好的休息",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 759,
       "original_text": "走可以放鬆心情可以好好的休息",
       "correction_id": "P0759"
@@ -193985,7 +193989,7 @@
       "text": "我們知道智慧城市、科技廊帶，或是宜居城市，這些宏觀的願景是非常讓",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 761,
       "original_text": "我們知道智慧城市科技廊帶或是宜居城市這些宏觀的願景是非常讓",
       "correction_id": "P0761"
@@ -193996,7 +194000,7 @@
       "text": "人嚮往，可是臺北市民應該會更關心他們每天的日常生",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 762,
       "original_text": "人嚮往可是臺北市民應該會更關心他們每天的日常生",
       "correction_id": "P0762"
@@ -194007,7 +194011,7 @@
       "text": "活，會不會因為兩位帶領的臺北市，而出現不同的改變、不同的調",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 763,
       "original_text": "活會不會因為兩位帶領的臺北市而出現不同的改變不同的調",
       "correction_id": "P0763"
@@ -194018,7 +194022,7 @@
       "text": "整、不同的進步？",
       "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "提問記者1／TVBS",
+      "label": "樊啟明／TVBS",
       "id": 764,
       "original_text": "整不同的進步",
       "correction_id": "P0764"
@@ -194029,7 +194033,7 @@
       "text": "按照抽籤順序，我們請蔣萬安先生回答，時間三分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 765,
       "original_text": "按照抽籤順序我們請蔣萬先生回答時間三分鐘請開始",
       "correction_id": "C178"
@@ -194412,7 +194416,7 @@
       "text": "發。同樣的問題，再請沈伯洋先生回答，回答時間3分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 800,
       "original_text": "發同樣的問題再請沈伯陽先生回答回答時間3分鐘請開始",
       "correction_id": "C184"
@@ -194775,7 +194779,7 @@
       "text": "好，繼續第二位媒體代表，是由三立新聞網資深總監黃燕怡女士提問。同樣，兩位",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 833,
       "original_text": "好繼續第二位媒體代表是由三立新聞網資深總監黃燕怡女士提問同樣兩位",
       "correction_id": "P0833"
@@ -194786,7 +194790,7 @@
       "text": "候選人各有三分鐘時間回答。請黃燕怡女士提問，提問時間兩分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 834,
       "original_text": "候選人各有三分鐘時間回答請黃燕怡女士提問提問時間兩分鐘請開始",
       "correction_id": "P0834"
@@ -194797,7 +194801,7 @@
       "text": "大家好，我代表三立電視提問。我想要觸及一個大家都能夠認同很迫切，但卻也",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 835,
       "original_text": "大家好我代表三立電視提問我想要觸及一個大家都能夠認同很迫切但卻也",
       "correction_id": "P0835"
@@ -194808,7 +194812,7 @@
       "text": "很艱困的一個話題，就是都更。因為臺北市面臨人口和建築雙重老化的問",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 836,
       "original_text": "很艱困的一個話題就是都更因為臺北市面臨人口和建築雙重老化的問",
       "correction_id": "P0836"
@@ -194819,7 +194823,7 @@
       "text": "題，很多老舊住宅其實面臨很高的耐震風險，卻也常有產",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 837,
       "original_text": "題很多老舊住宅其實面臨很高的耐震風險卻也常有產",
       "correction_id": "P0837"
@@ -194830,7 +194834,7 @@
       "text": "權整合程序冗長各種的問題。以目前的更新進度，請問有沒有",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 838,
       "original_text": "權整合程序冗長各種的問題以目前的更新進度請問有沒有",
       "correction_id": "P0838"
@@ -194841,7 +194845,7 @@
       "text": "辦法再加速？我們知道，現行的制度其實是誰先整合成功，誰就可以先都更，但是",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 839,
       "original_text": "辦法再加速我們知道現行的制度其實是誰先整合成功誰就可以先都更但是",
       "correction_id": "P0839"
@@ -194852,7 +194856,7 @@
       "text": "高風險很多的住宅其實可能會陷入漫長的等待。那我們也知道，現在老屋健檢",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 840,
       "original_text": "高風險很多的住宅其實可能會陷入漫長的等待那我們也知道現在老屋漸減",
       "correction_id": "C193"
@@ -194863,7 +194867,7 @@
       "text": "幾乎也都是靠住戶自己自願去辦理。我想要問一",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 841,
       "original_text": "幾乎也都是靠住戶自己自願去辦理我想要問一",
       "correction_id": "P0841"
@@ -194874,7 +194878,7 @@
       "text": "下，就是說，同樣我們來看看位於地震帶的大城市，像東京和洛杉",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 842,
       "original_text": "下就是說同樣我們來看看位於地震帶的大城市像東京和洛杉",
       "correction_id": "P0842"
@@ -194885,7 +194889,7 @@
       "text": "磯，其實他們政府是有機制去推動，就是強制的去介入清查特",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 843,
       "original_text": "磯其實他們政府是有機制去推動就是強制的去介入清查特",
       "correction_id": "P0843"
@@ -194896,7 +194900,7 @@
       "text": "定高風險的建築，並且公開資訊，還推動補強的措施。我想要請問兩位候選",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 844,
       "original_text": "定高風險的建築並且公開資訊還推動補強的措施我想要請問兩位候選",
       "correction_id": "P0844"
@@ -194907,7 +194911,7 @@
       "text": "人，在現行的法定之下，你認為臺北的都更現在面臨到最艱困的",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 845,
       "original_text": "人在現行的法定之下你認為臺北的都更現在面臨到最艱困的",
       "correction_id": "P0845"
@@ -194918,7 +194922,7 @@
       "text": "要突破的障礙是什麼？那在國際經驗當中，包括主動的清查，包括公開資",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 846,
       "original_text": "要突破的障礙是什麼那在國際經驗當中包括主動的清查包括公開資",
       "correction_id": "P0846"
@@ -194929,7 +194933,7 @@
       "text": "訊或其他的做法，有沒有適合我們借鏡的地方？另外，如果高風險的住",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 847,
       "original_text": "訊或其他的做法有沒有適合我們借鏡的地方另外如果高風險的住",
       "correction_id": "P0847"
@@ -194940,7 +194944,7 @@
       "text": "戶長期談不攏的話，是否將如何更積極、更快速的主動的介入，同時",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 848,
       "original_text": "戶長期談不攏的話是否將如何更積極更快速的主動的介入同時",
       "correction_id": "P0848"
@@ -194951,7 +194955,7 @@
       "text": "兼顧公安和住戶的權益？最後，我想要請兩位的候選人以市長的高度",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 849,
       "original_text": "兼顧公安和住戶的權益最後我想要請兩位的候選人以市長的高度",
       "correction_id": "P0849"
@@ -194962,7 +194966,7 @@
       "text": "告訴國人，在地震和極端氣候複合性衝擊的威脅之下，",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 850,
       "original_text": "告訴國人在地震和極端氣候複合性衝擊的威脅之下",
       "correction_id": "P0850"
@@ -194973,7 +194977,7 @@
       "text": "你對首都居住韌性的願景。",
       "speaker": "SPEAKER_01",
       "timing": "aligned",
-      "label": "提問記者2／三立",
+      "label": "黃燕怡／三立",
       "id": 851,
       "original_text": "你對首都居住任性的願景",
       "correction_id": "C194"
@@ -194984,7 +194988,7 @@
       "text": "謝謝。好，我們先請沈伯洋先生回答，時間三分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 852,
       "original_text": "謝謝好我們先請沈博洋先生回答時間三分鐘請開始",
       "correction_id": "C195"
@@ -195358,7 +195362,7 @@
       "text": "我們再請蔣萬安先生回答，時間三分鐘，請開始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 886,
       "original_text": "我們再請蔣安先生回答時間三分鐘請開始",
       "correction_id": "C200"
@@ -195710,7 +195714,7 @@
       "text": "好，謝謝兩位提問的媒體代表，也謝謝兩位候選人的回應。而接下來，我們要進入",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 918,
       "original_text": "好謝謝兩位提問的媒體代表也謝謝兩位候選人的回應而接下來我們要進入",
       "correction_id": "P0918"
@@ -195721,7 +195725,7 @@
       "text": "最後也是最重要的結論時間。我們休息一下，馬上回來。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 919,
       "original_text": "最後也是最重要的結論時間我們休息一下馬上回來",
       "correction_id": "P0919"
@@ -195732,7 +195736,7 @@
       "text": "歡迎回到2026臺北市長候選人電視辯論會。而接下來，辯論會要進入最",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 920,
       "original_text": "歡迎回到2026臺北市長候選人電視辯論會而接下來辯論會要進入最",
       "correction_id": "P0920"
@@ -195743,7 +195747,7 @@
       "text": "壓軸的結論時間，兩位候選人將各有6分鐘的時間來進行",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 921,
       "original_text": "壓軸的結論時間兩位候選人將各有6分鐘的時間來進行",
       "correction_id": "P0921"
@@ -195754,7 +195758,7 @@
       "text": "最關鍵的壓軸總結。而按照抽籤順序，我們要請蔣萬安先生",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 922,
       "original_text": "最關鍵的壓軸總結而按照抽籤順序我們要請蔣萬安先生",
       "correction_id": "P0922"
@@ -195765,7 +195769,7 @@
       "text": "先行做結論，時間6分鐘，請開始。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 923,
       "original_text": "先行做結論時間6分鐘請開始",
       "correction_id": "P0923"
@@ -196507,7 +196511,7 @@
       "text": "謝謝蔣萬安先生。接下來我們請沈伯洋先生進行結論，結論時間6分鐘，請開",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 991,
       "original_text": "謝謝蔣萬安先生接下來我們請沈伯陽先生進行結論結論時間6分鐘請開",
       "correction_id": "C214"
@@ -196518,7 +196522,7 @@
       "text": "始。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 992,
       "original_text": "始",
       "correction_id": "P0992"
@@ -197331,7 +197335,7 @@
       "text": "做。謝謝兩位候選人有如此精彩的表現，那麼我們先休息一下，馬上回來。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1067,
       "original_text": "做謝謝兩位候選人有如此精彩的表現那麼我們先休息一下馬上回來",
       "correction_id": "P1067"
@@ -197342,7 +197346,7 @@
       "text": "歡迎回到2026臺北市長候選人電視辯論會。稍早之前，我們看到臺上兩位",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1068,
       "original_text": "歡迎回到2026臺北市長候選人電視辯論會稍早之前我們看到臺上兩位",
       "correction_id": "P1068"
@@ -197353,7 +197357,7 @@
       "text": "的候選人都完成了今天辯論會的四個階段，包括了申論、交叉詰問",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1069,
       "original_text": "的候選人都完成了今天辯論會的四個階段包括了深論、交叉結問",
       "correction_id": "C223"
@@ -197364,7 +197368,7 @@
       "text": "、媒體提問以及結論時間，也象徵今天的臺北市長候選人電視",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1070,
       "original_text": "、媒體提問以及結論時間也象徵今天的臺北市長候選人電視",
       "correction_id": "P1070"
@@ -197375,7 +197379,7 @@
       "text": "辯論會在此畫下了完美的句點。而再次感謝臺上兩位候選人的參",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1071,
       "original_text": "辯論會在此畫下了完美的句點而再次感謝臺上兩位候選人的參",
       "correction_id": "P1071"
@@ -197386,7 +197390,7 @@
       "text": "與，讓選民能夠看到候選人負責任的態度，以及民主的精神。",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1072,
       "original_text": "與讓選民能夠看到候選人負責人的態度以及民主的精神",
       "correction_id": "C224"
@@ -197397,7 +197401,7 @@
       "text": "而最後，我們再請臺上兩位再度來到舞臺中央握手合影，也請臺下的",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1073,
       "original_text": "而最後我們再請臺上兩位再度來到舞臺中央握手合影也請臺下的",
       "correction_id": "P1073"
@@ -197408,7 +197412,7 @@
       "text": "貴賓可以用掌聲一起來參與，為這一場君子之爭畫下完美",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1074,
       "original_text": "貴賓可以用掌聲一起來參與為這一場君子之爭畫下完美",
       "correction_id": "P1074"
@@ -197419,7 +197423,7 @@
       "text": "的",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1075
     },
     {
@@ -197437,7 +197441,7 @@
       "text": "點。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1077,
       "original_text": "點",
       "correction_id": "P1077"
@@ -197448,7 +197452,7 @@
       "text": "謝",
       "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "主持人2／三立",
+      "label": "李文儀／三立",
       "id": 1078
     },
     {
@@ -197457,7 +197461,7 @@
       "text": "謝兩位參與的候選人。相信經由今天這場辯論會，所有關心臺北",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1079,
       "original_text": "謝兩位參與的候選人相信經由今天這場辯論會所有關心臺北",
       "correction_id": "P1079"
@@ -197468,7 +197472,7 @@
       "text": "市政的觀眾朋友心中更有定見了。也請別忘了，11月28號投向",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1080,
       "original_text": "市政的觀眾朋友心中更有並見了也請別忘了11月28號投向",
       "correction_id": "C225"
@@ -197479,7 +197483,7 @@
       "text": "您神聖的一票。我們在此預祝兩位臺北市長候選人順利成功。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1081,
       "original_text": "您神聖的一票我們在此預祝兩位臺北市長候選人順利成功",
       "correction_id": "P1081"
@@ -197490,7 +197494,7 @@
       "text": "感謝您的收看，我們再會。",
       "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "主持人1／TVBS",
+      "label": "黃欣樺／TVBS",
       "id": 1082,
       "original_text": "感謝您的收看我們再會",
       "correction_id": "P1082"

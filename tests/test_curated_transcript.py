@@ -21,13 +21,26 @@ def artifact():
 
 @pytest.mark.parametrize(
     ("speaker", "label"),
-    [("SPEAKER_03", "沈伯洋"), ("SPEAKER_04", "蔣萬安")],
+    [
+        ("SPEAKER_03", "沈伯洋"),
+        ("SPEAKER_04", "蔣萬安"),
+        ("SPEAKER_05", "黃欣樺／TVBS"),
+        ("SPEAKER_00", "李文儀／三立"),
+        ("SPEAKER_02", "樊啟明／TVBS"),
+        ("SPEAKER_01", "黃燕怡／三立"),
+    ],
 )
-def test_debater_labels_use_only_names(artifact, speaker, label):
+def test_speaker_display_labels(artifact, speaker, label):
     cues = [cue for cue in artifact["cues"] if cue["speaker"] == speaker]
 
     assert cues
     assert all(cue["label"] == label for cue in cues)
+
+
+def test_curated_roles_match_role_map(artifact):
+    roles = json.loads((DATA / "speaker-roles.json").read_text(encoding="utf-8"))
+
+    assert artifact["roles"] == roles
 
 
 def test_host_name_stays_with_tvbs_speaker(artifact):

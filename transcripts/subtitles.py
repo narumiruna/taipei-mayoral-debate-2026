@@ -34,10 +34,13 @@ def validate_roles(roles: dict, speakers: set[str]) -> None:
             or not entry.get("evidence")
         ):
             raise ValueError(f"Role {speaker} requires role and evidence fields.")
-        if not isinstance(entry["role"], str) or not isinstance(
-            entry.get("name", ""), str
+        if any(
+            not isinstance(entry.get(field, ""), str)
+            for field in ("role", "name", "organization")
         ):
-            raise TypeError(f"Role {speaker} requires string role and name fields.")
+            raise TypeError(
+                f"Role {speaker} requires string role, name, and organization fields."
+            )
         if not isinstance(entry["evidence"], list):
             raise TypeError(f"Role {speaker} evidence must be a list.")
         for evidence in entry["evidence"]:
@@ -56,6 +59,8 @@ def speaker_label(speaker: str, roles: dict) -> str:
     entry = roles.get(speaker)
     if not entry:
         return "說話者未確認" if speaker == UNKNOWN else f"{speaker}（角色未確認）"
+    if entry.get("organization"):
+        return "／".join((entry.get("name") or entry["role"], entry["organization"]))
     if entry["role"].startswith("辯論者") and entry.get("name"):
         return entry["name"]
     return "／".join(part for part in (entry["role"], entry.get("name", "")) if part)

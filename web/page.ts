@@ -8,6 +8,7 @@
   interface SpeakerRole {
     role: string;
     name: string;
+    organization: string;
   }
 
   interface Cue {
@@ -158,6 +159,7 @@
   function speakerName(speaker: string, cue: Cue | undefined): string {
     if (cue?.label) return cue.label;
     const role = data.roles[speaker];
+    if (role?.organization) return [role.name || role.role, role.organization].join("／");
     if (role) return [role.role, role.name].filter(Boolean).join("／") || "說話者未確認";
     return speaker === "UNKNOWN" ? "說話者未確認" : `${speaker}（角色未確認）`;
   }
