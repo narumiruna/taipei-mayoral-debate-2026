@@ -1,6 +1,7 @@
 import copy
 import json
 import re
+from html import unescape
 from html.parser import HTMLParser
 from importlib.resources import files
 from pathlib import Path
@@ -192,7 +193,7 @@ def test_malicious_text_round_trips_without_executable_markup(tmp_path, artifact
     assert malicious not in html
 
 
-def test_page_is_self_contained_with_local_media_and_download_paths(tmp_path, artifact):
+def test_page_embeds_reader_with_youtube_and_relative_downloads(tmp_path, artifact):
     html = render_page(artifact, tmp_path).read_text(encoding="utf-8")
     page = PageParser(html)
 
@@ -205,8 +206,41 @@ def test_page_is_self_contained_with_local_media_and_download_paths(tmp_path, ar
         for tag, attrs in page.elements
         if tag == "link"
     )
-    assert not re.search(r"\bfetch\s*\(|@import\b|https?://", html)
+    assert not re.search(r"\bfetch\s*\(|@import\b", html)
+    assert set(re.findall(r"https?://[^\s\"'<>`]+", unescape(html))) == {
+        "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&playsinline=1",
+        "https://youtu.be/plpXPrOoV2w",
+        "https://www.youtube.com/iframe_api",
+    }
+    assert "https://www.youtube.com/iframe_api" in page.scripts[1]["text"]
     assert all(marker not in html for marker in ("{{STYLE}}", "{{SCRIPT}}", "{{DATA}}"))
+    assert "{{MEDIA_" not in html
+    assert not any(tag in {"video", "source", "track"} for tag, _ in page.elements)
+    assert not any("poster" in attrs for _, attrs in page.elements)
+    assert not re.search(r"(?:media/|outputs/|raw/|\.mp4\b|poster\.jpg)", html)
+    assert str(tmp_path) not in html
+    (iframe,) = [attrs for tag, attrs in page.elements if tag == "iframe"]
+    assert iframe["id"] == "debate-video"
+    assert iframe["src"] == (
+        "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&playsinline=1"
+    )
+    assert iframe["title"] == "辯論完整影音"
+    assert {value.strip() for value in iframe["allow"].split(";")} == {
+        "autoplay",
+        "encrypted-media",
+        "picture-in-picture",
+        "web-share",
+    }
+    assert iframe["referrerpolicy"] == "strict-origin-when-cross-origin"
+    assert "allowfullscreen" in iframe
+    (fallback,) = [
+        attrs
+        for tag, attrs in page.elements
+        if tag == "a" and attrs.get("id") == "video-link"
+    ]
+    assert fallback["href"] == "https://youtu.be/plpXPrOoV2w"
+    assert fallback["target"] == "_blank"
+    assert "noopener" in fallback.get("rel", "").split()
     resources = {
         (tag, key, value)
         for tag, attrs in page.elements
@@ -215,10 +249,12 @@ def test_page_is_self_contained_with_local_media_and_download_paths(tmp_path, ar
         or (key == "href" and not value.startswith(("#", "data:")))
     }
     assert resources == {
-        ("video", "poster", "media/poster.jpg"),
-        ("source", "src", "media/debate.mp4"),
-        ("track", "src", "subtitles.vtt"),
-        ("a", "href", "media/debate.mp4"),
+        (
+            "iframe",
+            "src",
+            "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&playsinline=1",
+        ),
+        ("a", "href", "https://youtu.be/plpXPrOoV2w"),
         ("a", "href", "transcript.md"),
         ("a", "href", "transcript.json"),
         ("a", "href", "subtitles.srt"),

@@ -496,12 +496,13 @@ mark {
   font-size: 10px;
   color: var(--muted);
 }
-video {
+#debate-video {
   display: block;
   width: 100%;
+  min-height: 200px;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
   background: #192231;
+  border: 0;
   border-radius: 4px;
 }
 .player-status {

@@ -58,19 +58,40 @@ def test_reviewed_exports_use_separate_destination(tmp_path, transcript, roles):
     for name in ["subtitles.srt", "subtitles.vtt", "transcript.md"]:
         assert "這是校對文字。" in (destination / name).read_text(encoding="utf-8")
     page = (destination / "index.html").read_text(encoding="utf-8")
-    assert "../outputs/recording/media/debate.mp4" in page
+    assert (
+        "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&amp;playsinline=1"
+        in page
+    )
+    assert 'href="https://youtu.be/plpXPrOoV2w"' in page
+    assert "../outputs/" not in page
+    assert "media/debate.mp4" not in page
     assert artifact["segments_text_status"] == "original_asr_before_display_review"
 
 
-def test_page_encodes_relative_media_paths(tmp_path):
-    output = tmp_path / "data"
-    media = tmp_path / 'media "clips"'
-    page = render_page({"cues": []}, output, media_dir=media).read_text(
-        encoding="utf-8"
-    )
-    assert "../media%20%22clips%22/debate.mp4" in page
-    assert "../media%20%22clips%22/poster.jpg" in page
-    assert str(tmp_path) not in page
+def test_youtube_page_is_independent_of_export_directory(tmp_path):
+    outputs = [tmp_path / "data", tmp_path / 'nested "exports"' / "site"]
+    pages = [
+        render_page({"cues": []}, output).read_text(encoding="utf-8")
+        for output in outputs
+    ]
+    assert pages[0] == pages[1]
+    for page in pages:
+        assert (
+            "https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&amp;playsinline=1"
+            in page
+        )
+        assert 'href="https://youtu.be/plpXPrOoV2w"' in page
+        assert "media/debate.mp4" not in page
+        assert "media/poster.jpg" not in page
+        assert str(tmp_path) not in page
+        for name in (
+            "transcript.md",
+            "transcript.json",
+            "subtitles.srt",
+            "subtitles.vtt",
+            "corrections.json",
+        ):
+            assert f'href="{name}"' in page
 
 
 def test_character_conversion_preserves_spoken_terms():

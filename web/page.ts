@@ -53,6 +53,28 @@
     review: Review;
   }
 
+  interface YouTubePlayer {
+    getCurrentTime(): number;
+    getPlayerState(): number;
+    seekTo(seconds: number, allowSeekAhead: boolean): void;
+    cueVideoById(options: { videoId: string; startSeconds: number }): void;
+    playVideo(): void;
+  }
+
+  interface YouTubeAPI {
+    Player: new (
+      frame: HTMLIFrameElement,
+      options: {
+        events: {
+          onReady: (event: { target: YouTubePlayer }) => void;
+          onStateChange: () => void;
+          onError: (event: { data: number }) => void;
+          onAutoplayBlocked: () => void;
+        };
+      },
+    ) => YouTubePlayer;
+  }
+
   type View = "transcript" | "corrections" | "pending";
   type ReviewItem = Correction | Flag;
 
@@ -78,7 +100,9 @@
   const speakerIndex = new Map(knownSpeakers.map((speaker, index) => [speaker, index]));
   const correctedIds = new Set(corrections.map((item) => String(item.cue_id)));
   const pendingIds = new Set(flags.map((item) => String(item.cue_id)));
-  const video = requiredElement("debate-video", HTMLVideoElement);
+  const video = requiredElement("debate-video", HTMLIFrameElement);
+  const videoLink = requiredElement("video-link", HTMLAnchorElement);
+  const videoId = new URL(video.src).pathname.split("/").pop() || "";
   const search = requiredElement("search", HTMLInputElement);
   const speakerFilter = requiredElement("speaker-filter", HTMLSelectElement);
   const followPlayback = requiredElement("follow-playback", HTMLInputElement);
@@ -102,7 +126,10 @@
   let selectedSpeaker = "__all__";
   let activeId: string | null = null;
   let targetId: string | null = null;
-  let pendingSeek: number | null = null;
+  let player: YouTubePlayer | null = null;
+  let pendingSeek: { seconds: number; play: boolean } | null = null;
+  let mediaFailed = false;
+  let autoplayBlocked = false;
   let lastFollowedId: string | null = null;
   let cueElements = new Map<string, HTMLSpanElement>();
   const chapterButtons: HTMLButtonElement[] = [];
@@ -180,15 +207,26 @@
     );
   }
 
+  function applyPendingSeek(): void {
+    if (!player || !pendingSeek) return;
+    const { seconds, play } = pendingSeek;
+    pendingSeek = null;
+    autoplayBlocked = false;
+    if (!play && player.getPlayerState() !== 1) {
+      // Cue the requested time without starting playback during hash navigation.
+      player.cueVideoById({ videoId, startSeconds: seconds });
+    } else {
+      player.seekTo(seconds, true);
+      if (play) player.playVideo();
+    }
+  }
+
   function seek(cue: Cue, play = false): void {
     const seconds = Number(cue.start) || 0;
-    pendingSeek = seconds;
-    try {
-      video.currentTime = seconds;
-      if (video.readyState > 0) pendingSeek = null;
-    } catch {
-      // Metadata must load before some local video players can seek.
-    }
+    pendingSeek = { seconds, play };
+    const link = new URL(videoLink.href);
+    link.searchParams.set("t", String(Math.floor(seconds)));
+    videoLink.href = link.href;
     setTarget(String(cue.id));
     try {
       const original = cueById.get(String(cue.id));
@@ -198,13 +236,7 @@
     } catch {
       // Transcript navigation remains available if history changes are blocked.
     }
-    if (play) {
-      const promise = video.play();
-      if (promise)
-        promise.catch(() => {
-          $("playback-status").textContent = "請使用播放器播放；若無法載入，請檢查影片檔案。";
-        });
-    }
+    applyPendingSeek();
     updatePlayback();
   }
 
@@ -450,7 +482,9 @@
   }
 
   function updatePlayback(): void {
-    const now = video.currentTime || 0;
+    const now = pendingSeek?.seconds ?? player?.getCurrentTime() ?? 0;
+    const state = player?.getPlayerState();
+    const playing = state === 1;
     let active: Cue | null = null;
     for (const cue of chronological) {
       if (cue.start > now) break;
@@ -466,9 +500,18 @@
       current?.classList.add("is-active");
       if (current) current.setAttribute("aria-current", "true");
     }
-    if (!video.error)
-      $("playback-status").textContent =
-        `${video.paused ? "已暫停" : "播放中"} ${time(now)} / ${time(duration)}`;
+    if (player && !mediaFailed) {
+      const label = playing
+        ? "播放中"
+        : state === 3
+          ? "載入中"
+          : state === -1 || state === 5
+            ? "尚未播放"
+            : "已暫停";
+      $("playback-status").textContent = autoplayBlocked
+        ? "請按 YouTube 播放按鈕開始播放"
+        : `${label} ${time(now)} / ${time(duration)}`;
+    }
     const chapter = Math.floor(now / 600);
     chapterButtons.forEach((button, index) => {
       if (index === chapter) button.setAttribute("aria-current", "true");
@@ -476,7 +519,7 @@
     });
     if (
       followPlayback.checked &&
-      !video.paused &&
+      playing &&
       currentView === "transcript" &&
       activeId !== lastFollowedId
     ) {
@@ -491,9 +534,73 @@
     }
   }
 
-  function mediaFailure(): void {
-    $("media-error").hidden = false;
-    $("playback-status").textContent = "影音無法載入；文字功能仍可使用";
+  function mediaFailure(code?: number): void {
+    mediaFailed = true;
+    const restricted = code === 101 || code === 150;
+    const message = $("media-error");
+    message.hidden = false;
+    message.textContent = restricted
+      ? "YouTube 限制此影片的嵌入播放。請使用下方連結在 YouTube 開啟。逐字稿仍可閱讀與搜尋。"
+      : "無法載入 YouTube 影音。請確認網路連線，或使用下方連結在 YouTube 開啟。逐字稿仍可閱讀與搜尋。";
+    $("playback-status").textContent = restricted
+      ? "請在 YouTube 開啟影片"
+      : "YouTube 無法載入；文字功能仍可使用";
+  }
+
+  function loadYouTubePlayer(): void {
+    const youtube = window as Window & {
+      YT?: YouTubeAPI;
+      onYouTubeIframeAPIReady?: () => void;
+    };
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      const source = new URL(video.src);
+      source.searchParams.set("origin", window.location.origin);
+      video.src = source.href;
+    }
+    const readyTimeout = window.setTimeout(mediaFailure, 15000);
+    const failure = (code?: number): void => {
+      window.clearTimeout(readyTimeout);
+      mediaFailure(code);
+    };
+    const initialize = (): void => {
+      const api = youtube.YT;
+      if (!api) return;
+      new api.Player(video, {
+        events: {
+          onReady: ({ target }) => {
+            window.clearTimeout(readyTimeout);
+            player = target;
+            mediaFailed = false;
+            $("media-error").hidden = true;
+            applyPendingSeek();
+            updatePlayback();
+            window.setInterval(updatePlayback, 500);
+          },
+          onStateChange: () => {
+            if (player?.getPlayerState() === 1) {
+              mediaFailed = false;
+              autoplayBlocked = false;
+              $("media-error").hidden = true;
+            }
+            updatePlayback();
+          },
+          onError: ({ data }) => failure(data),
+          onAutoplayBlocked: () => {
+            autoplayBlocked = true;
+            updatePlayback();
+          },
+        },
+      });
+    };
+    if (youtube.YT?.Player) initialize();
+    else {
+      youtube.onYouTubeIframeAPIReady = initialize;
+      const script = element("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.async = true;
+      script.addEventListener("error", () => failure());
+      document.head.append(script);
+    }
   }
 
   $("stat-duration").textContent = time(duration);
@@ -558,21 +665,6 @@
       }
     });
   });
-  ["timeupdate", "play", "pause", "seeked"].forEach((event) => {
-    video.addEventListener(event, updatePlayback);
-  });
-  video.addEventListener("loadedmetadata", () => {
-    $("media-error").hidden = true;
-    if (pendingSeek !== null) {
-      video.currentTime = pendingSeek;
-      pendingSeek = null;
-    }
-  });
-  video.addEventListener("error", mediaFailure);
-  const source = video.querySelector("source");
-  if (!source) throw new Error("Required video source is missing");
-  source.addEventListener("error", mediaFailure);
-  if (video.error) mediaFailure();
   followPlayback.addEventListener("change", () => {
     lastFollowedId = null;
     updatePlayback();
@@ -580,4 +672,5 @@
   window.addEventListener("hashchange", revealHash);
   render();
   revealHash();
+  loadYouTubePlayer();
 })();

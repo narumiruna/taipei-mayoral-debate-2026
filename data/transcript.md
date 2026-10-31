@@ -6,14 +6,14 @@
 - Text: automatic transcription, converted to Traditional Chinese.
 - Speaker clusters are not verified identities. Unmapped roles remain unconfirmed.
 - Overlap, names, and low-confidence speech require review.
-- Text review: 225 corrected cues; 104 cues require review. See `corrections.json`.
+- Text review: 227 corrected cues; 103 cues require review. See `corrections.json`.
 - Source segments and character times are unchanged; reviewed cue text may differ.
 
 [00:14:14.632–00:14:20.539] **主持人1／TVBS** 歡迎收看由TVBS電視臺及三立電視共同聯合主辦的20
 
-[00:14:20.539–00:14:26.245] **主持人1／TVBS** 26臺北市長候選人電視辯論會我是TVBS黃欣
+[00:14:20.539–00:14:26.245] **主持人1／TVBS** 26臺北市長候選人電視辯論會我是TVBS黃欣樺
 
-[00:14:26.245–00:14:32.071] **主持人2／三立** 樺我是三立電視李文儀我們代表兩家電視臺特別感謝兩位市長候選人
+[00:14:26.245–00:14:32.071] **主持人2／三立** 我是三立電視李文儀我們代表兩家電視臺特別感謝兩位市長候選人
 
 [00:14:32.071–00:14:37.938] **主持人2／三立** 接受邀約讓臺北市的市民以及全國的觀眾得以透過兩位的政策辯
 

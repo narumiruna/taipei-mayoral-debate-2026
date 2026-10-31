@@ -24,8 +24,11 @@ console command remain `2026-debate`.
 
 Open [`data/index.html`](data/index.html).
 The page has transcript search, speaker filters, video seeking, correction
-comparisons, unresolved review items, and download links. CSS, JavaScript, and
-transcript data are embedded. No CDN or external service is required.
+comparisons, unresolved review items, and download links. Reader CSS, JavaScript,
+and transcript data are inline. Transcript search and review work offline,
+including when YouTube is blocked. Video playback uses
+[YouTube](https://youtu.be/plpXPrOoV2w) and its iframe API. It requires internet
+access and an HTTP(S) preview; YouTube may reject `file://` pages.
 
 | Committable file under `data/` | Contents |
 | --- | --- |
@@ -43,9 +46,9 @@ These are text files intended for version control. Published metadata contains
 only the source filename, not an absolute local path or source modification time.
 
 Large media, screenshots, logs, and inference checkpoints stay in ignored
-`outputs/`. Do not add those files to a commit. The web page uses relative links
-to `outputs/plpXPrOoV2w/media/debate.mp4` and `media/poster.jpg`.
-Without local media, transcript search and review remain available.
+`outputs/`. Do not add those files to a commit. The web page plays YouTube video,
+not ignored local media. Download links remain local paths relative to
+`index.html`, for the transcript, subtitles, and correction ledger.
 
 ## Deployment
 
@@ -60,21 +63,36 @@ The published site is <https://narumiruna.github.io/taipei-mayoral-debate-2026/>
 The workflow publishes the committed HTML, transcripts, subtitles, and review
 records without installing Python or running model inference. Rebuild and
 re-export the page before pushing frontend changes. Only `data/` is uploaded;
-`raw/`, `outputs/`, and local credentials are excluded. Video and poster files
-are not hosted, so video playback is unavailable on the published page.
-Transcript search, review views, and downloads remain available.
+`raw/`, `outputs/`, and local credentials are excluded. The published page plays
+the YouTube video; it does not need local video or poster files. Playback requires
+access to YouTube. Transcript search, review views, and relative download links
+do not depend on YouTube.
+
+### Playback limits
+
+YouTube controls video availability and embedding permissions. IFrame API errors
+101 and 150 indicate an embedding restriction. The page then shows a direct
+YouTube link. Timestamp clicks update that link to the selected video time.
+Transcript search and review remain available.
+
+The automated local check on 2026-10-31 received error 150; live embedded playback
+is not verified. A site maintainer must check the published page in a regular
+browser with YouTube access before reporting in-page playback as verified.
+If the restriction remains, the video owner must allow embedding. The direct
+YouTube link remains available when embedded playback is restricted.
 
 ## Preview
 
-Open the HTML file directly, or run this command from the repository root:
+For video playback, run this command from the repository root:
 
 ```bash
-uv run --with rangehttpserver python -m RangeHTTPServer 8765 --bind 127.0.0.1
+uv run python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Then open <http://127.0.0.1:8765/data/>. HTTP preview supports byte-range
-requests for the large video and avoids local-file caption restrictions. The
-server listens only on the local interface. Do not expose it as a public server.
+Then open <http://127.0.0.1:8765/data/> with internet access. YouTube may reject
+playback from `file://` pages. You can open the HTML file directly for offline
+transcript search and review. The server listens only on the local interface.
+Do not expose it as a public server.
 
 ## Review status
 
@@ -86,11 +104,11 @@ The full transcript was reviewed with a second Whisper large-v2 pass. Ten
 uncertain passages were also decoded with unbatched large-v3. This is not a
 complete manual listening review or a political fact check.
 
-- 225 cues have accepted text corrections with before/after records and evidence.
+- 227 cues have accepted text corrections with before/after records and evidence.
 - 46 cues changed when regional phrase substitution was removed. Use `s2tw`
   for Traditional Chinese characters, not `s2twp`, which can change spoken words
   such as `支持`, `分區`, `程序`, and `預算法` into unrelated terms.
-- 104 unique cues remain flagged after temporal and semantic checks are merged.
+- 103 unique cues remain flagged after temporal and semantic checks are merged.
   These include 18 unassigned-speaker cues, three long alignments, uncertain
   names, possible omissions, and disputed ASR alternatives.
 - Preserve numbers, political statements, and possible spoken mistakes. For
@@ -144,8 +162,9 @@ Node.js, or TypeScript at runtime. Generated assets and data exports are not
 Biome source inputs.
 
 After changing the frontend, rebuild it and run the export command below to
-update `data/index.html`. The page remains a self-contained HTML file that works
-without a frontend development server.
+update `data/index.html`. Reader assets and data remain inline in one HTML file;
+no frontend development server is required. Video uses YouTube and requires
+internet access through an HTTP(S) preview.
 
 ### Model access
 
@@ -189,7 +208,7 @@ env -u HF_TOKEN uv run 2026-debate transcribe raw/plpXPrOoV2w.webm \
 This recording's MP4 contains video only; the WebM contains matching Opus audio.
 Decode from sample zero. Do not remove the silent opening or advertisement breaks.
 The first speech starts at `00:14:14.632` on the original video timeline.
-The local web video combines both streams without trimming the timeline.
+The website uses the original YouTube video timeline for timestamp seeking.
 
 Checkpoints use atomic JSON replacement. A rerun reuses complete stages. If the
 input, model, package versions, or clip length changes, use a new work directory.

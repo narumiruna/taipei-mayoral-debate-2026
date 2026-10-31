@@ -163,7 +163,6 @@ def export(
     output: Path,
     roles: dict | None = None,
     corrections: Path | None = None,
-    media_dir: Path | None = None,
 ) -> dict:
     roles = {} if roles is None else roles
     speakers = {turn["speaker"] for turn in result.get("speaker_turns", [])}
@@ -277,5 +276,5 @@ def export(
     save_json(output / "validation.json", summary)
     from .web import render_page
 
-    render_page(artifact, output, media_dir=media_dir)
+    render_page(artifact, output)
     return summary

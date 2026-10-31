@@ -54,7 +54,6 @@ def transcribe(
             target,
             role_map,
             corrections,
-            media_dir=output_dir / "media",
         )
         logger.info("Exports saved in {}: {}", target, summary)
     except (TypeError, ValueError) as error:
@@ -85,7 +84,6 @@ def export_transcript(
             target,
             role_map,
             corrections,
-            media_dir=output_dir / "media",
         )
         logger.info("Exports saved in {}: {}", target, summary)
     except (TypeError, ValueError) as error:

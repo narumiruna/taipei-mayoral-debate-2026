@@ -1,21 +1,14 @@
-"""Render a self-contained, local-first debate transcript page."""
+"""Render a debate transcript page with an embedded YouTube player."""
 
-import html
 import json
-import os
 import re
 from pathlib import Path
-from urllib.parse import quote
 
 _ASSETS = Path(__file__).with_name("assets")
 
 
-def render_page(
-    artifact: dict,
-    output_dir: Path,
-    media_dir: Path | None = None,
-) -> Path:
-    """Write index.html without copying media or exporting subtitle files."""
+def render_page(artifact: dict, output_dir: Path) -> Path:
+    """Write index.html with inline reader assets and data."""
     review = artifact.get("review") or {}
     payload = {
         "metadata": {
@@ -87,22 +80,14 @@ def render_page(
         ("\u2029", "\\u2029"),
     ):
         data = data.replace(character, escaped)
-    media = (
-        Path(os.path.relpath(media_dir.resolve(), output_dir.resolve())).as_posix()
-        if media_dir is not None
-        else "media"
-    )
-    media = quote(media, safe="/")
     replacements = {
-        "MEDIA_VIDEO": html.escape(f"{media}/debate.mp4", quote=True),
-        "MEDIA_POSTER": html.escape(f"{media}/poster.jpg", quote=True),
         "STYLE": (_ASSETS / "page.css").read_text(encoding="utf-8"),
         "SCRIPT": (_ASSETS / "page.js").read_text(encoding="utf-8"),
         "DATA": data,
     }
     template = (_ASSETS / "page.html").read_text(encoding="utf-8")
     page = re.sub(
-        r"\{\{(STYLE|SCRIPT|DATA|MEDIA_VIDEO|MEDIA_POSTER)\}\}",
+        r"\{\{(STYLE|SCRIPT|DATA)\}\}",
         lambda match: replacements[match[1]],
         template,
     )

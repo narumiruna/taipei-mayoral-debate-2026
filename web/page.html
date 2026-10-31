@@ -54,11 +54,11 @@
         <div class="sidebar-sticky">
           <section class="media-panel" aria-labelledby="media-title">
             <div class="aside-heading"><h2 id="media-title">現場影音</h2><span>對照閱讀</span></div>
-            <video id="debate-video" controls preload="metadata" playsinline poster="{{MEDIA_POSTER}}" aria-label="辯論完整影音"><source src="{{MEDIA_VIDEO}}" type="video/mp4"><track kind="captions" src="subtitles.vtt" srclang="zh-Hant-TW" label="正體中文字幕" default>您的瀏覽器不支援影片播放，請使用下方連結開啟影片。</video>
-            <p id="media-error" class="media-error" role="status" hidden>無法載入影音。請確認本機影片檔案可用；大型媒體不隨文字資料提交。逐字稿仍可閱讀與搜尋。</p>
-            <div class="player-status"><span class="live-dot" aria-hidden="true"></span><span id="playback-status">尚未播放</span><a href="{{MEDIA_VIDEO}}">開啟影片 ↗</a></div>
+            <iframe id="debate-video" src="https://www.youtube.com/embed/plpXPrOoV2w?enablejsapi=1&amp;playsinline=1" title="辯論完整影音" allow="autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p id="media-error" class="media-error" role="status" hidden>無法載入 YouTube 影音。請確認網路連線，或使用下方連結在 YouTube 開啟。逐字稿仍可閱讀與搜尋。</p>
+            <div class="player-status"><span class="live-dot" aria-hidden="true"></span><span id="playback-status">YouTube 載入中</span><a id="video-link" href="https://youtu.be/plpXPrOoV2w" target="_blank" rel="noopener noreferrer">在 YouTube 開啟 ↗</a></div>
             <label class="follow-control"><input type="checkbox" id="follow-playback"><span>跟隨播放位置捲動</span><small>預設關閉</small></label>
-            <p class="media-help">點選逐字稿時間可定位並播放。直接開啟本機檔案時，若字幕無法顯示，可改用本機 HTTP 伺服器開啟此頁。</p>
+            <p class="media-help">影片由 YouTube 提供，需連線播放。點選逐字稿時間可定位；若未自動播放，請按播放器的播放按鈕。校對字幕可由下方下載。</p>
           </section>
           <section class="chapter-panel" aria-labelledby="chapters-title"><div class="aside-heading"><h2 id="chapters-title">時間索引</h2><span>每 10 分鐘</span></div><nav id="chapters" aria-label="影音時間索引"></nav><p class="index-note">時間索引非議題章節。</p></section>
           <section class="downloads" aria-labelledby="downloads-title"><div class="aside-heading"><h2 id="downloads-title">檔案下載</h2><span>離線保存</span></div><div class="download-grid"><a href="transcript.md" download>逐字稿 <span>MD ↓</span></a><a href="transcript.json" download>結構化資料 <span>JSON ↓</span></a><a href="subtitles.srt" download>字幕 <span>SRT ↓</span></a><a href="subtitles.vtt" download>網頁字幕 <span>VTT ↓</span></a><a href="corrections.json" download>校對紀錄 <span>JSON ↓</span></a></div></section>
