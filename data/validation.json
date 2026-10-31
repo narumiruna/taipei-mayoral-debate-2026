@@ -1,0 +1,20 @@
+{
+  "duration_seconds": 8085.0024375,
+  "stage": "diarize",
+  "cue_count": 1082,
+  "first_cue_start": 854.632,
+  "last_cue_end": 8026.155,
+  "speaker_clusters": [
+    "SPEAKER_00",
+    "SPEAKER_01",
+    "SPEAKER_02",
+    "SPEAKER_03",
+    "SPEAKER_04",
+    "SPEAKER_05"
+  ],
+  "unassigned_cues": 18,
+  "unconfirmed_role_cues": 18,
+  "segment_timing_cues": 0,
+  "corrected_cues": 225,
+  "pending_review_cues": 104
+}

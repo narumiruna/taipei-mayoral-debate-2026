@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local media and generated transcripts
+*.mp4
+*.webm
+*.wav
+raw/
+outputs/
+
+# Local credentials and check caches
+.env
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/

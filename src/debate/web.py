@@ -1,0 +1,113 @@
+"""Render a self-contained, local-first debate transcript page."""
+
+import html
+import json
+import os
+import re
+from pathlib import Path
+from urllib.parse import quote
+
+_ASSETS = Path(__file__).with_name("web_assets")
+
+
+def render_page(
+    artifact: dict,
+    output_dir: Path,
+    media_dir: Path | None = None,
+) -> Path:
+    """Write index.html without copying media or exporting subtitle files."""
+    review = artifact.get("review") or {}
+    payload = {
+        "metadata": {
+            key: artifact.get("metadata", {}).get(key)
+            for key in ("duration", "model", "stage")
+        },
+        "display_language": artifact.get("display_language", "zh-Hant-TW"),
+        "roles": {
+            speaker: {key: role.get(key, "") for key in ("role", "name")}
+            for speaker, role in artifact.get("roles", {}).items()
+        },
+        "cues": [
+            {
+                key: cue[key]
+                for key in (
+                    "id",
+                    "start",
+                    "end",
+                    "speaker",
+                    "label",
+                    "text",
+                    "timing",
+                    "original_text",
+                    "correction_id",
+                )
+                if key in cue
+            }
+            for cue in artifact.get("cues", [])
+        ],
+        "review": {
+            "corrections": [
+                {
+                    key: item[key]
+                    for key in (
+                        "id",
+                        "cue_id",
+                        "before",
+                        "after",
+                        "reason",
+                        "evidence",
+                    )
+                    if key in item
+                }
+                for item in review.get("corrections", [])
+            ],
+            "flags": [
+                {
+                    key: item[key]
+                    for key in (
+                        "id",
+                        "cue_id",
+                        "reason",
+                        "suggestion",
+                    )
+                    if key in item
+                }
+                for item in review.get("flags", [])
+            ],
+            "method": review.get("method", ""),
+            "source_sha256": review.get("source_sha256", ""),
+        },
+    }
+    data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    for character, escaped in (
+        ("&", "\\u0026"),
+        ("<", "\\u003c"),
+        (">", "\\u003e"),
+        ("\u2028", "\\u2028"),
+        ("\u2029", "\\u2029"),
+    ):
+        data = data.replace(character, escaped)
+    media = (
+        Path(os.path.relpath(media_dir.resolve(), output_dir.resolve())).as_posix()
+        if media_dir is not None
+        else "media"
+    )
+    media = quote(media, safe="/")
+    replacements = {
+        "MEDIA_VIDEO": html.escape(f"{media}/debate.mp4", quote=True),
+        "MEDIA_POSTER": html.escape(f"{media}/poster.jpg", quote=True),
+        "STYLE": (_ASSETS / "page.css").read_text(encoding="utf-8"),
+        "SCRIPT": (_ASSETS / "page.js").read_text(encoding="utf-8"),
+        "DATA": data,
+    }
+    template = (_ASSETS / "page.html").read_text(encoding="utf-8")
+    page = re.sub(
+        r"\{\{(STYLE|SCRIPT|DATA|MEDIA_VIDEO|MEDIA_POSTER)\}\}",
+        lambda match: replacements[match[1]],
+        template,
+    )
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    destination = output_dir / "index.html"
+    destination.write_text(page, encoding="utf-8")
+    return destination

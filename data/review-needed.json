@@ -1,0 +1,1486 @@
+[
+  {
+    "start": 860.539,
+    "end": 866.245,
+    "text": "26臺北市長候選人電視辯論會我是TVBS黃欣",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 2,
+    "review_id": "R001",
+    "reasons": [
+      "主持人姓名跨0002–0003字幕為黃欣樺，未有使用者確認；不可僅依同音擅改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 899.549,
+    "end": 905.037,
+    "text": "與會也請各位觀眾朋友見諒那麼一是介紹今天與會的候選",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 9,
+    "review_id": "R002",
+    "reasons": [
+      "那麼一是介紹語意不順，可能有連接詞誤辨，文字不足以確認。"
+    ],
+    "suggestion": "那麼依序介紹"
+  },
+  {
+    "start": 971.059,
+    "end": 976.947,
+    "text": "您所支持的候選人會扣除節電結論時間30秒鐘同",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 23,
+    "review_id": "R003",
+    "reasons": [
+      "節電結論時間中的節電疑為幻聽或結辯誤辨；保留原文待獨立轉錄核對，不猜測刪字。"
+    ],
+    "suggestion": "結辯結論時間／結論時間，待核"
+  },
+  {
+    "start": 1143.442,
+    "end": 1148.91,
+    "text": "的斷裂跟人行來搶道這些事情都是我們的日",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 53,
+    "review_id": "R004",
+    "reasons": [
+      "騎車看到人行道斷裂跟人行來搶道，後半語意不明；不能確定是行人、行車或其他措辭。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1275.123,
+    "end": 1275.143,
+    "text": "音",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 76,
+    "review_id": "T0076",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。",
+      "僅音一字延續0075聲音，且標為說話者未確認；應核對字幕切分，不依此推定另一位說話者。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1293.419,
+    "end": 1299.106,
+    "text": "任何的意義所以我們做了什麼事呢我們舉辦DebugSong我們30",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 80,
+    "review_id": "R006",
+    "reasons": [
+      "活動名DebugSong疑為英文或中英混合專名誤辨，無確認拼法，不逕改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1304.592,
+    "end": 1310.399,
+    "text": "寫好了2萬多人同時在線上觀看我們怎麼集體的智慧來解決現",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 82,
+    "review_id": "R007",
+    "reasons": [
+      "線上上觀看及我們怎麼集體的智慧語句有重複或漏字可能；亦可能為原話停頓，暫留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1397.364,
+    "end": 1403.23,
+    "text": "信任所以我們提出了專責專罰專款專業用這樣的一個",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 98,
+    "review_id": "R008",
+    "reasons": [
+      "專責專罰專款專業疑為政策口號，專罰的字形不確定，不改成推測的專法。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1420.526,
+    "end": 1426.316,
+    "text": "定所有這些機構違紀的機構該停業就停業該",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 102,
+    "review_id": "R009",
+    "reasons": [
+      "違紀的機構可能為違規，兩者皆成詞，不以合理化替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1454.794,
+    "end": 1460.639,
+    "text": "須要隨著物價的調整三規一章怎麼做要怎麼樣結合食農的教",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 108,
+    "review_id": "R010",
+    "reasons": [
+      "三規一章可能為說話者口誤；0473–0474明確指稱他把三章一Q講成三規一章，應保留原話，不改為正確政策名稱。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1544.071,
+    "end": 1550.024,
+    "text": "多的批評但是今天辯論會有兩個小時等一下還有交互結論我們可以",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 124,
+    "review_id": "R011",
+    "reasons": [
+      "互動結論可能為互動詰問，但文字不能排除說話者本身用詞，不逕改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1561.325,
+    "end": 1566.772,
+    "text": "覺也就是沈委員你常常提的是閨蜜鑽頭樓",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 127,
+    "review_id": "R012",
+    "reasons": [
+      "閨蜜鑽頭樓疑為臺語俗語或嚴重誤辨，須交叉核對0127–0128，不能按政治語意猜字。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1567.453,
+    "end": 1573.4,
+    "text": "聽歌沒跌破響了很多空泛的口號但拿不出具體的做法講",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 128,
+    "review_id": "R013",
+    "reasons": [
+      "聽歌沒跌破響了疑接前句俗語，無法從文字確定原詞，暫不接受替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1702.36,
+    "end": 1708.266,
+    "text": "諾要恢復U-Bike前三分鐘免費讓我們的綠運輸能夠更普及",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 151,
+    "review_id": "R014",
+    "reasons": [
+      "U-Bike前三分鐘免費含品牌拼法及時長疑點；數字可能是說話者原話，不改成常見政策數值。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1709.367,
+    "end": 1709.387,
+    "text": "了",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 153,
+    "review_id": "T0153",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。",
+      "僅了一字延續0152我做到，說話者標籤及極短切分待核，不據此推定新說話者。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 1738.569,
+    "end": 1743.895,
+    "text": "頂大道北上引道的開通到捷運東環段的通車的動",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 159,
+    "review_id": "R016",
+    "reasons": [
+      "通車的動工語意有衝突，可能為原話自我修正，不擅刪通車。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2390.071,
+    "end": 2390.091,
+    "text": "。",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 219,
+    "review_id": "T0219",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2436.724,
+    "end": 2442.615,
+    "text": "區西湖次分區灣仔次分區涉及的12個里都是危老",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 228,
+    "original_text": "區西湖次分區灣仔次分區涉及的12個裡都是危老",
+    "correction_id": "C040",
+    "review_id": "R017",
+    "reasons": [
+      "灣仔次分區的專名字形待核；只修明確的次分割槽及行政里字，不猜測地名。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2596.771,
+    "end": 2602.578,
+    "text": "瞭解而且我們康樂街第一個7599專案也已經完成公告章也已經簽約",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 257,
+    "review_id": "R018",
+    "reasons": [
+      "完成公告章不成完整詞，疑為公辦都更招標用語；不能確認是公告招商或公告招標。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2602.578,
+    "end": 2608.566,
+    "text": "了這些你都不清楚沈委員更重要的你完全不知道剛剛這十",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 258,
+    "original_text": "了這些你都不清楚省委員更重要的你完全不知道剛剛這十",
+    "correction_id": "C047",
+    "review_id": "R019",
+    "reasons": [
+      "句末這十與0259一件案例連讀為這十一件案例，與前文兩個案例數量不同；可能誤辨或說話者用語，不改數值。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2675.832,
+    "end": 2675.852,
+    "text": "嗎",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 271,
+    "review_id": "T0271",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2770.379,
+    "end": 2776.192,
+    "text": "所以",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 290,
+    "review_id": "R020",
+    "reasons": [
+      "0290–0291兩段合計約12秒只有所以這，前後由事故跳到缺席會議，疑有大段漏辨；不得憑後文補造。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2776.192,
+    "end": 2782.486,
+    "text": "這",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 291,
+    "review_id": "T0291",
+    "reasons": [
+      "單字對齊區間異常偏長，可能有時間對齊或漏字問題。",
+      "此段約6秒僅這一字，與0290合看疑有漏辨，待獨立轉錄核對。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2824.818,
+    "end": 2830.727,
+    "text": "專案會議為我親自主持專案追蹤專案列管這就是面對各項重大案件",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 300,
+    "review_id": "R022",
+    "reasons": [
+      "為我親自主持可能為由我親自主持，但無法排除原話語助或口誤，暫留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2900.593,
+    "end": 2906.504,
+    "text": "關心然後開始說我希望怎麼做怎麼做沒有實際辦法但你自己的本質",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 313,
+    "review_id": "R023",
+    "reasons": [
+      "本質與下一字幕立法委員的本職語意相近，可能誤辨，但兩者均可成話，不直接替換。"
+    ],
+    "suggestion": "本職"
+  },
+  {
+    "start": 2956.177,
+    "end": 2961.549,
+    "text": "有回答問題凱凱案更重要的是你還讓議會直接讓這個議留",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 323,
+    "review_id": "R024",
+    "reasons": [
+      "議留會跨0323–0324疑為流會相關措辭；缺乏可靠對應字序，應整段核對。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 2973.192,
+    "end": 2979.138,
+    "text": "現在的法務局長訴願會12次出席一次法規會12次出",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 326,
+    "original_text": "現在的法務局長訴院會12次出席一次法規會12次出",
+    "correction_id": "C060",
+    "review_id": "R025",
+    "reasons": [
+      "0326–0327連續兩次訴願會卻有不同次數，可能一處是其他委員會名稱，也可能為原話錯置；不改數字或猜會名。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3114.0,
+    "end": 3119.365,
+    "text": "麼帶商圈才需要土地內科南軟跟北市科到底要串聯什",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 352,
+    "review_id": "R026",
+    "reasons": [
+      "商圈才需要土地在產業廊帶語境突兀，仍可能為原話；不以產業知識改寫引述。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3166.473,
+    "end": 3166.493,
+    "text": "嗎",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 362,
+    "review_id": "T0362",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3236.826,
+    "end": 3242.734,
+    "text": "的吸引讓AI的人才從國小一直到大學一直到研究院變成是一個跟國",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 375,
+    "review_id": "R027",
+    "reasons": [
+      "從國小到大學再到研究院可能為研究所，但兩者皆是可用名詞，暫留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3242.734,
+    "end": 3248.623,
+    "text": "際合作最好的方式而至於你剛剛提到市民大道從縣信公",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 376,
+    "review_id": "R083",
+    "reasons": [
+      "兩輪辨識對公園名稱不一致；不僅因常見地名就改寫。"
+    ],
+    "suggestion": "可能為線形／線性公園，須回聽確認。"
+  },
+  {
+    "start": 3326.858,
+    "end": 3332.404,
+    "text": "北他們要花這麼多時間騎車上班一天辛勞要花一兩小時回家",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 391,
+    "review_id": "R028",
+    "reasons": [
+      "一天辛勞要花一兩小時疑有誤辨，可能為來回相關措辭；保留數值，不猜字。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3332.404,
+    "end": 3338.37,
+    "text": "嗎你說要在條通種樹設車架你知道那邊的條通平均路",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 392,
+    "original_text": "嗎你說要在調通縱速設車架你知道那邊的調通平均路",
+    "correction_id": "C084",
+    "review_id": "R029",
+    "reasons": [
+      "設車架在條通種樹語境不明，0393也重複車架；可能指特定設施，不能僅以常識改成遮架或遮陽架。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3338.37,
+    "end": 3344.303,
+    "text": "寬只有6到8米而且多半是單行道你打算設立什麼樣的車架",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 393,
+    "review_id": "R030",
+    "reasons": [
+      "什麼樣的車架與0392同一疑點，需核對完整設施名稱。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3379.551,
+    "end": 3385.418,
+    "text": "合這就是你在做縣新公園到臺北車站到雙子星就是你現在正在做的",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 401,
+    "review_id": "R084",
+    "reasons": [
+      "與前文同一公園名稱疑似誤辨，兩輪未提供一致字形。"
+    ],
+    "suggestion": "可能為線形／線性公園，須回聽確認。"
+  },
+  {
+    "start": 3446.632,
+    "end": 3446.652,
+    "text": "始",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 414,
+    "review_id": "T0414",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3472.093,
+    "end": 3472.133,
+    "text": "多萬",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 420,
+    "review_id": "T0420",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3478.3,
+    "end": 3484.286,
+    "text": "些學校閒些斷槌深深有先辱其實兌換率一直往下弱勢的",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 422,
+    "review_id": "R031",
+    "reasons": [
+      "閒些斷槌深深有先辱為多處明顯誤辨；前半可能是險些斷炊，後半可能是生生喝鮮乳，尚不足接受整句替換。"
+    ],
+    "suggestion": "些學校險些斷炊生生喝鮮乳其實兌換率一直往下弱勢的"
+  },
+  {
+    "start": 3504.158,
+    "end": 3510.269,
+    "text": "很",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 427,
+    "review_id": "T0427",
+    "reasons": [
+      "單字對齊區間異常偏長，可能有時間對齊或漏字問題。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3602.78,
+    "end": 3608.325,
+    "text": "望說沒關係你把經費留下地方政府臺北市我們來做但是總統參議院長不願",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 444,
+    "review_id": "R032",
+    "reasons": [
+      "總統參議院長不成清楚稱謂；可能涉及總統及行政院長並列，但不能猜測字序或新增人物。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3619.695,
+    "end": 3625.567,
+    "text": "他們盤點各項的困難我一一的來解決透過數位學生卡證能夠讓孩子",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 447,
+    "review_id": "R033",
+    "reasons": [
+      "數位學生卡證可能為政策正式卡名誤辨；原詞尚可理解，不猜測替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 3631.041,
+    "end": 3635.753,
+    "text": "的沈伯洋湘西嵐請繼續追問時間一分鐘請開始",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 449,
+    "original_text": "的沈博焱湘西嵐請繼續追問時間一分鐘請開始",
+    "correction_id": "C098",
+    "review_id": "R034",
+    "reasons": [
+      "姓名後湘西嵐不成詞；本字幕只接受沈伯洋姓名修正，後續措辭不猜改。"
+    ],
+    "suggestion": "先生／先生來，待核"
+  },
+  {
+    "start": 4329.362,
+    "end": 4335.195,
+    "text": "包括財劃法修法增加臺北市的財源這些都是事證你",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 519,
+    "original_text": "包括財化法修法增加臺北市的財源這些都是事證你",
+    "correction_id": "C118",
+    "review_id": "R085",
+    "reasons": [
+      "「這些都是事證」可能是原話或市政的誤辨；第二輪漏辨此段，未逕行替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4507.234,
+    "end": 4513.094,
+    "text": "有一些是跟你的推薦有關所以他沒有辦法再來食安也是金",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 551,
+    "review_id": "R035",
+    "reasons": [
+      "跟你的推薦有關所指不明，不能僅因政治指控不合理就替換成其他關係詞。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4513.094,
+    "end": 4519.003,
+    "text": "華國中剛剛提到了你馬上就趕到現場但晨淵國中部驗出金黃色葡",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 552,
+    "review_id": "R036",
+    "reasons": [
+      "晨淵國中部疑為學校名稱誤辨，0560又作成員國中；兩處應共同核對，未接受推測。"
+    ],
+    "suggestion": "成淵國中部"
+  },
+  {
+    "start": 4553.525,
+    "end": 4559.452,
+    "text": "校成員國中這一個個案我們即刻停業解約啟動備援機制而且給予所有學",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 560,
+    "review_id": "R037",
+    "reasons": [
+      "成員國中與0552晨淵國中部應是同一學校，但正式名稱未由本工作確認。"
+    ],
+    "suggestion": "成淵國中"
+  },
+  {
+    "start": 4601.725,
+    "end": 4601.745,
+    "text": "懲",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 569,
+    "review_id": "T0569",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4613.659,
+    "end": 4619.606,
+    "text": "子我們第一時間即刻的虛心來救制度面馬上的改進不管",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 572,
+    "review_id": "R038",
+    "reasons": [
+      "即刻的虛心來救制度面疑有連續誤辨；不能直接猜成修正或究責。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4619.606,
+    "end": 4625.374,
+    "text": "是凱凱案我們三方共訪機制一年六訪對於佩諾米達我",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 573,
+    "review_id": "R039",
+    "reasons": [
+      "佩諾米達疑為托育機構專名誤辨，無可靠字形，暫不修改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4625.374,
+    "end": 4631.322,
+    "text": "們拉高到一通報即刻停業停聘終身不得任職我們對於夏麗絲同",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 574,
+    "review_id": "R040",
+    "reasons": [
+      "夏麗絲疑為幼教集團名稱，字形未確認，不猜測替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4637.031,
+    "end": 4643.0,
+    "text": "在SDM制度裡面補充增加了類家內的狀況而且我們也有專業的復",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 576,
+    "original_text": "在STM制度裡面補充增加了類家內的狀況而且我們也有專業的復",
+    "correction_id": "C135",
+    "review_id": "R041",
+    "reasons": [
+      "SDM縮寫已依第二輪校正；「增加類家內」及與下一字幕相連的「復合」措辭仍需核對。"
+    ],
+    "suggestion": "可能涉及複核及短期家庭支持，未據此補寫。"
+  },
+  {
+    "start": 4643.0,
+    "end": 4648.949,
+    "text": "合短期家庭式的支援所以這些我們都是很用心",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 577,
+    "review_id": "R042",
+    "reasons": [
+      "復合短期家庭式的支援語意不清；可能跨句或漏詞，不依政策知識補文。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4771.301,
+    "end": 4777.27,
+    "text": "加了33名稽查人力我們也率全國之先成立了實驗性疾病的檢驗組而且",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 601,
+    "review_id": "R086",
+    "reasons": [
+      "兩輪均辨識為實驗性疾病；可能是食源性／食因性疾病，但無足夠語音依據指定名稱。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 4806.68,
+    "end": 4812.229,
+    "text": "本片皮生成的原因是什麼等到現在沒有一個清楚的答案沈委",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 607,
+    "review_id": "R043",
+    "reasons": [
+      "本片皮疑為毒油檢驗物質名誤辨，需交叉核對後才接受化學名稱。"
+    ],
+    "suggestion": "苯並芘"
+  },
+  {
+    "start": 4935.263,
+    "end": 4941.215,
+    "text": "來就是死刑這是現行殺人就是死刑所以毒駕致死的刑度要怎麼",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 631,
+    "review_id": "R044",
+    "reasons": [
+      "毒駕殺人本來就是死刑等刑罰斷言可能是說話者原話；不得為符合現行法而改寫。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5020.242,
+    "end": 5020.262,
+    "text": "謝",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 646,
+    "review_id": "T0646",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5030.578,
+    "end": 5036.45,
+    "text": "都講但是更重要的是身為首長以怨怨傾聽人民的",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 649,
+    "review_id": "R045",
+    "reasons": [
+      "以怨怨傾聽人民的聲音不成句，可能為要願意等措辭，無法確定，暫不替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5174.399,
+    "end": 5178.81,
+    "text": "子這個都是地方政府能夠做的事情謝",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 675,
+    "review_id": "R046",
+    "reasons": [
+      "用什麼樣的牌子與酒駕檢測語境不明，可能為設備品牌或其他詞；不擅改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5207.154,
+    "end": 5218.987,
+    "text": "要",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 682,
+    "review_id": "T0682",
+    "reasons": [
+      "單字對齊區間異常偏長，可能有時間對齊或漏字問題。",
+      "此段近12秒僅要一字，0681–0683疑有大段漏辨，不能按松山機場政策推補。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5236.13,
+    "end": 5241.119,
+    "text": "了很久然後在心裡面都完全沒有找人討論嗎還是說現在突然提到職盲搬出",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 686,
+    "review_id": "R048",
+    "reasons": [
+      "突然提到職盲搬出來明顯不順，可能涉及急忙搬出政策，但無法確定原詞，不猜改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5296.963,
+    "end": 5302.788,
+    "text": "院也可以支持更重要張盛市長也提你不能用現在的眼光看未",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 697,
+    "review_id": "R049",
+    "reasons": [
+      "張盛市長疑為人名誤辨；未確認原稱呼，不依職務推補完整人名。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5331.573,
+    "end": 5337.259,
+    "text": "你說20年以後才能克服這些困難我看的是第一天同樣",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 703,
+    "review_id": "R050",
+    "reasons": [
+      "我看的是第一天與前述20年相對，可能另有數字或詞句，不以時程合理性改字。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5342.944,
+    "end": 5348.189,
+    "text": "變過去長期主張2025非核家園2026從來重啟核",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 705,
+    "review_id": "R051",
+    "reasons": [
+      "2026從來重啟核電不順，從來可能為重來等誤辨；日期及政治主張保留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5403.657,
+    "end": 5409.524,
+    "text": "營業額去計算但我們在計算的時候是要看產值不是營業額儲物科",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 716,
+    "review_id": "R052",
+    "reasons": [
+      "儲物科疑為科技園區簡稱，可能與下一字幕規模數值比較相關；不憑常識指定園區。"
+    ],
+    "suggestion": "竹科，待核"
+  },
+  {
+    "start": 5484.454,
+    "end": 5490.14,
+    "text": "據重整專業的分析數據目前公館圓環的交通事故率還是大幅的下",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 731,
+    "original_text": "據重整專業的分析數據目前公管圓環的交通事故率還是大幅的下",
+    "correction_id": "C174",
+    "review_id": "R053",
+    "reasons": [
+      "重整專業的分析資料疑有機關或專業單位誤辨，現僅修公館地名，不接受推測單位名。"
+    ],
+    "suggestion": "交通專業的分析資料，待核"
+  },
+  {
+    "start": 5815.404,
+    "end": 5821.353,
+    "text": "網資深總監黃映穎女士你好目前兩位候選人針對",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 744,
+    "review_id": "R054",
+    "reasons": [
+      "提問者姓名黃映穎與0833–0834黃燕怡、0853黃燕儀不一致，未確認正確字形。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5902.599,
+    "end": 5902.639,
+    "text": "一下",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 760,
+    "review_id": "T0760",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5960.49,
+    "end": 5966.036,
+    "text": "%公託準公託第二胎免費這已經成",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 772,
+    "review_id": "R055",
+    "reasons": [
+      "準公託可能為準公共托育的口語簡稱或誤辨，不擅補公共二字。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 5977.849,
+    "end": 5983.784,
+    "text": "公車上班路過輝達的新群總部感受到北市科已經是",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 775,
+    "review_id": "R056",
+    "reasons": [
+      "輝達的新群總部可能指星群建築或新總部，專名未確認，不猜字。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6070.369,
+    "end": 6076.274,
+    "text": "人已經很習慣去各地的敷衍吸菸室吸菸走在臺北街頭你",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 792,
+    "review_id": "R057",
+    "reasons": [
+      "敷衍吸菸室不成明確設施名，可能為複合、附設等誤辨，未接受替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6105.612,
+    "end": 6111.561,
+    "text": "畢業不用擔心租約到就要翻到轉學區達到4年後的那一個早晨",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 798,
+    "review_id": "R058",
+    "reasons": [
+      "翻到轉學區達到語意不順，疑為連續誤辨；不可按幸福住宅政策自行補句。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6168.771,
+    "end": 6174.759,
+    "text": "實就是家庭一戰同家長版的1999因為這個0到18歲在這個養育的",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 810,
+    "review_id": "R059",
+    "reasons": [
+      "家庭一戰同家長版的1999疑為家庭驛站相關政策名稱；未確認是否有同等漏辨，不接受整段猜修。"
+    ],
+    "suggestion": "家庭驛站"
+  },
+  {
+    "start": 6243.23,
+    "end": 6248.678,
+    "text": "還可以促成觀光的效益那還有一個我們推出的親子童心卡剛剛說到底要去",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 823,
+    "review_id": "R060",
+    "reasons": [
+      "親子童心卡可能是政策專名同音字問題；未確認字形，不擅改。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6296.768,
+    "end": 6302.266,
+    "text": "好繼續第二位媒體代表是由三立新聞網資深總監黃燕怡女士提問同樣兩位",
+    "speaker": "SPEAKER_00",
+    "timing": "aligned",
+    "label": "主持人2／三立",
+    "id": 833,
+    "review_id": "R061",
+    "reasons": [
+      "黃燕怡與0744、0853姓名字形不一致，需共同核對，不猜定。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6302.266,
+    "end": 6308.044,
+    "text": "候選人各有三分鐘時間回答請黃燕怡女士提問提問時間兩分鐘請開始",
+    "speaker": "SPEAKER_00",
+    "timing": "aligned",
+    "label": "主持人2／三立",
+    "id": 834,
+    "review_id": "R062",
+    "reasons": [
+      "同0833，黃燕怡的姓名字形未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6365.345,
+    "end": 6371.11,
+    "text": "人在現行的法定之下你認為臺北的都更現在面臨到最艱困的",
+    "speaker": "SPEAKER_01",
+    "timing": "aligned",
+    "label": "提問記者2／三立",
+    "id": 845,
+    "review_id": "R063",
+    "reasons": [
+      "現行的法定之下可能為法令或法制，但不能確定，暫留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6408.667,
+    "end": 6414.655,
+    "text": "謝謝黃燕儀女士的提問剛剛講到所謂的韌性城市韌性城市大概可以分成兩",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 853,
+    "original_text": "謝謝黃燕儀女士的提問剛剛講到所謂的韌性程式韌性程式大概可以分成兩",
+    "correction_id": "C196",
+    "review_id": "R064",
+    "reasons": [
+      "黃燕儀與0744、0833姓名字形不一致；本字幕僅接受韌性城市術語修正。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6457.257,
+    "end": 6463.128,
+    "text": "有那麼多的時間來跟大家介紹但是它有可能是一個能夠去加速的解放那回",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 862,
+    "review_id": "R065",
+    "reasons": [
+      "加速的解放可能為解方，但不能排除原話用詞，暫留。"
+    ],
+    "suggestion": "解方"
+  },
+  {
+    "start": 6553.499,
+    "end": 6559.445,
+    "text": "現在既有的資源不管是專有的還是公有的去提供耐震補助跟都",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 879,
+    "original_text": "現在既有的資源不管是專有的還是公有的去提供耐震補助跟督",
+    "correction_id": "C198",
+    "review_id": "R066",
+    "reasons": [
+      "專有的還是公有的可能為私有的還是公有的；兩種產權詞皆存在，不以對偶合理性替換。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6617.694,
+    "end": 6623.562,
+    "text": "動介入讓他們儘速的改建另外對於潛在危險的建物像是年輕63年以",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 891,
+    "review_id": "R067",
+    "reasons": [
+      "年輕63年以前的建物疑有年代前詞誤辨；可能為民國63年，但未確認，必須保留63數值。"
+    ],
+    "suggestion": "民國63年以前，待核"
+  },
+  {
+    "start": 6682.496,
+    "end": 6688.449,
+    "text": "然風險幾乎一樣胡志門知秋就是一個好例子給了我們很大的啟發而都更",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 902,
+    "review_id": "R068",
+    "reasons": [
+      "胡志門知秋疑為東京地震或防災用語嚴重誤辨；不猜事件名或日期。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6711.479,
+    "end": 6717.246,
+    "text": "是其他五都加總1.4倍另外提問人提到有關風險",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 907,
+    "review_id": "R069",
+    "reasons": [
+      "其他五都加總1.4倍與0224的1.3倍不一致；可能為原話差異，不改任何數值。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6722.897,
+    "end": 6728.888,
+    "text": "網第一大街廓的都更基準容積從25提高到300大幅",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 909,
+    "review_id": "R070",
+    "reasons": [
+      "基準容積從25提高到300有可能漏數字，但亦可能為原話；不能補零或變更數值。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 6734.779,
+    "end": 6740.504,
+    "text": "099公辦都更只要住戶過半同意市府就開始推動下一階段協",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 911,
+    "review_id": "R071",
+    "reasons": [
+      "與0910連讀為5099，與前文7599不同；可能是另一政策或原話，數值保留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7098.521,
+    "end": 7104.21,
+    "text": "想到我的對手沈委員很多人會想到楊柳但是隱藏在背後的沈委",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 930,
+    "review_id": "R072",
+    "reasons": [
+      "楊柳可能是詞語或專名誤辨，亦可能為原話梗或引述；不依政治印象改成其他詞。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7117.13,
+    "end": 7117.15,
+    "text": "麼",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 934,
+    "review_id": "T0934",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7134.018,
+    "end": 7139.967,
+    "text": "為身邊有府院黨包裝宣傳一夕之間他好像成了一",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 938,
+    "review_id": "R073",
+    "reasons": [
+      "為身邊有府院黨的句首疑有漏詞或人名，但無法可靠恢復，暫留。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7238.499,
+    "end": 7244.468,
+    "text": "講話的人我一定會說話但是我真的知道我有方",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 956,
+    "review_id": "R074",
+    "reasons": [
+      "我一定會說話與前後自評可能矛盾，仍可能是原話，不加不字來合理化。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7282.706,
+    "end": 7288.013,
+    "text": "會推動大罷免的人而是一個能夠城市團結一",
+    "speaker": "SPEAKER_04",
+    "timing": "aligned",
+    "label": "辯論者2／蔣萬安",
+    "id": 964,
+    "review_id": "R075",
+    "reasons": [
+      "能夠城市團結一起可能漏讓字；不為潤句而補字。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7392.8,
+    "end": 7392.82,
+    "text": "了",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 984,
+    "review_id": "T0984",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7508.994,
+    "end": 7513.88,
+    "text": "我塞到車車裡面的時候想說我們交通要改革結果現在只幫我們省了2到3",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 1006,
+    "review_id": "R076",
+    "reasons": [
+      "我塞到車車裡面的時候疑有重複或誤辨，不能確定是否原話停頓；與下一字幕數字連讀另須核對。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7513.88,
+    "end": 7519.568,
+    "text": "3秒我要找市長我找不到營養午餐今天出了問題他要找市長他找不",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 1007,
+    "review_id": "R077",
+    "reasons": [
+      "與1006連讀為2到33秒，可能跨字幕多出一個3，也可能為原話數值；不擅刪或改成2到3秒。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7556.231,
+    "end": 7556.271,
+    "text": "什麼",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 1017,
+    "review_id": "T1017",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7568.266,
+    "end": 7568.286,
+    "text": "來",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 1021,
+    "review_id": "T1021",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7573.597,
+    "end": 7579.506,
+    "text": "寫著我們是復興的小火炬是世上的光所以我們作為市長",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 1023,
+    "original_text": "寫著我們是復興的小夥劇是世上的光所以我們作為市長",
+    "correction_id": "C218",
+    "review_id": "R078",
+    "reasons": [
+      "此處為校徽或校歌引述，雖小火炬可明確修字，仍不可按記憶重建整段校訓。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7586.558,
+    "end": 7586.578,
+    "text": "嗎",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 1026,
+    "review_id": "T1026",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7645.078,
+    "end": 7650.905,
+    "text": "被當立委從第一個會期到現在每一個會期都是優秀立委今",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 1037,
+    "review_id": "R079",
+    "reasons": [
+      "被當立委可能是被選上、當上等誤辨，也可能原話；不推定其當選方式。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7670.09,
+    "end": 7670.11,
+    "text": "值",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 1042,
+    "review_id": "T1042",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7683.197,
+    "end": 7688.947,
+    "text": "贏你要管你有沒有你當你把票投給你想要的生活",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 1045,
+    "review_id": "R080",
+    "reasons": [
+      "引述不用管哪個候選人贏你要管你有沒有你當你把票投給等字句不順，可能漏贏字或口誤，不用外部引文重寫。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7691.552,
+    "end": 7691.592,
+    "text": "贏了",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 1047,
+    "review_id": "T1047",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 7754.188,
+    "end": 7758.315,
+    "text": "這一",
+    "speaker": "SPEAKER_03",
+    "timing": "aligned",
+    "label": "辯論者1／沈伯洋",
+    "id": 1059,
+    "review_id": "R081",
+    "reasons": [
+      "約4秒僅這一，且1057–1061提到禮運大同篇卻未呈現引文，疑有漏辨；不可憑古文補入鰥寡孤獨等原文。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 8005.578,
+    "end": 8005.598,
+    "text": "句",
+    "speaker": "UNKNOWN",
+    "timing": "aligned",
+    "label": "說話者未確認",
+    "id": 1076,
+    "review_id": "T1076",
+    "reasons": [
+      "說話者時間未與語音重疊，身分未確認。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 8011.969,
+    "end": 8017.88,
+    "text": "市政的觀眾朋友心中更有定見了也請別忘了11月28號投向",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 1080,
+    "original_text": "市政的觀眾朋友心中更有並見了也請別忘了11月28號投向",
+    "correction_id": "C225",
+    "review_id": "R087",
+    "reasons": [
+      "「投向您神聖的一票」雖搭配不常見，兩輪均為投向；保留可能的主持人口誤，不改成投下。"
+    ],
+    "suggestion": ""
+  },
+  {
+    "start": 8017.88,
+    "end": 8023.851,
+    "text": "您神聖的一票我們在此預祝兩位臺北市長候選人順利成功",
+    "speaker": "SPEAKER_05",
+    "timing": "aligned",
+    "label": "主持人1／TVBS",
+    "id": 1081,
+    "review_id": "R082",
+    "reasons": [
+      "預祝兩位候選人順利成功可能看似不合選舉邏輯，仍保留可能的主持人原話。"
+    ],
+    "suggestion": ""
+  }
+]

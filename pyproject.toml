@@ -1,0 +1,39 @@
+[project]
+name = "2026-debate"
+version = "0.1.0"
+description = "Timestamped debate transcripts with WhisperX and pyannote.audio"
+readme = "README.md"
+authors = [
+    { name = "narumi", email = "toucans-cutouts0f@icloud.com" }
+]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "huggingface-hub>=0.34,<1",
+    "imageio-ffmpeg>=0.6,<1",
+    "loguru>=0.7.3",
+    "opencc-python-reimplemented>=0.1.7",
+    "pyannote-audio==3.4.0",
+    "torch==2.8.0",
+    "torchaudio==2.8.0",
+    "transformers>=4.48,<5",
+    "typer>=0.27.3",
+    "whisperx==3.7.2",
+]
+
+[project.scripts]
+2026-debate = "debate.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "debate"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.3",
+    "ty>=0.0.95",
+]

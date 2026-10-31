@@ -1,0 +1,87 @@
+{
+  "source_file": "plpXPrOoV2w.webm",
+  "duration_seconds": 8085.0024375,
+  "cue_count": 1082,
+  "speaker_count": 6,
+  "display_language": "zh-Hant-TW",
+  "script_conversion": "s2tw",
+  "accepted_corrected_cues": 225,
+  "normalization_changed_cues": 46,
+  "pending_review_cues": 104,
+  "unassigned_speaker_cues": 18,
+  "long_alignment_cues": 3,
+  "overlapping_adjacent_cues": 9,
+  "cue_ids_times_and_speakers_unchanged": true,
+  "arabic_numeric_tokens_unchanged": true,
+  "reviewed_text_matches_ledger": true,
+  "source_word_timing_is_unreviewed": true,
+  "original_model_checkpoints_preserved": true,
+  "ffmpeg_parsed_cues": {
+    "subtitles.srt": 1082,
+    "subtitles.vtt": 1082
+  },
+  "html_embedded_cues_match_json": true,
+  "committable_data_files_text_only": true,
+  "no_absolute_machine_paths_or_credential_patterns_in_data": true,
+  "independent_asr_segments": 259,
+  "targeted_recheck_clips": 10,
+  "role_anchor_checks": {
+    "SPEAKER_05": {
+      "label": "主持人1／TVBS",
+      "start": 863.9,
+      "end": 866.2,
+      "passed": true
+    },
+    "SPEAKER_00": {
+      "label": "主持人2／三立",
+      "start": 866.2,
+      "end": 869,
+      "passed": true
+    },
+    "SPEAKER_03": {
+      "label": "辯論者1／沈伯洋",
+      "start": 1050,
+      "end": 1500,
+      "passed": true
+    },
+    "SPEAKER_04": {
+      "label": "辯論者2／蔣萬安",
+      "start": 1583,
+      "end": 2010,
+      "passed": true
+    },
+    "SPEAKER_02": {
+      "label": "提問記者1／TVBS",
+      "start": 5830.8,
+      "end": 5925,
+      "passed": true
+    },
+    "SPEAKER_01": {
+      "label": "提問記者2／三立",
+      "start": 6308.7,
+      "end": 6400,
+      "passed": true
+    }
+  },
+  "browser": {
+    "url_path": "/data/",
+    "desktop_viewport": [
+      1440,
+      1000
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "search_highlight_and_speaker_filter": true,
+    "correction_and_pending_views": true,
+    "keyboard_tabs": true,
+    "video_seek_and_hash_navigation": true,
+    "caption_cues": 1082,
+    "horizontal_overflow": false,
+    "console_errors_or_warnings": 0,
+    "media_range_http_status": 206
+  },
+  "unit_tests_passed": 170,
+  "all_speech_manually_verified": false
+}
