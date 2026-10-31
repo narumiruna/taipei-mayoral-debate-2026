@@ -85,12 +85,6 @@ button:disabled {
   font-weight: 400;
   color: var(--muted);
 }
-.masthead-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 6px 20px;
-}
 .edition {
   color: var(--muted);
   font-size: 12px;
@@ -230,7 +224,7 @@ h2 {
   font-size: 11px;
   color: var(--muted);
 }
-.search-label:not([hidden]) {
+.search-label {
   display: block;
   font-size: 12px;
   margin-bottom: 7px;
@@ -302,8 +296,7 @@ h2 {
 }
 .tabs {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0 22px;
+  gap: 22px;
   border-bottom: 1px solid var(--line);
 }
 .tabs button {
@@ -328,7 +321,7 @@ h2 {
   border-radius: 3px;
   font-variant-numeric: tabular-nums;
 }
-.result-bar:not([hidden]) {
+.result-bar {
   display: flex;
   justify-content: space-between;
   gap: 12px;
@@ -748,331 +741,6 @@ mark {
   text-align: center;
   margin: 32px 0 0;
 }
-/* Question responsiveness: source evidence and hypothetical examples. */
-.assessment {
-  padding-top: 25px;
-  font-size: 13px;
-  overflow-wrap: anywhere;
-}
-.assessment h3 {
-  margin: 0 0 14px;
-  font-size: 16px;
-  line-height: 1.7;
-}
-.assessment h4 {
-  margin: 0 0 10px;
-  font-size: 13px;
-}
-.assessment p {
-  margin: 8px 0;
-}
-.assessment-kicker {
-  font-size: 10px;
-  color: var(--clay);
-  letter-spacing: 0.12em;
-}
-.assessment-intro h3 {
-  font-family: var(--serif);
-  font-size: 24px;
-  margin-top: 10px;
-}
-.assessment-intro p {
-  color: var(--muted);
-}
-.assessment-intro strong {
-  color: var(--ink);
-  font-weight: 600;
-}
-.assessment-notice {
-  margin: 20px 0;
-  padding: 14px 18px;
-  border-left: 3px solid var(--clay);
-  background: #f1e9df;
-  font-size: 12px;
-}
-.assessment-notice p {
-  margin-bottom: 0;
-}
-.assessment-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr;
-  gap: 14px;
-  margin: 24px 0 0;
-}
-.assessment-stats dt {
-  font-size: 11px;
-  color: var(--muted);
-}
-.assessment-stats dd {
-  margin: 5px 0 0;
-  font-size: 21px;
-  font-variant-numeric: tabular-nums;
-}
-.assessment-stats small {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-}
-.assessment-section {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-}
-.assessment-caption,
-.assessment-caution {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.9;
-}
-.assessment .assessment-caution {
-  color: #88432d;
-  padding-left: 10px;
-  border-left: 2px solid var(--clay);
-}
-.question-select {
-  width: 100%;
-  min-width: 0;
-  padding: 10px;
-  background: var(--surface);
-  border: 1px solid #c8ccc9;
-  border-radius: 3px;
-  font-size: 12px;
-}
-.question-card,
-.answer-card {
-  margin-top: 14px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-}
-.evidence-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-}
-.evidence-link {
-  background: transparent;
-  color: var(--blue);
-  font-size: 11px;
-  padding: 5px 0;
-  margin-left: auto;
-}
-.subquestions {
-  padding-left: 22px;
-  margin: 12px 0;
-}
-.subquestions li {
-  margin: 5px 0;
-}
-.evidence-source summary,
-.assessment-references summary {
-  color: var(--blue);
-  cursor: pointer;
-  padding: 7px 0;
-  font-size: 12px;
-}
-.evidence-quote {
-  margin: 12px 0;
-  padding-left: 12px;
-  border-left: 2px solid var(--line);
-  font-family: var(--serif);
-  font-size: 16px;
-  line-height: 1.9;
-}
-.evidence-quote p {
-  margin: 5px 0;
-}
-.evidence-flags {
-  padding-left: 20px;
-  color: #88432d;
-  font-size: 11px;
-}
-.classification-list,
-.rubric-list {
-  margin: 15px 0;
-}
-.classification-item,
-.rubric-list > div {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-}
-.classification-item dd,
-.rubric-list dd {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-.response-label {
-  --response-color: #647080;
-  color: var(--response-color);
-}
-.response-direct {
-  --response-color: #326a5d;
-}
-.response-partial {
-  --response-color: #76551e;
-}
-.response-evasive {
-  --response-color: #9e4b32;
-}
-.response-refusal {
-  --response-color: #735273;
-}
-.hypothetical-question {
-  margin: 24px 0 14px;
-  padding: 16px;
-  background: #eeeae0;
-}
-.example-label {
-  color: #88432d;
-  font-size: 11px;
-  font-weight: 600;
-}
-.classification-examples article {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-.classification-examples blockquote {
-  margin: 8px 0;
-  font-family: var(--serif);
-  font-size: 17px;
-}
-.classification-examples p {
-  color: var(--muted);
-  font-size: 12px;
-}
-.assessment-table-wrap {
-  overflow-x: auto;
-  margin: 18px 0;
-}
-.assessment-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-}
-.assessment-table caption {
-  text-align: left;
-  font-size: 11px;
-  color: var(--muted);
-  padding-bottom: 8px;
-}
-.assessment-table th,
-.assessment-table td {
-  text-align: left;
-  border-bottom: 1px solid var(--line);
-  padding: 10px 7px;
-}
-.assessment-table thead th {
-  font-size: 11px;
-  font-weight: 500;
-  white-space: nowrap;
-  color: var(--muted);
-}
-.assessment-table tbody th {
-  font-weight: 500;
-}
-.rate-table td {
-  font-size: 18px;
-}
-.distribution-table td {
-  position: relative;
-  width: 30%;
-}
-.distribution-bar {
-  display: inline-block;
-  vertical-align: middle;
-  height: 8px;
-  background: var(--response-color);
-  opacity: 0.7;
-  margin-right: 8px;
-}
-.distribution-count {
-  display: inline-block;
-  min-width: 16px;
-}
-.assessment-formula {
-  font-size: 11px;
-  background: #eeeee7;
-  padding: 12px;
-  color: #4a5564;
-}
-.rubric-list dt {
-  font-weight: 600;
-}
-.rubric-list dt span {
-  display: block;
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--muted);
-}
-.quality-calculator {
-  margin-top: 20px;
-  padding: 18px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-}
-.quality-calculator h4 span {
-  display: block;
-  margin-top: 4px;
-}
-.quality-controls {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 16px;
-  margin-top: 16px;
-}
-.quality-control span {
-  display: block;
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-.quality-control select {
-  width: 100%;
-  padding: 8px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-}
-.quality-result {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 20px;
-}
-.quality-result output {
-  font-size: 28px;
-  font-variant-numeric: tabular-nums;
-}
-.quality-result button {
-  padding: 7px 10px;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  font-size: 11px;
-}
-.assessment-method {
-  padding-left: 22px;
-}
-.assessment-method li {
-  margin: 12px 0;
-}
-.assessment-references {
-  margin-top: 20px;
-  font-size: 12px;
-}
-.assessment-references ul {
-  padding-left: 20px;
-}
-.assessment-references li {
-  margin-bottom: 15px;
-}
-.assessment-references p {
-  color: var(--muted);
-}
 footer {
   display: flex;
   align-items: center;
@@ -1122,7 +790,7 @@ footer a {
     gap: 32px;
   }
   .tabs {
-    gap: 0 14px;
+    gap: 14px;
   }
   .stats > div {
     padding: 0 24px;
@@ -1269,26 +937,8 @@ footer a {
     line-height: 2.25;
   }
   .tabs {
-    gap: 0 14px;
-  }
-  .section-heading {
-    flex-wrap: wrap;
-  }
-  .assessment-intro h3 {
-    font-size: 21px;
-  }
-  .assessment-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-  .assessment-stats > div:last-child {
-    grid-column: 1 / -1;
-  }
-  .question-card,
-  .answer-card {
-    padding: 12px;
-  }
-  .evidence-link {
-    margin-left: 0;
+    gap: 0;
+    justify-content: space-between;
   }
   .tabs button {
     font-size: 12px;

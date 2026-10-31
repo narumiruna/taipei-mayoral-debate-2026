@@ -1,7 +1,58 @@
-import { mountResponsiveness } from "./responsiveness";
-import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
-
 (() => {
+  interface TranscriptMetadata {
+    duration: number | null;
+    model: string | null;
+    stage: string | null;
+  }
+
+  interface SpeakerRole {
+    role: string;
+    name: string;
+  }
+
+  interface Cue {
+    id: number;
+    start: number;
+    end: number;
+    speaker: string;
+    label: string;
+    text: string;
+    timing: string;
+    original_text?: string;
+    correction_id?: string;
+  }
+
+  interface Correction {
+    id: string;
+    cue_id: number;
+    before: string;
+    after: string;
+    reason: string;
+    evidence: string;
+  }
+
+  interface Flag {
+    id: string;
+    cue_id: number;
+    reason: string;
+    suggestion?: string;
+  }
+
+  interface Review {
+    corrections: Correction[];
+    flags: Flag[];
+    method: string;
+    source_sha256: string;
+  }
+
+  interface TranscriptData {
+    metadata: TranscriptMetadata;
+    display_language: string;
+    roles: Record<string, SpeakerRole>;
+    cues: Cue[];
+    review: Review;
+  }
+
   interface YouTubePlayer {
     getCurrentTime(): number;
     getPlayerState(): number;
@@ -24,7 +75,7 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
     ) => YouTubePlayer;
   }
 
-  type View = "transcript" | "corrections" | "pending" | "responsiveness";
+  type View = "transcript" | "corrections" | "pending";
   type ReviewItem = Correction | Flag;
 
   function requiredElement<T extends HTMLElement>(id: string, type: new () => T): T {
@@ -61,12 +112,7 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
         throw new Error("Each tab must be a button");
       }
       const view = button.dataset.view;
-      if (
-        view !== "transcript" &&
-        view !== "corrections" &&
-        view !== "pending" &&
-        view !== "responsiveness"
-      ) {
+      if (view !== "transcript" && view !== "corrections" && view !== "pending") {
         throw new Error(`Invalid tab view: ${view}`);
       }
       return { button, view };
@@ -342,10 +388,6 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
   }
 
   function render(): void {
-    if (currentView === "responsiveness") {
-      $("empty-state").hidden = true;
-      return;
-    }
     query = search.value.trim().toLocaleLowerCase("zh-TW");
     selectedSpeaker = speakerFilter.value;
     $("clear-search").hidden = !search.value;
@@ -401,12 +443,6 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
 
   function switchView(view: View, focus = false): void {
     currentView = view;
-    const assessment = view === "responsiveness";
-    $("reader-filters").hidden = assessment;
-    $("reader-results").hidden = assessment;
-    $("reader-end-note").hidden = assessment;
-    $("record-heading").textContent = assessment ? "問答回應品質評估" : "發言紀錄";
-    $("record-heading-note").textContent = assessment ? "分類、品質與事實分開看" : "依影音時間排序";
     tabs.forEach(({ button, view: tabView }) => {
       const selected = tabView === view;
       button.setAttribute("aria-selected", String(selected));
@@ -417,22 +453,6 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
     render();
   }
 
-  function navigateTab(view: View, focus = false): void {
-    switchView(view, focus);
-    const hash =
-      view === "responsiveness"
-        ? "#responsiveness"
-        : window.location.hash === "#responsiveness"
-          ? "#record"
-          : null;
-    if (!hash) return;
-    try {
-      history.replaceState(null, "", hash);
-    } catch {
-      // Tab navigation also works when history changes are blocked.
-    }
-  }
-
   function resetFilters(): void {
     search.value = "";
     speakerFilter.value = "__all__";
@@ -440,14 +460,6 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
   }
 
   function revealHash(): void {
-    if (
-      !window.location.hash ||
-      window.location.hash === "#responsiveness" ||
-      window.location.hash === "#record"
-    ) {
-      switchView(window.location.hash === "#responsiveness" ? "responsiveness" : "transcript");
-      return;
-    }
     const match = /^#cue-(\d+)$/.exec(window.location.hash);
     const clock = /^#time-(\d+(?:\.\d+)?)$/.exec(window.location.hash);
     const seconds = clock ? Number(clock[1]) : null;
@@ -629,20 +641,6 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
   }
   if (!chapterButtons.length) $("chapters").append(element("p", "index-note", "尚無時間索引"));
 
-  mountResponsiveness(data, {
-    speakerBadge,
-    timestampButton,
-    openTranscript: (cue) => {
-      resetFilters();
-      switchView("transcript");
-      seek(cue);
-      requestAnimationFrame(() => {
-        $("panel-transcript").focus({ preventScroll: true });
-        cueElements.get(String(cue.id))?.scrollIntoView({ block: "center", behavior: "instant" });
-      });
-    },
-  });
-
   search.addEventListener("input", render);
   speakerFilter.addEventListener("change", render);
   requiredElement("clear-search", HTMLButtonElement).addEventListener("click", () => {
@@ -653,7 +651,7 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
   requiredElement("reset-filters", HTMLButtonElement).addEventListener("click", resetFilters);
   requiredElement("empty-reset", HTMLButtonElement).addEventListener("click", resetFilters);
   tabs.forEach(({ button, view }, index) => {
-    button.addEventListener("click", () => navigateTab(view));
+    button.addEventListener("click", () => switchView(view));
     button.addEventListener("keydown", (event) => {
       let next: number | undefined;
       if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
@@ -663,16 +661,13 @@ import type { Correction, Cue, Flag, TranscriptData } from "./transcript";
       if (next !== undefined) {
         event.preventDefault();
         const nextTab = tabs[next];
-        if (nextTab) navigateTab(nextTab.view, true);
+        if (nextTab) switchView(nextTab.view, true);
       }
     });
   });
   followPlayback.addEventListener("change", () => {
     lastFollowedId = null;
     updatePlayback();
-  });
-  document.querySelectorAll('a[href="#record"]').forEach((link) => {
-    link.addEventListener("click", () => switchView("transcript"));
   });
   window.addEventListener("hashchange", revealHash);
   render();
