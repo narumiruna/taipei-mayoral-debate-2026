@@ -82,6 +82,7 @@ def test_export_uses_checkpoint_without_inference(
 
     assert result.exit_code == 0, result.output
     assert checkpoint.read_bytes() == original
+    assert not (tmp_path / "index.html").exists()
     for name in ("subtitles.srt", "subtitles.vtt", "transcript.md", "validation.json"):
         assert (tmp_path / name).is_file()
     artifact = json.loads((tmp_path / "transcript.json").read_text(encoding="utf-8"))

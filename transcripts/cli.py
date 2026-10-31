@@ -70,7 +70,7 @@ def export_transcript(
     ] = None,
     destination: Annotated[Path | None, typer.Option(file_okay=False)] = None,
 ) -> None:
-    """Regenerate reviewed text and HTML exports without model inference."""
+    """Regenerate reviewed transcript data without model inference."""
     checkpoint = output_dir / "work" / "result.json"
     if not checkpoint.exists():
         logger.error("No result checkpoint: {}", checkpoint)

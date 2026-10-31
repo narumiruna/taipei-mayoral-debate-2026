@@ -5,12 +5,16 @@
     "prepare": "husky",
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
+    "test:browser": "bun run build && node --test tests/browser_fact_checks.mjs",
     "check": "biome check --error-on-warnings . && bun run typecheck",
-    "build": "bun run check && mkdir -p transcripts/assets && bun build web/page.ts --target browser --format iife --banner '/* Generated from web/page.ts. Run bun run build to update. */ \"use strict\";' --outfile transcripts/assets/page.js && cp web/page.css web/page.html transcripts/assets/"
+    "build": "bun run build:assets && bun run build:site",
+    "build:site": "uv run --no-project python -m transcripts.site",
+    "build:assets": "bun run check && mkdir -p transcripts/assets && bun build web/page.ts --target browser --format iife --banner '/* Generated from web/page.ts. Run bun run build to update. */ \"use strict\";' --outfile transcripts/assets/page.js && cp web/page.css web/page.html transcripts/assets/"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.4",
     "husky": "9.1.7",
+    "playwright": "1.64.1",
     "typescript": "7.0.2"
   }
 }

@@ -281,7 +281,4 @@ def export(
         "pending_review_cues": len(review["flags"]),
     }
     save_json(output / "validation.json", summary)
-    from .web import render_page
-
-    render_page(artifact, output)
     return summary

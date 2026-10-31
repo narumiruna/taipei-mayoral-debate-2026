@@ -13,10 +13,11 @@ Public site: <https://narumiruna.github.io/taipei-mayoral-debate-2026/>.
 | `transcripts/` | Python package: transcription, alignment, speaker separation, review, subtitles, and export |
 | `transcripts/assets/` | Generated JavaScript and copied HTML/CSS used by the Python exporter |
 | `web/` | Frontend TypeScript, CSS, and HTML source |
-| `data/` | Curated transcripts, subtitles, review records, and the single-file web page |
+| `data/` | Curated transcripts, subtitles, review records, and fact-check sources |
+| `site/` | Generated website and public downloads; ignored deployment output |
 | `raw/` | Original media; ignored |
 | `outputs/` | Local media derivatives, logs, screenshots, and inference checkpoints; ignored |
-| `tests/` | Python regression tests |
+| `tests/` | Python regression tests and headless browser checks |
 
 The Python package uses a flat layout without `src/`. Root configuration files
 serve this one project. Python imports use `transcripts`; the distribution and
@@ -24,23 +25,23 @@ console command remain `2026-debate`.
 
 ## Results
 
-Open [`data/index.html`](data/index.html).
+Run `bun run build`, then open `site/index.html`.
 The page has transcript search, speaker filters, video seeking, correction
-comparisons, unresolved review items, and download links. Reader CSS, JavaScript,
-and transcript data are inline. Transcript search and review work offline,
-including when YouTube is blocked. Video playback uses
+comparisons, unresolved review items, sourced fact checks, and download links.
+Reader CSS, JavaScript, and transcript data are inline. Transcript search and
+review work offline, including when YouTube is blocked. Video playback uses
 [YouTube](https://youtu.be/plpXPrOoV2w) and its iframe API. It requires internet
 access and an HTTP(S) preview; YouTube may reject `file://` pages.
 
 | Committable file under `data/` | Contents |
 | --- | --- |
-| `index.html` | Responsive transcript and review page |
 | `transcript.md` | Reviewed timecoded transcript |
 | `transcript.json` | Reviewed cues, original source segments, roles, and review records |
 | `subtitles.srt`, `subtitles.vtt` | Reviewed subtitles |
 | `speaker-roles.json` | Speaker mapping and introduction evidence |
 | `corrections.json` | Exact before/after text, evidence, source fingerprint, and unresolved flags |
 | `review-needed.json` | Unresolved intervals with timestamps |
+| `fact-checks.json` | Selected factual claims, exact cue quotes, dated sources, findings, and limits |
 | `speaker-review.md` | Role mapping and review limits |
 | `validation.json`, `verification.json` | Output checks and counts |
 
@@ -55,20 +56,28 @@ not ignored local media. Download links remain local paths relative to
 ## Deployment
 
 The GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
-publishes `data/` to GitHub Pages. It runs when a push to `main` changes `data/`
-or the workflow file. To deploy manually, select **Actions → Deploy webpage →
-Run workflow** on `main`.
+builds and publishes `site/` to GitHub Pages. Changes to website source, curated
+data, build configuration, or the workflow trigger a build on pull requests and
+pushes to `main`. Only `main` can deploy. To deploy manually, select **Actions →
+Deploy webpage → Run workflow** on `main`.
 
 In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**.
 The published site is <https://narumiruna.github.io/taipei-mayoral-debate-2026/>.
 
-The workflow publishes the committed HTML, transcripts, subtitles, and review
-records without installing Python or running model inference. Rebuild and
-re-export the page before pushing frontend changes. Only `data/` is uploaded;
-`raw/`, `outputs/`, and local credentials are excluded. The published page plays
-the YouTube video; it does not need local video or poster files. Playback requires
-access to YouTube. Transcript search, review views, and relative download links
-do not depend on YouTube.
+The workflow installs Bun and uv, then runs `bun run build`. The Python site
+builder uses only the standard library through `uv run --no-project python`;
+it does not install transcription dependencies or run inference.
+
+The build copies the documented public records from `data/`, validates the
+optional fact-check ledger, and generates one inline HTML page in `site/`.
+It does not change source data. Only `site/` is uploaded. Unknown files, local
+credentials, `raw/`, and `outputs/` are not copied. Do not commit `site/` or write
+HTML into `data/`.
+
+The public homepage and download URLs do not change: `site/` becomes the
+published root, not an extra URL segment. The page plays YouTube video and does
+not need local video or poster files. Playback requires access to YouTube;
+transcript search, fact checks, review views, and local downloads do not.
 
 ### Playback limits
 
@@ -85,16 +94,18 @@ YouTube link remains available when embedded playback is restricted.
 
 ## Preview
 
-For video playback, run this command from the repository root:
+From the repository root, build and serve only the deployment output:
 
 ```bash
-uv run python -m http.server 8765 --bind 127.0.0.1
+bun run build
+uv run --no-project python -m http.server 8765 --bind 127.0.0.1 --directory site
 ```
 
-Then open <http://127.0.0.1:8765/data/> with internet access. YouTube may reject
-playback from `file://` pages. You can open the HTML file directly for offline
-transcript search and review. The server listens only on the local interface.
-Do not expose it as a public server.
+Then open <http://127.0.0.1:8765/#fact-checks> for the fact-check tab or
+<http://127.0.0.1:8765/> for the transcript. YouTube requires internet access and
+may reject `file://` playback. You can open `site/index.html` directly for offline
+reading. The server listens only on the local interface and does not serve the
+repository. Do not expose it as a public server.
 
 ## Review status
 
@@ -132,6 +143,38 @@ complete manual listening review or a political fact check.
 Use the page's correction and pending-review views before quoting uncertain
 speech. A second ASR result is evidence, not proof of exact speech.
 
+## Fact checks
+
+The **事實查核** tab contains a selected-claim review, separate from ASR text
+corrections. The 2026-10-31 snapshot covers five claims from each debater and
+links to 18 source pages. It is not a complete audit of the debate or either
+candidate's past statements. It does not infer intent or estimate a candidate's
+overall accuracy.
+
+Each item includes exact transcript quotes, video time, a finding, analysis,
+source evidence, and limits. Findings distinguish supported claims, claims that
+need context, claims contradicted by evidence, and insufficient evidence.
+Unresolved ASR flags remain visible. Missing evidence does not establish that a
+claim is false. A source date is the page's marked publication or update date;
+undated pages are identified separately from the review date.
+
+Search includes the findings and source text. The speaker and finding filters
+can be combined. Reading checks works offline; opening source links and video
+requires internet access. The page is a repository research summary, not a
+certification from an external fact-checking organization.
+
+Edit `data/fact-checks.json`, then run `bun run build`. The site builder reads
+`data/transcript.json` and the optional ledger, then passes both to the renderer.
+The renderer never reads input from `site/`. It rejects invalid dates, unsafe
+source URLs, mismatched source hashes, changed quotes, and wrong speaker
+references before publication. Builds without a ledger remain supported.
+The validator checks structure and transcript consistency; it cannot verify
+whether a source supports a conclusion.
+
+Commit the source ledger and any frontend changes, not the generated site.
+Source pages can change. Review the evidence and update findings rather than
+treating validation as renewed source verification.
+
 ## Setup
 
 ```bash
@@ -157,22 +200,36 @@ bun install --frozen-lockfile
 bun run format
 bun run check
 bun run build
+bunx playwright install chromium
+bun run test:browser
 ```
 
-`bun run check` runs Biome and the TypeScript compiler. `bun run build` checks the
-source, bundles `web/page.ts` as a browser IIFE in `transcripts/assets/page.js`,
-and copies `web/page.html` and `web/page.css` into `transcripts/assets/`.
+Website builds need Bun, uv, and a Python interpreter, not the transcription
+packages. Full Python tests and transcription also require `uv sync --dev`.
 
-Edit frontend source only under `web/`. Do not edit `transcripts/assets/` directly;
-regenerate its three runtime files with `bun run build`. Keep those files in the
-Python package so exports and installed wheels do not require `web/`, Bun,
-Node.js, or TypeScript at runtime. Generated assets and data exports are not
-Biome source inputs.
+`bun run test:browser` builds a fresh site, then blocks external requests while
+testing filters, source links, keyboard tabs, transcript navigation, offline
+reading, and widths of 1440, 390, and 320 pixels. It also serves the generated
+files under the GitHub Pages project path and verifies download bytes.
+Screenshots stay under ignored `outputs/fact-checks/`.
 
-After changing the frontend, rebuild it and run the export command below to
-update `data/index.html`. Reader assets and data remain inline in one HTML file;
-no frontend development server is required. Video uses YouTube and requires
-internet access through an HTTP(S) preview.
+`bun run check` runs Biome and the TypeScript compiler. The build has two stages:
+
+1. `bun run build:assets` checks the frontend, bundles `web/page.ts` into
+   `transcripts/assets/page.js`, and copies the HTML and CSS runtime assets.
+2. `bun run build:site` uses the curated data and packaged assets to generate
+   `site/`. It does not need model checkpoints or third-party Python packages.
+
+`bun run build` runs both stages. Edit frontend source only under `web/`; do not
+edit `transcripts/assets/` directly. Keep those generated runtime assets in the
+Python package so installed site builders do not require frontend tools.
+Generated assets, data exports, and `site/` are not Biome source inputs.
+
+The site builder prepares the full output before replacing a previous site.
+Invalid source data leaves the previous output unchanged. Rebuilding removes
+stale output files, including a fact-check ledger removed from the inputs.
+Reader assets and data stay inline in one HTML file; no frontend server is
+required.
 
 ### Git hooks
 
@@ -182,7 +239,8 @@ require `uv sync --dev`.
 
 The pre-commit hook calls `bash scripts/pre-commit.sh`. It runs the frontend
 checks, Ruff lint and format checks, Python type checks, and Python tests.
-A failed check stops the commit. The hook does not format files or rebuild exports.
+A failed check stops the commit. The hook does not format source files or update
+`site/`; regression tests build temporary sites for validation.
 
 To run the same checks manually:
 
@@ -213,8 +271,10 @@ uv run 2026-debate export \
   --output-dir outputs/plpXPrOoV2w \
   --destination data \
   --roles data/speaker-roles.json
+bun run build
 ```
 
+Transcript export writes data only; website generation is a separate step.
 The exporter automatically reads `corrections.json` from the destination.
 Use `--corrections PATH` to import another ledger. Each accepted edit needs a
 unique ID, cue ID, exact `before` text, `after` text, reason, and evidence.
@@ -253,4 +313,5 @@ uv run ty check transcripts
 bun run check
 bun run build
 node --check transcripts/assets/page.js
+bun run test:browser
 ```

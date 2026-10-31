@@ -1,4 +1,14 @@
+from pathlib import Path
+
 import pytest
+
+from transcripts.site import build_site
+
+
+@pytest.fixture(scope="session")
+def curated_site(tmp_path_factory):
+    data = Path(__file__).resolve().parents[1] / "data"
+    return build_site(data, tmp_path_factory.mktemp("curated") / "site")
 
 
 @pytest.fixture

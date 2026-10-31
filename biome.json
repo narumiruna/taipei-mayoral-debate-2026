@@ -6,7 +6,14 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["package.json", "tsconfig.json", "biome.json", "web/**/*.ts", "web/**/*.css"]
+    "includes": [
+      "package.json",
+      "tsconfig.json",
+      "biome.json",
+      "web/**/*.ts",
+      "web/**/*.css",
+      "tests/browser_fact_checks.mjs"
+    ]
   },
   "formatter": {
     "enabled": true,
