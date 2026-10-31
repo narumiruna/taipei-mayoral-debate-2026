@@ -70,10 +70,12 @@
       return hours ? `${hours}:${String(minutes).padStart(2, "0")}:${remainder}` : `${String(minutes).padStart(2, "0")}:${remainder}`;
     }
     function speakerName(speaker, cue) {
+      if (cue?.label)
+        return cue.label;
       const role = data.roles[speaker];
       if (role)
         return [role.role, role.name].filter(Boolean).join("／") || "說話者未確認";
-      return cue?.label || (speaker === "UNKNOWN" ? "說話者未確認" : `${speaker}（角色未確認）`);
+      return speaker === "UNKNOWN" ? "說話者未確認" : `${speaker}（角色未確認）`;
     }
     function speakerBadge(cue) {
       const speaker = speakerKey(cue);

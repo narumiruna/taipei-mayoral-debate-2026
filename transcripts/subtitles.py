@@ -56,6 +56,8 @@ def speaker_label(speaker: str, roles: dict) -> str:
     entry = roles.get(speaker)
     if not entry:
         return "說話者未確認" if speaker == UNKNOWN else f"{speaker}（角色未確認）"
+    if entry["role"].startswith("辯論者") and entry.get("name"):
+        return entry["name"]
     return "／".join(part for part in (entry["role"], entry.get("name", "")) if part)
 
 

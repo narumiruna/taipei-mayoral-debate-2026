@@ -19,6 +19,17 @@ def artifact():
     return json.loads((DATA / "transcript.json").read_text(encoding="utf-8"))
 
 
+@pytest.mark.parametrize(
+    ("speaker", "label"),
+    [("SPEAKER_03", "沈伯洋"), ("SPEAKER_04", "蔣萬安")],
+)
+def test_debater_labels_use_only_names(artifact, speaker, label):
+    cues = [cue for cue in artifact["cues"] if cue["speaker"] == speaker]
+
+    assert cues
+    assert all(cue["label"] == label for cue in cues)
+
+
 def test_host_name_stays_with_tvbs_speaker(artifact):
     cues = {cue["id"]: cue for cue in artifact["cues"]}
 
