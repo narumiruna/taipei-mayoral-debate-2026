@@ -61,6 +61,72 @@ def test_reviewed_exports_use_separate_destination(tmp_path, transcript, roles):
     assert artifact["segments_text_status"] == "original_asr_before_display_review"
 
 
+def test_speaker_review_replays_without_changing_checkpoint(
+    tmp_path, transcript, roles
+):
+    work, destination = tmp_path / "work", tmp_path / "data"
+    segment = transcript["segments"][0]
+    segment["text"] = "謝謝。"
+    segment["words"] = [
+        {"word": "謝", "start": 1.0, "end": 1.9, "speaker": "SPEAKER_00"},
+        {"word": "謝。", "start": 1.9, "end": 2.0},
+    ]
+    checkpoint = work / "work" / "result.json"
+    pipeline.save_json(checkpoint, transcript)
+    original = checkpoint.read_bytes()
+    cues = subtitles.make_cues(transcript, roles)
+    pipeline.save_json(destination / "speaker-roles.json", roles)
+    pipeline.save_json(
+        destination / "corrections.json",
+        {
+            "source_sha256": source_fingerprint(cues),
+            "corrections": [],
+            "speaker_corrections": [
+                {
+                    "id": "S002",
+                    "cue_id": 2,
+                    "before": "UNKNOWN",
+                    "after": "SPEAKER_00",
+                    "reason": "延續前一句的謝謝。",
+                    "evidence": "前後文與既有時間資料。",
+                }
+            ],
+            "flags": [],
+        },
+    )
+    runner = CliRunner()
+    for _ in range(2):
+        response = runner.invoke(
+            cli.app,
+            [
+                "export",
+                "--output-dir",
+                str(work),
+                "--destination",
+                str(destination),
+                "--roles",
+                str(destination / "speaker-roles.json"),
+            ],
+        )
+        assert response.exit_code == 0, response.output
+    artifact = pipeline.load_json(destination / "transcript.json")
+    reviewed = artifact["cues"][1]
+    assert reviewed["speaker"] == "SPEAKER_00"
+    assert reviewed["original_speaker"] == "UNKNOWN"
+    assert reviewed["original_label"] == "說話者未確認"
+    assert reviewed["speaker_correction_id"] == "S002"
+    assert all(reviewed[key] == cues[1][key] for key in ("id", "start", "end", "text"))
+    assert checkpoint.read_bytes() == original
+    assert artifact["review"]["flags"] == []
+    summary = pipeline.load_json(destination / "validation.json")
+    assert summary["unassigned_cues"] == 0
+    assert summary["speaker_corrected_cues"] == 1
+    for name in ["subtitles.srt", "subtitles.vtt", "transcript.md"]:
+        text = (destination / name).read_text(encoding="utf-8")
+        assert "主持人／王小明" in text
+        assert "說話者未確認" not in text
+
+
 def test_youtube_page_is_independent_of_export_directory(tmp_path):
     outputs = [tmp_path / "data", tmp_path / 'nested "exports"' / "site"]
     pages = [

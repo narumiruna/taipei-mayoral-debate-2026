@@ -17,6 +17,18 @@ def render_page(
     if fact_checks is not None:
         fact_checks = validate_fact_checks(fact_checks, artifact)
     review = artifact.get("review") or {}
+    corrections = list(review.get("corrections", []))
+    by_id = {cue["id"]: cue for cue in artifact.get("cues", [])}
+    for entry in review.get("speaker_corrections", []):
+        cue = by_id.get(entry["cue_id"], {})
+        corrections.append(
+            {
+                **entry,
+                "before": cue.get("original_label", entry["before"]),
+                "after": cue.get("label", entry["after"]),
+                "kind": "speaker",
+            }
+        )
     payload = {
         "metadata": {
             key: artifact.get("metadata", {}).get(key)
@@ -42,6 +54,9 @@ def render_page(
                     "timing",
                     "original_text",
                     "correction_id",
+                    "original_speaker",
+                    "original_label",
+                    "speaker_correction_id",
                 )
                 if key in cue
             }
@@ -58,10 +73,11 @@ def render_page(
                         "after",
                         "reason",
                         "evidence",
+                        "kind",
                     )
                     if key in item
                 }
-                for item in review.get("corrections", [])
+                for item in corrections
             ],
             "flags": [
                 {

@@ -186472,12 +186472,15 @@
       "start": 1275.123,
       "end": 1275.143,
       "text": "音。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 76,
       "original_text": "音",
-      "correction_id": "P0076"
+      "correction_id": "P0076",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0076"
     },
     {
       "start": 1276.068,
@@ -187317,12 +187320,15 @@
       "start": 1709.367,
       "end": 1709.387,
       "text": "了。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_04",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "蔣萬安",
       "id": 153,
       "original_text": "了",
-      "correction_id": "P0153"
+      "correction_id": "P0153",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0153"
     },
     {
       "start": 1709.671,
@@ -188041,10 +188047,13 @@
       "start": 2390.071,
       "end": 2390.091,
       "text": "。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_00",
       "timing": "aligned",
-      "label": "說話者未確認",
-      "id": 219
+      "label": "李文儀／三立",
+      "id": 219,
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0219"
     },
     {
       "start": 2390.712,
@@ -188611,12 +188620,15 @@
       "start": 2675.832,
       "end": 2675.852,
       "text": "嗎？",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 271,
       "original_text": "嗎",
-      "correction_id": "P0271"
+      "correction_id": "P0271",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0271"
     },
     {
       "start": 2675.984,
@@ -189608,12 +189620,15 @@
       "start": 3166.473,
       "end": 3166.493,
       "text": "嗎？",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 362,
       "original_text": "嗎",
-      "correction_id": "P0362"
+      "correction_id": "P0362",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0362"
     },
     {
       "start": 3167.215,
@@ -190180,12 +190195,15 @@
       "start": 3446.632,
       "end": 3446.652,
       "text": "始。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_05",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "黃欣樺／TVBS",
       "id": 414,
       "original_text": "始",
-      "correction_id": "P0414"
+      "correction_id": "P0414",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0414"
     },
     {
       "start": 3447.712,
@@ -190244,12 +190262,15 @@
       "start": 3472.093,
       "end": 3472.133,
       "text": "多萬。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 420,
       "original_text": "多萬",
-      "correction_id": "P0420"
+      "correction_id": "P0420",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0420"
     },
     {
       "start": 3472.315,
@@ -191879,12 +191900,15 @@
       "start": 4601.725,
       "end": 4601.745,
       "text": "懲。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_04",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "蔣萬安",
       "id": 569,
       "original_text": "懲",
-      "correction_id": "P0569"
+      "correction_id": "P0569",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0569"
     },
     {
       "start": 4601.843,
@@ -192726,12 +192750,15 @@
       "start": 5020.242,
       "end": 5020.262,
       "text": "謝。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 646,
       "original_text": "謝",
-      "correction_id": "P0646"
+      "correction_id": "P0646",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0646"
     },
     {
       "start": 5020.917,
@@ -193976,12 +194003,15 @@
       "start": 5902.599,
       "end": 5902.639,
       "text": "一下？",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_02",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "樊啟明／TVBS",
       "id": 760,
       "original_text": "一下",
-      "correction_id": "P0760"
+      "correction_id": "P0760",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0760"
     },
     {
       "start": 5902.619,
@@ -195886,12 +195916,15 @@
       "start": 7117.13,
       "end": 7117.15,
       "text": "麼。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_04",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "蔣萬安",
       "id": 934,
       "original_text": "麼",
-      "correction_id": "P0934"
+      "correction_id": "P0934",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0934"
     },
     {
       "start": 7117.13,
@@ -196432,12 +196465,15 @@
       "start": 7392.8,
       "end": 7392.82,
       "text": "了。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_04",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "蔣萬安",
       "id": 984,
       "original_text": "了",
-      "correction_id": "P0984"
+      "correction_id": "P0984",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S0984"
     },
     {
       "start": 7393.238,
@@ -196793,12 +196829,15 @@
       "start": 7556.231,
       "end": 7556.271,
       "text": "什麼？",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 1017,
       "original_text": "什麼",
-      "correction_id": "P1017"
+      "correction_id": "P1017",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S1017"
     },
     {
       "start": 7556.251,
@@ -196835,12 +196874,15 @@
       "start": 7568.266,
       "end": 7568.286,
       "text": "來。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 1021,
       "original_text": "來",
-      "correction_id": "P1021"
+      "correction_id": "P1021",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S1021"
     },
     {
       "start": 7568.468,
@@ -196888,12 +196930,15 @@
       "start": 7586.558,
       "end": 7586.578,
       "text": "嗎？",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 1026,
       "original_text": "嗎",
-      "correction_id": "P1026"
+      "correction_id": "P1026",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S1026"
     },
     {
       "start": 7587.2,
@@ -197062,12 +197107,15 @@
       "start": 7670.09,
       "end": 7670.11,
       "text": "值。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 1042,
       "original_text": "值",
-      "correction_id": "P1042"
+      "correction_id": "P1042",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S1042"
     },
     {
       "start": 7671.575,
@@ -197117,12 +197165,15 @@
       "start": 7691.552,
       "end": 7691.592,
       "text": "贏了。",
-      "speaker": "UNKNOWN",
+      "speaker": "SPEAKER_03",
       "timing": "aligned",
-      "label": "說話者未確認",
+      "label": "沈伯洋",
       "id": 1047,
       "original_text": "贏了",
-      "correction_id": "P1047"
+      "correction_id": "P1047",
+      "original_speaker": "UNKNOWN",
+      "original_label": "說話者未確認",
+      "speaker_correction_id": "S1047"
     },
     {
       "start": 7693.225,
@@ -197503,7 +197554,7 @@
   "segments_text_status": "original_asr_before_display_review",
   "review": {
     "source_sha256": "bcc1e56e8d98ed44e2c48d219314380627d9b3e02a76f3f6433645328899aae2",
-    "method": "全片以Whisper large-v3轉錄，另以large-v2完整重辨，並對10處疑點以未分批large-v3再次辨識。依使用者確認的姓名及上下文修正明確錯字；不等同人工逐句聽辨或政治事實查核。保留可能口誤、數值與未確認的漏字。另依跨段語意檢查全數1,082段並補上中文標點；不改動既有文字、數字、時間碼、說話者及待確認標記，亦不代表重新聽辨或新增文字校正。",
+    "method": "全片以Whisper large-v3轉錄，另以large-v2完整重辨，並對10處疑點以未分批large-v3再次辨識。依使用者確認的姓名及上下文修正明確錯字；不等同人工逐句聽辨或政治事實查核。保留可能口誤、數值與未確認的漏字。另依跨段語意檢查全數1,082段並補上中文標點；不改動既有文字、數字、時間碼、說話者及待確認標記，亦不代表重新聽辨或新增文字校正。另檢查18段未確認說話者的短字幕，依前後文與既有時間資料為17段補上說話者；保留1段主持人交接疑點。僅移除已解決的身分旗標，原始說話者、文字及時間資料保留；此項不是人工聽辨。",
     "corrections": [
       {
         "id": "C001",
@@ -207026,6 +207077,158 @@
         "punctuation_before": "感謝您的收看我們再會"
       }
     ],
+    "speaker_corrections": [
+      {
+        "id": "S0076",
+        "cue_id": 76,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「聲」與「音。」合為「聲音」，是上一句的結尾。",
+        "evidence": "第0075段為沈伯洋：「的聲音是沒有被聽到的。而我們做的事情就是聆聽市民的聲」；本段「音。」起於1275.123秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。",
+        "resolved_flags": [
+          {
+            "cue_id": 76,
+            "reason": "僅音一字延續0075聲音，且標為說話者未確認；應核對字幕切分，不依此推定另一位說話者。",
+            "id": "R005"
+          }
+        ]
+      },
+      {
+        "id": "S0153",
+        "cue_id": 153,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_04",
+        "reason": "「我做到」與「了。」合為「我做到了」，是上一句的結尾。",
+        "evidence": "第0152段為蔣萬安：「我做到」；本段「了。」起於1709.367秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。",
+        "resolved_flags": [
+          {
+            "cue_id": 153,
+            "reason": "僅了一字延續0152我做到，說話者標籤及極短切分待核，不據此推定新說話者。",
+            "id": "R015"
+          }
+        ]
+      },
+      {
+        "id": "S0219",
+        "cue_id": 219,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_00",
+        "reason": "本段只有句號，屬於上一段主持人的「請開始」，不是下一位候選人的發言。",
+        "evidence": "第0218段為李文儀／三立：「蔣萬安先生,提問時間一分鐘,請開始」；本段「。」起於2390.071秒，等於上一段終點，僅長20毫秒。下一段已交給蔣萬安，本段仍完成上一句。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0271",
+        "cue_id": 271,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「最重要的事情」後的「嗎？」延續同一位候選人的問句。",
+        "evidence": "第0270段為沈伯洋：「你剛剛的答案來講，不就是最重要的事情」；本段「嗎？」起於2675.832秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0362",
+        "cue_id": 362,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「我長得像卓榮泰」後的「嗎？」延續同一位候選人的問句。",
+        "evidence": "第0361段為沈伯洋：「謝謝蔣市長的提問。我長得像卓榮泰」；本段「嗎？」起於3166.473秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。第二輪未辨出末尾「嗎」，本次只校正說話者，不據此改動文字。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0414",
+        "cue_id": 414,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_05",
+        "reason": "「請開」與「始。」合為主持人的「請開始」，不是下一位候選人的發言。",
+        "evidence": "第0413段為黃欣樺／TVBS：「生，請開」；本段「始。」起於3446.632秒，等於上一段終點，僅長20毫秒。下一段已交給沈伯洋，本段仍完成上一句。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0420",
+        "cue_id": 420,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「5000」後的「多萬。」延續上一句的金額敘述，不改動數值。",
+        "evidence": "第0419段為沈伯洋：「萬暴增到5000」；本段「多萬。」起於3472.093秒，等於上一段終點，僅長40毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0569",
+        "cue_id": 569,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_04",
+        "reason": "「嚴」與「懲。」合為「嚴懲」，是上一句的結尾。",
+        "evidence": "第0568段為蔣萬安：「嚴」；本段「懲。」起於4601.725秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0646",
+        "cue_id": 646,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「謝」與「謝。」合為候選人結束回答的「謝謝」，不是下一位主持人的發言。",
+        "evidence": "第0645段為沈伯洋：「麼，刑度要怎麼設計。謝」；本段「謝。」起於5020.242秒，等於上一段終點，僅長20毫秒。下一段已交給李文儀／三立，本段仍完成上一句。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0760",
+        "cue_id": 760,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_02",
+        "reason": "「休息」後的「一下？」延續同一位記者的提問。",
+        "evidence": "第0759段為樊啟明／TVBS：「走，可以放鬆心情，可以好好的休息」；本段「一下？」起於5902.599秒，等於上一段終點，僅長40毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0934",
+        "cue_id": 934,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_04",
+        "reason": "「說什」與「麼。」合為「說什麼」，是上一句的結尾。",
+        "evidence": "第0933段為蔣萬安：「說什」；本段「麼。」起於7117.130秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S0984",
+        "cue_id": 984,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_04",
+        "reason": "「忍耐很久」後的「了。」延續同一位候選人的引述。",
+        "evidence": "第0983段為蔣萬安：「久」；本段「了。」起於7392.800秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S1017",
+        "cue_id": 1017,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「臺北到底要引領」後的「什麼？」延續同一位候選人的問句。",
+        "evidence": "第1016段為沈伯洋：「領」；本段「什麼？」起於7556.231秒，等於上一段終點，僅長40毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S1021",
+        "cue_id": 1021,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「帶回」與「來。」合為「帶回來」，是上一句的結尾。",
+        "evidence": "第1020段為沈伯洋：「回」；本段「來。」起於7568.266秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S1026",
+        "cue_id": 1026,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「綻放著光彩」後的「嗎？」延續同一位候選人的問句。",
+        "evidence": "第1025段為沈伯洋：「綻放著光彩」；本段「嗎？」起於7586.558秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。第二輪未辨出末尾「嗎」，本次只校正說話者，不據此改動文字。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S1042",
+        "cue_id": 1042,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「價」與「值。」合為「價值」，是上一句的結尾。",
+        "evidence": "第1041段為沈伯洋：「想要遵守的價」；本段「值。」起於7670.090秒，等於上一段終點，僅長20毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      },
+      {
+        "id": "S1047",
+        "cue_id": 1047,
+        "before": "UNKNOWN",
+        "after": "SPEAKER_03",
+        "reason": "「你就」後的「贏了。」延續同一位候選人的引述。",
+        "evidence": "第1046段為沈伯洋：「方式的時候，你就」；本段「贏了。」起於7691.552秒，等於上一段終點，僅長40毫秒。前後兩段說話者相同。已對照保存的第二輪 large-v2 文字；它只支持詞句連續性，不證明聲音身分。此為上下文與既有時間資料判定，未重新聽辨；不更動文字、時間碼或原始模型資料。"
+      }
+    ],
     "flags": [
       {
         "cue_id": 9,
@@ -207043,11 +207246,6 @@
         "cue_id": 53,
         "reason": "騎車看到人行道斷裂跟人行來搶道，後半語意不明；不能確定是行人、行車或其他措辭。",
         "id": "R004"
-      },
-      {
-        "id": "T0076",
-        "cue_id": 76,
-        "reason": "說話者時間未與語音重疊，身分未確認。\n僅音一字延續0075聲音，且標為說話者未確認；應核對字幕切分，不依此推定另一位說話者。"
       },
       {
         "cue_id": 80,
@@ -207095,19 +207293,9 @@
         "id": "R014"
       },
       {
-        "id": "T0153",
-        "cue_id": 153,
-        "reason": "說話者時間未與語音重疊，身分未確認。\n僅了一字延續0152我做到，說話者標籤及極短切分待核，不據此推定新說話者。"
-      },
-      {
         "cue_id": 159,
         "reason": "通車的動工語意有衝突，可能為原話自我修正，不擅刪通車。",
         "id": "R016"
-      },
-      {
-        "id": "T0219",
-        "cue_id": 219,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 228,
@@ -207123,11 +207311,6 @@
         "cue_id": 258,
         "reason": "句末這十與0259一件案例連讀為這十一件案例，與前文兩個案例數量不同；可能誤辨或說話者用語，不改數值。",
         "id": "R019"
-      },
-      {
-        "id": "T0271",
-        "cue_id": 271,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 290,
@@ -207166,11 +207349,6 @@
         "id": "R026"
       },
       {
-        "id": "T0362",
-        "cue_id": 362,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
         "cue_id": 375,
         "reason": "從國小到大學再到研究院可能為研究所，但兩者皆是可用名詞，暫留。",
         "id": "R027"
@@ -207201,16 +207379,6 @@
         "reason": "與前文同一公園名稱疑似誤辨，兩輪未提供一致字形。",
         "suggestion": "可能為線形／線性公園，須回聽確認。",
         "id": "R084"
-      },
-      {
-        "id": "T0414",
-        "cue_id": 414,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
-        "id": "T0420",
-        "cue_id": 420,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 422,
@@ -207262,11 +207430,6 @@
         "id": "R037"
       },
       {
-        "id": "T0569",
-        "cue_id": 569,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
         "cue_id": 572,
         "reason": "即刻的虛心來救制度面疑有連續誤辨；不能直接猜成修正或究責。",
         "id": "R038"
@@ -207307,11 +207470,6 @@
         "cue_id": 631,
         "reason": "毒駕殺人本來就是死刑等刑罰斷言可能是說話者原話；不得為符合現行法而改寫。",
         "id": "R044"
-      },
-      {
-        "id": "T0646",
-        "cue_id": 646,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 649,
@@ -207364,11 +207522,6 @@
         "cue_id": 744,
         "reason": "提問者姓名黃映穎與0833–0834黃燕怡、0853黃燕儀不一致，未確認正確字形。",
         "id": "R054"
-      },
-      {
-        "id": "T0760",
-        "cue_id": 760,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 772,
@@ -207464,11 +207617,6 @@
         "id": "R072"
       },
       {
-        "id": "T0934",
-        "cue_id": 934,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
         "cue_id": 938,
         "reason": "為身邊有府院黨的句首疑有漏詞或人名，但無法可靠恢復，暫留。",
         "id": "R073"
@@ -207484,11 +207632,6 @@
         "id": "R075"
       },
       {
-        "id": "T0984",
-        "cue_id": 984,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
         "cue_id": 1006,
         "reason": "我塞到車車裡面的時候疑有重複或誤辨，不能確定是否原話停頓；與下一字幕數字連讀另須核對。",
         "id": "R076"
@@ -207499,24 +207642,9 @@
         "id": "R077"
       },
       {
-        "id": "T1017",
-        "cue_id": 1017,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
-        "id": "T1021",
-        "cue_id": 1021,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
         "cue_id": 1023,
         "reason": "此處為校徽或校歌引述，雖小火炬可明確修字，仍不可按記憶重建整段校訓。",
         "id": "R078"
-      },
-      {
-        "id": "T1026",
-        "cue_id": 1026,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 1037,
@@ -207524,19 +207652,9 @@
         "id": "R079"
       },
       {
-        "id": "T1042",
-        "cue_id": 1042,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
-      },
-      {
         "cue_id": 1045,
         "reason": "引述不用管哪個候選人贏你要管你有沒有你當你把票投給等字句不順，可能漏贏字或口誤，不用外部引文重寫。",
         "id": "R080"
-      },
-      {
-        "id": "T1047",
-        "cue_id": 1047,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
       },
       {
         "cue_id": 1059,
@@ -207546,7 +207664,8 @@
       {
         "id": "T1076",
         "cue_id": 1076,
-        "reason": "說話者時間未與語音重疊，身分未確認。"
+        "reason": "說話者時間未與語音重疊，身分未確認。\n「句」位於李文儀與黃欣樺的主持人交接處；第1077段「點。」與第1078段「謝」時間重疊，原始「句」「點」的對齊分數均為0。第二輪文字支持「句點」的連續性，但不能確認說話者，不逕自歸入任一位主持人。",
+        "suggestion": "回聽02:13:24–02:13:27並共同核對1075–1079的說話者與切分；未確認前保留原始標記。"
       },
       {
         "cue_id": 1080,

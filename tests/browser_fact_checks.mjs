@@ -112,6 +112,29 @@ await test("fact checks work with external network requests blocked", async (t) 
       assert.match(await page.locator("#check-FC005 .pending-label").textContent(), /待確認字幕/);
     });
 
+    await t.test("speaker corrections remain visible alongside fact checks", async () => {
+      const transcript = JSON.parse(publishedFiles.get("transcript.json").toString("utf8"));
+      const speakerCorrections = transcript.review.speaker_corrections;
+      assert(speakerCorrections.length > 0);
+      await page.locator("#tab-corrections").click();
+      for (const correction of speakerCorrections) {
+        const cue = transcript.cues.find((entry) => entry.id === correction.cue_id);
+        assert(cue);
+        const card = page.locator(".review-card").filter({
+          has: page.getByText(`修訂 ${correction.id}`, { exact: true }),
+        });
+        assert.equal(await card.count(), 1);
+        assert.deepEqual(await card.locator(".comparison dt").allTextContents(), [
+          "原說話者",
+          "修訂說話者",
+        ]);
+        assert.equal(await card.locator(".before dd").textContent(), cue.original_label);
+        assert.equal(await card.locator(".after dd").textContent(), cue.label);
+      }
+      await openChecks();
+      assert.equal(await cards.count(), ledger.items.length);
+    });
+
     await t.test("candidate, verdict, and source-text search combine correctly", async () => {
       await page.getByRole("button", { name: "查看沈伯洋的查核" }).click();
       assert.equal(await cards.count(), 5);
