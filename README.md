@@ -47,6 +47,23 @@ Large media, screenshots, logs, and inference checkpoints stay in ignored
 to `outputs/plpXPrOoV2w/media/debate.mp4` and `media/poster.jpg`.
 Without local media, transcript search and review remain available.
 
+## Deployment
+
+The GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+publishes `data/` to GitHub Pages. It runs when a push to `main` changes `data/`
+or the workflow file. To deploy manually, select **Actions → Deploy webpage →
+Run workflow** on `main`.
+
+In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**.
+The published site is <https://narumiruna.github.io/taipei-mayoral-debate-2026/>.
+
+The workflow publishes the committed HTML, transcripts, subtitles, and review
+records without installing Python or running model inference. Rebuild and
+re-export the page before pushing frontend changes. Only `data/` is uploaded;
+`raw/`, `outputs/`, and local credentials are excluded. Video and poster files
+are not hosted, so video playback is unavailable on the published page.
+Transcript search, review views, and downloads remain available.
+
 ## Preview
 
 Open the HTML file directly, or run this command from the repository root:
